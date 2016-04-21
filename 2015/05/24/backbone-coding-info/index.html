@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Backbone前端开发流程及规范 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="开发流程-
+
+定好View首先，根据页面切分View，切分View的规则是将重复利用的视图或者功能相近的视图归于一个View,对于Backbone，每一个model都要对应一个View。父层View负责布局，并将model发给子层View，让子层view负责渲染model数据。View并不是越多越好，要合理设计，View过多将会导致View资源管理成为负担；另外，View过于精简，可能会造成Vi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Backbone前端开发流程及规范">
+<meta property="og:url" content="http://yoursite.com/2015/05/24/backbone-coding-info/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="开发流程-
+
+定好View首先，根据页面切分View，切分View的规则是将重复利用的视图或者功能相近的视图归于一个View,对于Backbone，每一个model都要对应一个View。父层View负责布局，并将model发给子层View，让子层view负责渲染model数据。View并不是越多越好，要合理设计，View过多将会导致View资源管理成为负担；另外，View过于精简，可能会造成Vi">
+<meta property="og:image" content="http://i1.piimg.com/03aee69fe0cbc67c.png">
+<meta property="og:image" content="http://i1.piimg.com/3e05448400743d86.png">
+<meta property="og:updated_time" content="2016-04-21T02:06:49.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Backbone前端开发流程及规范">
+<meta name="twitter:description" content="开发流程-
+
+定好View首先，根据页面切分View，切分View的规则是将重复利用的视图或者功能相近的视图归于一个View,对于Backbone，每一个model都要对应一个View。父层View负责布局，并将model发给子层View，让子层view负责渲染model数据。View并不是越多越好，要合理设计，View过多将会导致View资源管理成为负担；另外，View过于精简，可能会造成Vi">
+<meta name="twitter:image" content="http://i1.piimg.com/03aee69fe0cbc67c.png">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12.5px;">backbone</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/cluster/" style="font-size: 12.5px;">cluster</a> <a href="/tags/file/" style="font-size: 12.5px;">file</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 12.5px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 20px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/spring/" style="font-size: 17.5px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 17.5px;">web</a> <a href="/tags/webservice/" style="font-size: 10px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12.5px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-backbone-coding-info" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/24/backbone-coding-info/" class="article-date">
+  	<time datetime="2015-05-24T13:36:51.000Z" itemprop="datePublished">2015-05-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Backbone前端开发流程及规范
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/backbone/">backbone</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>开发流程<br>-</li>
+</ul>
+<h3 id="定好View"><a href="#定好View" class="headerlink" title="定好View"></a>定好View</h3><p>首先，根据页面切分View，切分View的规则是将重复利用的视图或者功能相近的视图归于一个View,对于Backbone，每一个model都要对应一个View。父层View负责布局，并将model发给子层View，让子层view负责渲染model数据。View并不是越多越好，要合理设计，View过多将会导致View资源管理成为负担；另外，View过于精简，可能会造成View的不必要的渲染工作。页面切分很有讲究，所以这一部分工作建议进行统一设计。</p>
+<p>以下图作为例子进行View设计：<br><img src="http://i1.piimg.com/03aee69fe0cbc67c.png" alt=""></p>
+<p>View设计如下：<br><img src="http://i1.piimg.com/3e05448400743d86.png" alt=""></p>
+<p>这里一共有7个View(实际还有几个潜在view，比如弹窗，上传图片页面等，原理是一样的)：</p>
+<p>MyMainView负责全局布局，并将子View的渲染内容填充到页面中；</p>
+<p>TopView负责渲染页面头，包括网站图标，工具栏，关于我们等；</p>
+<p>ContentView负责渲染页面主要内容；</p>
+<p>FooterView负责渲染页面底部信息，包括&copy;copyright等；</p>
+<p>ContentView 里面还可以继续划分:</p>
+<p>ContentTopView负责内容管理工具条，包括相册的选择，管理相册按钮；</p>
+<p>ContentListView负责贴图的主要页面部分，里面是一个个的ContentListItemView , ContentListView负责为每一个ContentListItemView的位置进行布局，每一个ContentListItemView只负责将本view的内容进行渲染；</p>
+<p>结构如下：</p>
+<p>-MyMainView</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-TopView</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-ContentView</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -ContentTopView</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -ContentListView</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-ContentListItemView</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;-FooterView</p>
+<p>为了简要说明， 以下没说明样式，请自行加入。</p>
+<p>MyMainView.js:</p>
+<pre><code>define([&quot;backbone&quot;,&quot;TopView&quot; ,&quot;ContentView&quot;,&quot;FooterView] ,
+    function(Backbone , TopView , ContentView , FooterView){
+
+    var myMainView = Backbone.View.extend({
+        initialize :{
+            this.childrenView = [];
+        },
+        render:{
+            this.$el.html(&quot;&lt;div id=&apos;topview&apos;&gt;&lt;/div&gt;&quot;);
+            this.$el.append(&quot;&lt;div id=&apos;contentview&apos;&gt;&lt;/div&gt;&quot;);
+            this.$el.append(&quot;&lt;div id=&apos;footerview&apos;&gt;&lt;/div&gt;&quot;);
+
+            var topView = new TopView({el:&quot;#topview&quot;});
+            this.childrenView.push(topview);
+            topview.render();
+
+            var contentView = new ContentView({el:&quot;#contentview&quot;});
+            this.childrenView.push(contentView);
+            contentView.render();
+
+            var footerView = new FooterView({el:&quot;#footerview&quot;});
+            this.childrenView.push(footerView);
+            footerView.render();
+
+
+        }    ,
+
+
+    dispose : function(onlyDisposeChildren) {
+        // 1
+        if (!this.childrenViews
+                || this.childrenViews.length == 0) {
+            if (!onlyDisposeChildren) {
+                this.remove();
+            }
+            return;
+        }
+        // 2
+        _.each(this.childrenViews, function(childView) {
+            if (childView.dispose) {
+                childView.dispose();
+            } else {
+                childView.remove();
+            }
+        });
+        // 3
+        this.childrenViews = [];
+        // 4
+        if (!onlyDisposeChildren) {
+            this.remove();
+        }
+    }
+    });
+
+    return myMainView;
+});
+</code></pre><p>利用Backbone划分View的好处就是，上层View只负责子层view的布局，而不需要关心子view的内容，具体的渲染工作交给子view去做，这样一个页面就可以划分为一个个的view,每一层view只关心本view的渲染和负责子view的布局。这样整个的页面开发更加有层次，并且打破常规的前端网页的开发模式，对于一个页面，可以多人进行开发，大大加快了效率。</p>
+<h3 id="定义好每一个View所需的参数"><a href="#定义好每一个View所需的参数" class="headerlink" title="定义好每一个View所需的参数"></a>定义好每一个View所需的参数</h3><p>上面说到父view负责子view的布局，并且负责生成子view，所以子view需要的参数，也是由父view传给它；比如对于ContentListView：</p>
+<pre><code>var contentListView = Backbone.View.extend({
+initialize :function(data){
+    this.collection = data.collection;
+    this.COUNTPERROW = 5;
+},
+
+render :function(){
+
+var self =this;
+this.collection.each(function(aModel,index){
+
+    var row = null;
+
+    // 每行设计5张图片
+    if (index % self.COUNTPERROW == 0) {
+
+        row = $(&quot;&lt;div class=&apos;row&apos;&gt;&lt;/div&gt;&quot;);
+        self .append(row);
+    }
+
+    // 父view负责布局
+    var itemDiv= $(&quot;&lt;div id=&apos;&quot; + aModel.get(&quot;id)&apos; + &quot;&gt;&lt;/div&gt;);
+    row.append(itemDiv);
+
+    // 子view负责渲染
+    var itemView = new ContentListItemView({
+        el : itemDiv,
+        model :aModel
+    });
+    self.childrenView.push(itemView);
+    itemView.render();
+
+});
+
+},
+});
+</code></pre><h3 id="View之间独立开发"><a href="#View之间独立开发" class="headerlink" title="View之间独立开发"></a>View之间独立开发</h3><p>把整个页面的View划分好，并且将每一个的View的参数定义好后，就可以分配工作了，一个人负责几个View进行独立开发。</p>
+<p>每一个View 要做的就三件事：</p>
+<p>1、从上层取得渲染归属的dom节点 (this.$el) , 和所需参数； </p>
+<p>2、本层负责在该dom节点中进行渲染；</p>
+<p>3、为下层view布局，并传递数据</p>
+<p>-前端开发注意事项<br>-</p>
+<h2 id="dom结构"><a href="#dom结构" class="headerlink" title="dom结构"></a>dom结构</h2><p>网页是由一个个的Dom节点组成的，对于动态网页，需要动态对dom进行操作，在操作的过程尤其需要注意的是，在dom结构append到当前页面dom结构之前，该dom节点很有可能获取不到：</p>
+<pre><code>var div = $(&quot;&lt;div id=&apos;test&apos;&gt;&lt;/div&gt;&quot;);
+$(&quot;#test&quot;).html(&quot;ad&quot;);
+
+this.$el.append(div);
+</code></pre><p>在append到dom结构之前，就使用了id或class去查找dom接口，结果是没用的。<br>以上的方法可改为</p>
+<pre><code>var div = $(&quot;&lt;div id=&apos;test&apos;&gt;&lt;/div&gt;&quot;);
+$(div).html(&quot;ad&quot;);
+
+this.$el.append(div);
+</code></pre><p>jquery提供给了很多的方法：</p>
+<h3 id="节点的操作"><a href="#节点的操作" class="headerlink" title="节点的操作"></a>节点的操作</h3><p><strong>查找节点</strong>：</p>
+<pre><code>var $var_1=$(&quot;htmltype&quot;);   //这句话就是获取所有htmltype节点
+</code></pre><p>如：var $ul_1=$(“ul”);</p>
+<p><strong>创建并追加节点</strong>：</p>
+<pre><code>var $var_1=$(&quot;&lt;htmltype&gt;&quot;);//这句话是创建一个节点
+
+$(&quot;htmltype2&quot;).append($var_1) ; //这句话是把节点插入所有htmltype2节点中
+</code></pre><p>例子：    </p>
+<pre><code>var $li_1=$(&quot;&lt;li  title=&quot;title1&quot;&gt;香蕉&lt;/li&gt;&quot;);
+
+     $(&quot;ul&quot;).append($li_1);
+</code></pre><p>其中插入方法有以下几种：</p>
+<pre><code>append() 把B追加到A内部（所有的A元素，以下类似）
+appendTo() 把A追加到B内部
+prepend() 把B追加到A内部的内容前
+prependTo() 把A追加到B的内容前
+after() 在A后追加B
+insertAfter() 在A前追加B
+before() 在A前追加B
+insertBefore()在A后追加B 
+</code></pre><p>例子：</p>
+<pre><code>$(&quot;ul&quot;).append(&quot;&lt;li&gt;你好&lt;/li&gt;&quot;);//在ul内部追加li
+ $(&quot;&lt;li&gt;你好&lt;/li&gt;&quot;).appendTo(&quot;ul&quot;);//在ul内部追加li
+</code></pre><p><strong>删除节点</strong></p>
+<pre><code>remove() 删除该元素
+empty() 清空节点，包括后代节点 
+</code></pre><p>例子：</p>
+<pre><code>$(&quot;ul  li:eq[1]&quot;).remove(); //获取ul中的第二个li并删除
+$(&quot;ul  li&quot;).remove(“li[title=&quot;菠萝&quot;]”);//删除ul中li元素属性title=&quot;菠萝&quot;的元素
+</code></pre><p><strong>复制节点</strong></p>
+<pre><code>clone();//复制本节点 
+</code></pre><p>例子：</p>
+<pre><code>$(&quot;ul  li:eq[1]&quot;).clone().appenTo(&quot;ul&quot;);//复制并追加到ul中，只复制是不会显示出来的
+</code></pre><p><strong>替换节点</strong></p>
+<pre><code>replaceWith();//将B替换所有A
+replaceAll();//将A替换所有B 
+</code></pre><p><strong>包裹节点</strong></p>
+<pre><code>warpAll();//用B包裹A
+warpInner();//用B包裹A的内容 
+</code></pre><h3 id="属性操作"><a href="#属性操作" class="headerlink" title="属性操作"></a>属性操作</h3><p><strong>获取和设置属性</strong></p>
+<pre><code>var $var_1=$(&quot;p&quot;);//这句话是获取节点P
+var $p_1=$var_1.attr(&quot;title&quot;);//获取节点P的title属性
+var $p_2=$var_1.attr(&quot;title&quot;,&quot;你好&quot;);//设置节点P的title属性为&quot;你好&quot;
+</code></pre><p><strong>删除属性</strong></p>
+<pre><code>$(&quot;p&quot;).removeAttr(&quot;title&quot;);//删除节点P的Title属性
+</code></pre><h3 id="样式操作"><a href="#样式操作" class="headerlink" title="样式操作"></a>样式操作</h3><p><strong>获取和设置样式</strong></p>
+<pre><code>var $var_class=$(&quot;p&quot;).attr(&quot;class&quot;);//获取节点P的class属性
+$(&quot;p&quot;).attr(&quot;class&quot;,&quot;class1&quot;);设置节点P的class属性为样式表类class1
+</code></pre><p><strong>追加样式</strong></p>
+<pre><code>addClass() 添加样式到A 
+</code></pre><p>例子：</p>
+<pre><code>$(&quot;p&quot;).addClass(&quot;another&quot;);添加样式表类another类到P
+</code></pre><p><strong>移除样式</strong></p>
+<pre><code>removeClass() 移除类 
+</code></pre><p><strong>切换样式</strong></p>
+<pre><code>toggleClass() 切换clss属性类为新的类 
+</code></pre><p><strong>判断某个样式是否存在</strong></p>
+<pre><code>hasClass() 
+</code></pre><h3 id="内容的操作"><a href="#内容的操作" class="headerlink" title="内容的操作"></a>内容的操作</h3><pre><code>html() 该方法获取html元素的内容，如：var var1=$(&quot;p&quot;).html();//获取P元素内的内容
+text() 获取或设置某个html元素的内容
+val() 获取元素的Value值
+children() 获取html元素的所有子节点
+next()  获取html元素后紧邻的同辈节点
+prev() 获取html元素前紧邻的同辈节点
+siblings() 获取html元素前后紧邻的同辈节点 ﻿ 
+</code></pre><h3 id="CSS-DOM技术"><a href="#CSS-DOM技术" class="headerlink" title="CSS-DOM技术"></a>CSS-DOM技术</h3><pre><code>css(&quot;属性&quot;，&quot;值&quot;) 设置元素css某个属性的值，如：$(&quot;p&quot;).css(&quot;color&quot;,&quot;red&quot;);//设置P的css属性{color:red;}
+</code></pre><h2 id="View手动销毁"><a href="#View手动销毁" class="headerlink" title="View手动销毁"></a>View手动销毁</h2><p>由于Backbone 没有提供view的销毁机制， 所以在不使用的时候要手动将view清理掉，否则view始终存在于内存中，更糟糕的是这个view所有的绑定和监听事件都是有效的；如果没有手动清理view的习惯，那么一个请求很有可能就会被多次发送，而你却始终找不到问题的所在，这样不仅浪费网页内存，让你的网页由于存在大量view而奇卡无比 ， 而且还会造成网络资源的浪费，服务器压力的倍增。<br>销毁函数可采用以下：</p>
+<pre><code>dispose : function(onlyDisposeChildren) {
+       // 1
+       if (!this.childrenViews
+               || this.childrenViews.length == 0) {
+           if (!onlyDisposeChildren) {
+               this.remove();
+           }
+           return;
+       }
+       // 2
+       _.each(this.childrenViews, function(childView) {
+           if (childView.dispose) {
+               childView.dispose();
+           } else {
+               childView.remove();
+           }
+       });
+       // 3
+       this.childrenViews = [];
+       // 4
+       if (!onlyDisposeChildren) {
+           this.remove();
+       }
+   }
+</code></pre><h2 id="谨慎使用全局事件"><a href="#谨慎使用全局事件" class="headerlink" title="谨慎使用全局事件"></a>谨慎使用全局事件</h2><p>在某些情况下，为了使得事件能够在全局范围内传播，可以将事件绑定在全局变量Backbone中。</p>
+<pre><code>this.listenTo(Backbone , &quot;Event:Test&quot; , this.HandleTest);
+</code></pre><p>使用全局的确使得我们在事件触发和监听上获得了方便，但是需要特别谨慎的是，事件在view销毁之前会一直存在，如果该view没有调用remove方法，那么这个view和这个绑定事件就会一直存在的，由于是全局的事件，所以隐患很大。在切分View的时候，可能会分出几级的View视图出来，每一层View都可能会有事件监听，所以上一点说到的View销毁至关重要。另外在监听事件之前，最好先将当前事件进行解绑，让原有监听该事件的所有方法都失效，这样控制全局事件更加有效。</p>
+<pre><code>Backbone.off(&quot;Event:Test&quot;);
+</code></pre><h2 id="谨防js命名空间和css样式冲突"><a href="#谨防js命名空间和css样式冲突" class="headerlink" title="谨防js命名空间和css样式冲突"></a>谨防js命名空间和css样式冲突</h2><p>对于js命名空间冲突问题 ， 之前说过可以使用requireJS来解决命名空间冲突问题，对于requireJs的使用可以参考我之前的文章:<a href="http://vence.gitcafe.io/blog/2015/05/14/require-info/" target="_blank" rel="external">使用RequireJS实现异步加载脚本</a>。</p>
+<p>至于样式冲突问题，目前还没有很好地方式可以避免，我们在开发的过程中，每个人负责一部分模块，在开发的过程中，会共用到很多样式文件，尤其对于SIP开发，所以在样式问题上冲突时常发生，这个需要开发人员商定好统一的格式进行定义， 比如可以在模块的样式前加上模块名进行限定。比如对于bootstrap的 col-md-x样式 , 可能有些开发人员需要的栅栏布局的样式需要调整，就自己在css中添加了样式：</p>
+<pre><code>.col-md-12 {
+    margin : 0px 0px;
+}
+</code></pre><p>这样的整个系统中所有的col-md-12样式都会照着这个样式进行，而其他的需要的就是bootstrap 默然的样式，这样的错误非常容易出现，所在大家养成模块限定的好习惯：</p>
+<pre><code>#schedules .col-md-12 {
+    margin : 0px 0px;
+}
+</code></pre><p>以上的样式只覆盖了 schedules 下的所有col-md-12的样式，这样可以有效解决样式冲突问题，前提是需要每个开发人员进行有效预防。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/24/inform-email-info/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          JavaMail发送邮件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/14/backbone-info/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Backbone技术解析</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

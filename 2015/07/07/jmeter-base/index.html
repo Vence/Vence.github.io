@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>JMeter压力测试技术-基础篇 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介Apache JMeter是一款强大的图形界面压力测试工具，是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测试但后来扩展到其他测试领域。
+Apache jmeter 可以用于对静态的和动态的资源（文件，Servlet，Perl脚本，java 对象，数据库和查询，FTP服务器等等）的性能进行测试。它可以用于对服务器，网络 或对象模拟繁重的负载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMeter压力测试技术-基础篇">
+<meta property="og:url" content="http://yoursite.com/2015/07/07/jmeter-base/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="简介Apache JMeter是一款强大的图形界面压力测试工具，是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测试但后来扩展到其他测试领域。
+Apache jmeter 可以用于对静态的和动态的资源（文件，Servlet，Perl脚本，java 对象，数据库和查询，FTP服务器等等）的性能进行测试。它可以用于对服务器，网络 或对象模拟繁重的负载">
+<meta property="og:image" content="http://i1.piimg.com/493a25a7d45d6c9c.png">
+<meta property="og:image" content="http://i1.piimg.com/5a9bb9e7f5dfff05.jpg">
+<meta property="og:image" content="http://i1.piimg.com/a9df3b873cd1907a.jpg">
+<meta property="og:image" content="http://i1.piimg.com/aa9e4101cb8c01ef.png">
+<meta property="og:image" content="http://i1.piimg.com/fce6623fa5f56d09.png">
+<meta property="og:image" content="http://i1.piimg.com/e96df58d6efe03fe.png">
+<meta property="og:image" content="http://i1.piimg.com/31a4622f9ff4b770.png">
+<meta property="og:image" content="http://i3.piimg.com/ea5df5c425e2720d.jpg">
+<meta property="og:image" content="http://i1.piimg.com/f0db785148d2e1ee.png">
+<meta property="og:image" content="http://i1.piimg.com/da4ccd669b03a8bc.jpg">
+<meta property="og:updated_time" content="2016-04-21T02:00:50.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JMeter压力测试技术-基础篇">
+<meta name="twitter:description" content="简介Apache JMeter是一款强大的图形界面压力测试工具，是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测试但后来扩展到其他测试领域。
+Apache jmeter 可以用于对静态的和动态的资源（文件，Servlet，Perl脚本，java 对象，数据库和查询，FTP服务器等等）的性能进行测试。它可以用于对服务器，网络 或对象模拟繁重的负载">
+<meta name="twitter:image" content="http://i1.piimg.com/493a25a7d45d6c9c.png">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12.5px;">backbone</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/cluster/" style="font-size: 12.5px;">cluster</a> <a href="/tags/file/" style="font-size: 12.5px;">file</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 12.5px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 20px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/spring/" style="font-size: 17.5px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 17.5px;">web</a> <a href="/tags/webservice/" style="font-size: 10px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12.5px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-jmeter-base" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/07/jmeter-base/" class="article-date">
+  	<time datetime="2015-07-07T02:20:44.000Z" itemprop="datePublished">2015-07-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JMeter压力测试技术-基础篇
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="http://jakarta.apache.org/jmeter/" target="_blank" rel="external">Apache JMeter</a>是一款强大的图形界面压力测试工具，是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测试但后来扩展到其他测试领域。</p>
+<p>Apache jmeter 可以用于对静态的和动态的资源（文件，Servlet，Perl脚本，java 对象，数据库和查询，FTP服务器等等）的性能进行测试。它可以用于对服务器，网络 或对象模拟繁重的负载来测试它们的强度或分析不同压力类型下的整体性能。你可以使用它做性能的图形分析或在大并发负载测试你的服务器/脚本/对象。</p>
+<p>Jmeter 是一个非常流行的性能测试工具，虽然与<em>LoadRunner</em>相比有很多不足，比如：它结果分析能力没有LoadRunner详细；很它的优点也有很多：</p>
+<ul>
+<li><p>开源，他是一款开源的免费软件，使用它你不需要支付任何费用，</p>
+</li>
+<li><p>小巧，相比LR的庞大（最新LR11将近4GB），它非常小巧，不需要安装，但需要JDK环境，因为它是使用java开发的工具。</p>
+</li>
+<li><p>功能强大，jmeter设计之初只是一个简单的web性能测试工具，但经过不段的更新扩展，现在可以完成数据库、FTP、LDAP、WebService等方面的测试。因为它的开源性，当然你也可以根据自己的需求扩展它的功能。</p>
+</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><a href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank" rel="external">从官网下载JMeter压缩包</a>，注意下载的是 <strong>apache-jmeter-2.13.zip</strong>  (不是 apache-jmeter-2.13_src.zip )， 目前最新版本是<strong>2.13</strong>。<br>下载解压后，在目录jakarta-jmeter-2.4\bin下可以见到一个jmeter.bat文件，双击此文件，打开初始界面如下图：<br><img src="http://i1.piimg.com/493a25a7d45d6c9c.png" alt=""></p>
+<p>注意的是上面显示的是中文，如果你想使用其他语言，比如英文，那么通过菜单选项-&gt;选择语言-&gt;英文即可，当然转为中文也是同样操作。</p>
+<h2 id="HTTP-Request"><a href="#HTTP-Request" class="headerlink" title="HTTP Request"></a>HTTP Request</h2><h3 id="建立一个线程组，如下图"><a href="#建立一个线程组，如下图" class="headerlink" title="建立一个线程组，如下图"></a>建立一个线程组，如下图</h3><p><img src="http://i1.piimg.com/5a9bb9e7f5dfff05.jpg" alt=""><br>为什么要建立线程组？原因很简单，因为我们要模拟多个线程（用户）来访问网站。<br>线程组创建界面如下图：</p>
+<p>名称可以随意填写，默认选中“继续”即可。<br>线程属性部分中，线程数是启动多少个线程，我这里填写的是60，Ramp-Up Period (in seconds)表示线程之间间隔多少时间允许，单位是秒，比如如果填写120，那么120/60=2表示60个线程间每隔2秒钟请求网站。</p>
+<p>Ramp-Up Period官方解释：</p>
+<pre><code>Ramp-up Period 
+How long JMeter should take to get all the threads started. 
+If there are 10 threads and a ramp-up time of 100 seconds, 
+then each thread will begin 10 seconds after the previous thread started, 
+for a total time of 100 seconds to get the test fully up to speed.
+</code></pre><p>循环次数：60个线程运行完毕算是一次，循环次数就是这样的一个请求过程运行多少次，我这里填写的是1000.<br>每次修改一个设置后，别忘记了保存一下。</p>
+<h3 id="设置请求服务器、压力链接等信息"><a href="#设置请求服务器、压力链接等信息" class="headerlink" title="设置请求服务器、压力链接等信息"></a>设置请求服务器、压力链接等信息</h3><p>接下来很自然的是，我们要测试的网站地址是什么？链接是什么？所以现在我们就来设置这些信息。<br>右键点击我们刚创建的线程组，在弹出的菜单中，选择添加-&gt;Sampler-&gt;Http请求，弹出如下图界面：<br><img src="http://i1.piimg.com/a9df3b873cd1907a.jpg" alt=""></p>
+<p>名称：随意填写</p>
+<p>注释：可有可无</p>
+<p>服务器名称或IP：我这里填写 zihou.me</p>
+<p>端口号：我这里填写80</p>
+<p>Timesout部分可以不填</p>
+<p>HTTP请求部分的协议：http，方法我选择的是GET，Content encoding我填的是UTF-8.</p>
+<p>路径：<br>这里值得一提的就是这个路径，假如你只是对一个链接进行压力测试，那么这里就非常简单了，你就直接填写一个链接就够了，比如http：//www.zihou.me，但很多情况下都不是这样的，我们这里需要多个链接，就如同刚开始讲到的那样，我们要将多个链接保存到一个文本文件中，然后随机读取进行压力测试。我们可以这么干，如图：</p>
+<p><img src="http://i1.piimg.com/aa9e4101cb8c01ef.png" alt=""></p>
+<p><img src="http://i1.piimg.com/fce6623fa5f56d09.png" alt=""></p>
+<p>在选择一个功能下拉列表中选择_StringFromFile，然后在本机新建一个测试文件text.txt，在第一行（你也可以不在第一行）的值中填写测试文件的路径，如下图：<br><img src="http://i1.piimg.com/e96df58d6efe03fe.png" alt=""></p>
+<p>然后点击“生成”按钮，在生成按钮的左边文本框中将生成一个字符串如：</p>
+<pre><code>${__StringFromFile(E:\test\test.txt,,,)}
+</code></pre><p>在测试文件中，我们每行写一个URL链接，如下格式：</p>
+<p>2011/03/26/3054</p>
+<p>2011/03/26/3052</p>
+<p>2011/03/26/3042</p>
+<p>2011/03/25/3040</p>
+<p>2011/03/25/3034</p>
+<p>2011/03/24/3027</p>
+<p>注意，每行前面并没有<span>http：//www.zihou.me</span>这样的信息，因为我们在前面已经填写了服务器地址为zihou.me，这里就没必要再为每个url填写这个相同前缀了；另外，上面的url格式也只是个例子，表示域名后的部分，但很多时候url后面跟的都是各参数，比如<span>http：//www.zihou.me/p?a=1&amp;b=3</span>，如果是这种情况，则上面的链接可以写为：<br><code>a=1&amp;b=3</code> 这样的形式。</p>
+<p>现在我们可以来填写前面所说的路径了，如下：</p>
+<pre><code>/ ${__StringFromFile(E:\test\test.txt,,,)}
+</code></pre><p>这样一来，当我们并非请求的时候，就会从test.txt中随机选择url来进行压力测试。</p>
+<p>另外值得注意的一个地方是，如果参数中有中文的情况，运行的时候可能会出现乱码，这个时候就需要注意你在Jmeter中的编码设置与你要请求的网页编码是一致的。</p>
+<p>路径文本框下面的选项，可以按默认的就成，Use multipart/form-data for HTTP POST是当请求中有附件的情况，一般情况下都不用选中的。</p>
+<p>同请求一起发送参数部分：如果你仅仅是对某一个固定的页面进行压力测试，那你就可以不用进行上面所说的在文本文件中设置URL的过程了，直接在这里设置就行了，这里的名称就是参数名，值就是参数值，在这里添加就OK了，但你如果是压力多个链接，那这里你可以不用填。</p>
+<h3 id="查看运行结果"><a href="#查看运行结果" class="headerlink" title="查看运行结果"></a>查看运行结果</h3><p>上面设置好后，接下来很自然的想到如何查看运行结果呢？Jmeter在这方面提供了好些个查看方式，有表格形式，有曲线形式等等，我个人认为查看表格形式就足够了！</p>
+<p>鼠标右键点击线程组，在弹出的菜单中选择添加-&gt;监听器-&gt;用表格查询结果，如下图：</p>
+<p><img src="http://i1.piimg.com/31a4622f9ff4b770.png" alt=""></p>
+<p><img src="http://i3.piimg.com/ea5df5c425e2720d.jpg" alt=""></p>
+<p>当然，你也可以选择其他查看方式，你也可以看到在监听器菜单中，有好多种方式。</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>好了，现在我们终于可以运行了！<br>选择菜单项运行-&gt;启动，如下图：</p>
+<p><img src="http://i1.piimg.com/f0db785148d2e1ee.png" alt=""></p>
+<p>当然，在运行前，你得把所有修改都保存了。<br>运行后的结果表格如下：</p>
+<p><img src="http://i1.piimg.com/da4ccd669b03a8bc.jpg" alt=""></p>
+<p>各属性如下：</p>
+<p><strong>Sample</strong>：每个请求的序号</p>
+<p><strong>Start Time</strong>：每个请求开始时间</p>
+<p><strong>Thread Name</strong>：每个线程的名称</p>
+<p><strong>Label</strong>：Http请求名称</p>
+<p><strong>Sample Time</strong>：每个请求所花时间，单位毫秒</p>
+<p><strong>Status</strong>：请求状态，如果为勾则表示成功，如果为叉表示失败。</p>
+<p><strong>Bytes</strong>：请求的字节数</p>
+<p>如果Status为叉，那很显然请求是失败了，但如果是勾，也并不能认为请求就一定完全成功了，因为还得看Bytes的字节数是否是所请求网页的正常大小值，如果不是则说明发生了丢包现象，也不是完全成功。</p>
+<h4 id="在下面还有几个参数"><a href="#在下面还有几个参数" class="headerlink" title="在下面还有几个参数"></a>在下面还有几个参数</h4><p><strong>样本数目（No of Samples）</strong>：也就是上面所说的请求个数，成功的情况下等于你设定的并发数目乘以循环次数。</p>
+<p><strong>平均(Average)</strong>：每个线程请求的平均时间</p>
+<p><strong>最新样本(Latest Sample)</strong>：表示服务器响应最后一个请求的时间</p>
+<p><strong>偏离（Deviation）</strong>：服务器响应时间变化、离散程度测量值的大小，或者，换句话说，就是数据的分布。</p>
+<p>好了，主要的就介绍这么多了，其实Jmeter做压力测试的范围远远不止于对Web，它还可以用于Java小服务程序、CGI 脚本、Java 对象、数据库， FTP 服务器等等，更多的使用可以根据自己的需要去研究掌握。</p>
+<p>最后还提到的一点是：你一定注意到了，HTTP请求和结果查看都是在线程组这一节点下创建的，其实，你也可以不用一定要在线程组下创建，你在测试计划下建立也可以，但创建在线程组下面可以使得我们的测试意图一目了然，也就是我们的HTTP请求和结果查看都是基于我们设定的线程组的。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/07/jmeter-advanced/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          JMeter压力测试技术-脚本录制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/18/webbind2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">站内账户绑定的介绍和实现</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

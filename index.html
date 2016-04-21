@@ -69,10 +69,10 @@
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
 						<li>Menu</li>
-						<li>Тэги</li>
+						<li>Tags</li>
 						
 						
-						<li>О сайте</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a>
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12.5px;">backbone</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/cluster/" style="font-size: 12.5px;">cluster</a> <a href="/tags/file/" style="font-size: 12.5px;">file</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 12.5px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 20px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/spring/" style="font-size: 17.5px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 17.5px;">web</a> <a href="/tags/webservice/" style="font-size: 10px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12.5px;">压力测试</a>
 					</div>
 				</section>
 				
@@ -177,6 +177,147 @@
 
       <div class="body-wrap">
   
+    <article id="post-aop-demo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/21/aop-demo/" class="article-date">
+  	<time datetime="2016-04-21T02:46:26.000Z" itemprop="datePublished">2016-04-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/21/aop-demo/">aop-demo</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>利用AOP技术实现日志管理、权限验证等，这些都有一个共同的特点：就是面向切面。</p>
+<h3 id="Spring配置AOP"><a href="#Spring配置AOP" class="headerlink" title="Spring配置AOP"></a>Spring配置AOP</h3><pre><code>&lt;context:component-scan base-package=&quot;aop.demo&quot;&gt;
+&lt;/context:component-scan&gt;
+&lt;aop:aspectj-autoproxy/&gt;
+</code></pre><p>扫描包aop.demo；<br>开启AOP自动代理；</p>
+<h3 id="设置AOP"><a href="#设置AOP" class="headerlink" title="设置AOP"></a>设置AOP</h3><pre><code>package aop.demo.aspact;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+import aop.demo.annotation.Auth;
+
+@Aspect
+@Component
+public class AuthAspect {
+
+@Pointcut(&quot;execution(* aop.demo.service.*.*(..))&quot;)
+private void log() {
+}
+
+@Before(value = &quot;log() &amp;&amp; @annotation(auth) &amp;&amp; args(userId, entityId,..)&quot;)
+public Object beforeMethod(JoinPoint pjd, Auth auth, String userId,
+        String entityId) throws Exception {
+    System.out.println(auth.type() + &quot;|&quot; + auth.code());
+    System.out.println(userId);
+    System.out.println(entityId);
+
+    // TODO process
+
+    return &quot;success&quot;;
+}
+}
+</code></pre><p>设置切入点，这里只针对aop.demo.service包下所有类的所有方法。</p>
+<p>beforeMethod会在AOP拦截的方法之前执行，这里对beforeMethod设置了前置条件</p>
+<blockquote>
+<ol>
+<li>拥有注解auth</li>
+<li>方法参数满足：第一个参数名是userId，第二个参数名是entityId</li>
+</ol>
+</blockquote>
+<h3 id="切入点"><a href="#切入点" class="headerlink" title="切入点"></a>切入点</h3><pre><code>@Service(&quot;demoService&quot;)
+public class DemoServiceImpl implements DemoService {
+
+    @Override
+    @Auth(type=AuthType.USER, code=&quot;0001&quot;)
+    public void test(String userId, String entityId) {
+        System.out.println(&quot;test&quot;);
+    }
+
+    @Override
+    @Auth(type=AuthType.PROJECT, code=&quot;0002&quot;)
+    public void test1(String userId, String entityId, String test) {
+        System.out.println(test);
+    }
+
+}
+</code></pre><p>这里的切入点必须满足上一节说的两个条件。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>@Test
+public void inteceptorTest() {
+    ApplicationContext ctx = new ClassPathXmlApplicationContext(
+            &quot;applicationContext.xml&quot;);
+    DemoService bean = (DemoService) ctx.getBean(&quot;demoService&quot;);
+
+    try {
+    bean.test(&quot;userId1111&quot;, &quot;entityId222&quot;);
+    bean.test1(&quot;userId1111&quot;, &quot;entityId222&quot;, &quot;ccc&quot;);
+    } catch (Exception e){
+        e.printStackTrace();
+    }
+}
+</code></pre><p>输入结果：</p>
+<blockquote>
+<p>USER|0001</p>
+<p>userId1111</p>
+<p>entityId222</p>
+<p>test</p>
+<p>PROJECT|0002</p>
+<p>userId1111</p>
+<p>entityId222</p>
+<p>ccc</p>
+</blockquote>
+<h3 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h3><p><a href="https://github.com/Vence/aop-demo" target="_blank" rel="external">https://github.com/Vence/aop-demo</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aop/">aop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -194,7 +335,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/20/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/04/20/hello-world/">利用hexo搭建个人博客</a>
     </h1>
   
 
@@ -219,6 +360,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	</div>
+
       
 
       
@@ -299,6 +444,943 @@
 
 
   
+    <article id="post-addressbookinfo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/17/addressbookinfo/" class="article-date">
+  	<time datetime="2015-07-17T13:57:30.000Z" itemprop="datePublished">2015-07-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/17/addressbookinfo/">通讯录专利技术整理</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="网络通讯录"><a href="#网络通讯录" class="headerlink" title="网络通讯录"></a>网络通讯录</h3><p><strong>网络通讯录</strong>是一种利用互联网或实现通讯录网络存储和备份的应用/服务。网络通讯录最重要的一项功能是可以在不同的设备间实现联系人信息的同步。例如：你可以在一台电脑上录入某个联系人的信息，然后在手机或者另外一台电脑中读取或修改该信息。当然，你也可以在个人电脑上录入你的联系人的手机\电话号码、Email、QQ、MSN、通信地址等通讯录信息，或对以前的信息进行分组、管理和更新，在你的许可下，该联系人可以看到他所在组内的其他联系人信息，从而实现通讯录共享，而且你还可以直接通过网络通讯录跟你的家人、朋友及同事拨打网络电话、发短信、邮件、传真等。</p>
+<h3 id="移动通讯录"><a href="#移动通讯录" class="headerlink" title="移动通讯录"></a>移动通讯录</h3><p>是一种利用互联网或移动互联网实现通讯录信息同步更新和备份的应用/服务。你可以在个人电脑、掌上电脑、移动电话等任何联网设备上录入你的联系人的手机\电话号码、Email、QQ、MSN、通信地址等通讯录信息，或对以前的信息进行分组、管理和更新，在你的许可下，该联系人可以看到他所在组内的其他联系人信息，从而实现通讯录共享，如果该联系人更新自己的联系信息，你的通讯录会自动更新，实现同步通讯录，并留下旧版本的通讯录信息。</p>
+<p>移动通讯录，借用web2.0的说法，移动通讯录，可以称之为通讯录2.0。这是移动通讯录的基础，也是核心的服务。我们现在支持从Gmail、Sina、Sohu、MSN、163、Yahoo导入通讯录，也支持通过CSV或Excel格式批量导入。另外，在手工添加联系人方面，添加的项目上比较灵活，可多可少，采用AJAX技术，让你感觉到像操作EXCEL一样。联系人管理方面，除了常用的功能之外，分组功能是更大的亮点。则体现在：</p>
+<ul>
+<li>相互同步: 保持最新,如果你的联系人也在使用移动通讯录的服务，那么系统会自动帮你发现，你和联系人之间，可以选择是否相互交换保持同步。也就是说，如果你的联系人也都是用移动通讯录的服务，那么大家的联系方式始终都会保持最新。</li>
+<li>共享: 除了个人通讯录外，还有移动通讯录更多的是一个应用/服务，而不是一个SNS的平台，所以，彼此是看不到各自的联系人的，因为我们以为个人通讯录是个人隐私资料，必须要绝对保护的。既然个人通讯录保护起来，怎么还会有共享的通讯录呢？我想几乎每个人都有一个比如大学通讯录、单位通讯录等。这些通讯录呢，和个人的不同，移动通讯录中的每个人都有一份的，大家共享着这个通讯录。所以，移动通讯录也提供了“共享通讯录”的功能。</li>
+</ul>
+<h2 id="国内专利情况"><a href="#国内专利情况" class="headerlink" title="国内专利情况"></a>国内专利情况</h2><p><img src="http://i.imgur.com/m57CG1f.png" alt=""></p>
+<p><img src="http://i.imgur.com/AHMOMvd.png" alt=""></p>
+<p>可以看出对通讯录的研究在2012年到2013年处于高峰期。</p>
+<h2 id="专利技术"><a href="#专利技术" class="headerlink" title="专利技术"></a>专利技术</h2><h3 id="一种第三方应用的联系人管理方法及装置、系统"><a href="#一种第三方应用的联系人管理方法及装置、系统" class="headerlink" title="一种第三方应用的联系人管理方法及装置、系统"></a>一种第三方应用的联系人管理方法及装置、系统</h3><p>申请人：<strong>腾讯科技(深圳)有限公司</strong></p>
+<p>本发明涉及互联网技术领域，公开了一种第三方应用的联系人管理方法及装置、系统，该方法包括：</p>
+<ul>
+<li>检测用户对第三方应用操作输入的获取联系人指令；</li>
+<li>响应该获取联系人指令，从通讯录中读取联系人数据；</li>
+<li>对读取的联系人数据进行加密处理，得到加密联系人数据；</li>
+<li>将加密联系人数据导入该第三方应用的联系人数据表；</li>
+<li>将该联系人数据表中的加密联系人数据上传至云端服务器，以使云端服务器建立该用户的账号信息与该加密联系人数据的映射关系；其中，该用户的账号信息用于登录该第三方应用。</li>
+</ul>
+<p>实施本发明实施例可以有效提高联系人数据的安全性和可靠性。</p>
+<p><img src="http://i.imgur.com/XNGVs7h.png" alt=""></p>
+<p>一种第三方应用的联系人管理装置，其特征在于，包括：</p>
+<ul>
+<li>检测单元，用于检测用户对第三方应用操作输入的获取联系人指令；</li>
+<li>读取单元，用于响应所述获取联系人指令，从通讯录中读取联系人数据；</li>
+<li>加密单元，用于对读取的联系人数据进行加密处理，得到加密联系人数据；</li>
+<li>导入单元，用于将所述加密联系人数据导入所述第三方应用的联系人数据表；</li>
+<li>传输单元，用于将所述联系人数据表中的加密联系人数据上传至云端服务器，以使所述云端服务器建立所述用户的账号信息与所述加密联系人数据的映射关系；其中，所述用户的账号信息用于登录所述第三方应用。</li>
+</ul>
+<h3 id="基于云计算的企业内部通讯录管理方法和系统"><a href="#基于云计算的企业内部通讯录管理方法和系统" class="headerlink" title="基于云计算的企业内部通讯录管理方法和系统"></a>基于云计算的企业内部通讯录管理方法和系统</h3><p>申请人：<strong>中国电建集团华东勘测设计研究院有限公司</strong></p>
+<p>本发明涉及一种云计算的企业内部通讯录管理方法和系统。本发明的目的是通过云端服务器和通信终端的互联，员工参与维护企业内部通讯录，保证企业内部通讯录的及时更新，确保联系信息不因一些意外事件导致信息丢失。<br>本发明的技术方案是：</p>
+<ul>
+<li>云端服务器定期到通信终端中采集有发生变更的员工个人联系信息，对个人联系信息的有效性进行分析验证后，以发生变更后的联系信息为最新数据来更新云端服务器中的企业内部通讯录信息并保存；</li>
+<li>员工通过通信终端登录到云端服务器，从云端服务器同步全部或部分最新变更的企业内部通讯录信息，同步完成后通信终端将本地企业内部通讯录版本号修改为与云端服务器的数据版号相同。本发明适用于通信技术领域。</li>
+</ul>
+<p><img src="http://i.imgur.com/mPZUn2F.png" alt=""></p>
+<p>所述通信终端包括：</p>
+<ul>
+<li>员工登录模块，用于验证员工的身份，只有验证通过的员工才能够登录云端服务器访问企业内部通讯录；</li>
+<li>数据更新模块，一方面用于员工新增和更改自己的个人联系信息，并供云端服务器采集有发生变更的员工个人联系信息，另一方面同步云端服务器最新的企业内部通讯录信息；</li>
+<li>信息查询模块，用于查询本地企业内部通讯录中其他员工的联系信息，返回查询结果，信息查询模块判断通信终端的类型是否为手机设备，若是，则向通信终端发出是否将查询结果联系人添加到员工个人手机通讯录中的询问。</li>
+</ul>
+<h3 id="基于云计算实现多企业多通讯录自动关联的方法及系统"><a href="#基于云计算实现多企业多通讯录自动关联的方法及系统" class="headerlink" title="基于云计算实现多企业多通讯录自动关联的方法及系统"></a>基于云计算实现多企业多通讯录自动关联的方法及系统</h3><p>申请人：<strong>北京思特奇信息技术股份有限公司</strong></p>
+<p>本发明涉及基于云计算实现多企业多通讯录自动关联的方法及系统，包括企业通讯录云管理模块、企业内部通讯录数据库、企业客户通讯录数据库、企业服务通讯录数据库、企业客户与服务通讯录关联模块、企业通讯录云服务模块和若干个融合通信客户端；<br>本发明利用云计算、移动互联网和融合通信客户端实现为多个企业提供通讯录服务，企业通讯录云管理模块对每个企业的通讯录进行分类管理，企业客户与服务通讯录关联模块实现不同企业间的通讯录建立关联，企业通讯录云服务模块为各融合通信客户端提供通讯录服务，当某企业的通讯录发生变化时，其他相关企业可以及时发现变动，并快速、准确、方便的找到相应联系人。</p>
+<p><img src="http://i.imgur.com/OLN7dT3.png" alt=""><br>包括以下步骤：</p>
+<ul>
+<li>步骤1 ：通过企业通讯录云管理模块录入多个企业的企业内部通讯录、企业客户通讯录和企业服务通讯录；</li>
+<li>步骤2 ：将录入的企业内部通讯录、企业客户通讯录和企业服务通讯录分别存入企业内部通讯录数据库、企业客户通讯录数据库和企业服务通讯录数据库；</li>
+<li>步骤3 ：企业通讯录云管理模块根据每个企业的业务特点按照分类规则将本企业的企业客户通讯录和企业服务通讯录中的通讯记录分类，将每类通讯记录与本企业的企业内部通讯录中的相关人员记录进行关联；</li>
+<li>步骤4 ：通过企业通讯录云管理模块和企业客户与服务通讯录关联模块将企业客户通讯录数据库中和企业服务通讯录数据库中的有对应关系的不同企业间的通讯录建立关联；</li>
+<li>步骤5 ：企业客户与服务通讯录关联模块实时监测企业客户通讯录数据库与企业服务通讯录数据库中的数据，当企业客户（服务）通讯录数据库中的通讯记录发生变化时，将这种变化同步到企业服务（客户）通讯录数据库中相应企业的通讯录。</li>
+</ul>
+<p>还包括每个客户端获取本企业内部通讯录、有查看权限的企业客户通讯录和企业服务通讯录中通讯记录的具体步骤如下：</p>
+<ul>
+<li>步骤A ：客户端登录企业通讯录云服务模块；</li>
+<li>步骤B ：所述企业通讯录云服务模块根据登录的客户端的账号在企业内部通讯录数据库查找该客户端所属的企业内部通讯录；</li>
+<li>步骤C ：根据该客户端在企业内部通讯录中的通讯记录与本企业的企业客户通讯录、企业服务通讯录中相关通讯记录的关联获取该客户端有权查看的客户通讯记录和服务通讯记录；</li>
+<li>步骤D ：将步骤B 中查找到的企业内部通讯录和步骤C 中查找到的该客户端有权查看的客户通讯记录和服务通讯记录同步到该客户端，并将客户通讯录记录和服务通讯录记录分别存储在客户端内的“我的客户通讯录”模块和“我的服务通讯录”模块。</li>
+</ul>
+<h3 id="一种大型通讯录人员状态实时感知算法"><a href="#一种大型通讯录人员状态实时感知算法" class="headerlink" title="一种大型通讯录人员状态实时感知算法"></a>一种大型通讯录人员状态实时感知算法</h3><p>申请人：<strong>杭州易和互联软件技术有限公司</strong></p>
+<p>一种大型通讯录人员状态实时感知算法，其包含获取个人通讯录、获取用户组织通讯录、实时状态获取和用户的增删改，获取个人通讯录通过登录后，点击常用联系人，获取个人通讯录，查看本地是否有个人通讯录的缓存，IM 收到请求后，向客户端返回个人通讯录的版本号，此时，客户端把本地个人通讯录版本号和IM 返回的版本号进行比对，IM 收到请求后，获取个人通讯录的用户，从用户队列中读取个人通讯录数据的数据，然后把数据返回给客户端，客户端更新个人通讯录的展现，并把数据缓存保存到本地。本发明所应用的一套系统，以导航模式，展现了当前级或当前节点用户的状态，且通讯录人数可达到10 万人以上。</p>
+<p><img src="http://i.imgur.com/DnMy1Oi.png" alt=""></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/patent/">patent</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-cloudstorageinfo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/17/cloudstorageinfo/" class="article-date">
+  	<time datetime="2015-07-17T03:56:49.000Z" itemprop="datePublished">2015-07-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/17/cloudstorageinfo/">云存储文件系统</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在信息时代，对文件的管理和使用更加趋向云存储。</p>
+<p><strong>云存储</strong>是在<em>云计算</em>(cloud computing)概念上延伸和发展出来的一个新的概念，是一种新兴的 <strong><em>网络存储技术</em></strong> ，是</p>
+<p><font style="border-bottom:solid 2px #4B0082">指通过集群应用、网络技术或分布式文件系统等功能，将网络中大量各种不同类型的存储设备通过应用软件集合起来协同工作，共同对外提供数据存储和业务访问功能的一个系统</font>。当云计算系统运算和处理的核心是大量数据的存储和管理时，云计算系统中就需要配置大量的存储设备，那么云计算系统就转变成为一个云存储系统，所以<font style="border-bottom:solid 2px #4B0082">云存储是一个以数据存储和管理为核心的云计算系统</font>。简单来说，云存储就是将储存资源放到云上供人存取的一种新兴方案。使用者可以在任何时间、任何地方，透过任何可连网的装置连接到云上方便地存取数据。</p>
+<h2 id="专利情况"><a href="#专利情况" class="headerlink" title="专利情况"></a>专利情况</h2><p><img src="http://i.imgur.com/ao7akWo.png" alt=""></p>
+<p>从以上分析报告中，可以简单看出，云存储技术是在2010年开始兴起，并在2014年达到了研究的高峰期，在目前云存储依然是值得研究的技术，更是未来云计算发展的趋势。</p>
+<h2 id="专利技术"><a href="#专利技术" class="headerlink" title="专利技术"></a>专利技术</h2><h3 id="云存储"><a href="#云存储" class="headerlink" title="云存储"></a>云存储</h3><p>申请人： <strong>苹果公司</strong></p>
+<p>本发明的方法、系统和装置，以及编码在计算机存储介质上的计算机程序，用于数据存储。在一个方面中，方法包括以下动作：</p>
+<ul>
+<li>识别来自应用的运行中查询；</li>
+<li>根据一个或多个应用特定访问策略确定多个数据项中该应用拥有查看许可的一个或多个数据项；</li>
+<li>以及将该一个或多个数据项呈现给该应用，而不呈现该多个数据项中的其他数据项。</li>
+</ul>
+<p><img src="http://i.imgur.com/P8mc8TZ.png" alt=""></p>
+<ol>
+<li>从与用户账号相关联的第一计算设备接收数据项，该数据项与在所述第一计算设备上运行的应用相关联；</li>
+<li>确定存储所述数据项的容器，该容器专用于与所述第一计算设备相关联的所述用户账号、并且专用于所述应用；</li>
+<li>将所述数据项存储在所述容器中；</li>
+<li>以及向与所述用户账号相关联的一个或多个其他设备发送关于所述数据项的通知，所述通知包括与所述数据项相关联的所述应用的标识。</li>
+</ol>
+<p><img src="http://i.imgur.com/M1FtLAm.png" alt=""></p>
+<h3 id="云存储文件系统"><a href="#云存储文件系统" class="headerlink" title="云存储文件系统"></a>云存储文件系统</h3><p>申请人：<strong>西安邮电大学</strong></p>
+<p>本发明公开了一种云存储文件系统，在Hadoop 分布式文件系统基础之上实现日志结构块存储系统：</p>
+<ul>
+<li>所述Hadoop 分布式文件系统，用于提供分布式的存储介质；</li>
+<li>所述日志结构块存储系统包括快照单元，克隆单元，块压缩单元，缓存单元等等。</li>
+</ul>
+<p>本发明的优点在于通过封装<strong>HDFS</strong>(Hadoop Distributed File-System)接口实现<strong>HLBS</strong>(Hadoop Log-Structured<br>Block-Storage System)的接口，在此基础上实现<strong>LBS</strong>(Log-Structured Block-Storage System)，最终实现创新型Hadoop 分布式日志结构块存储系统，从而实现对数据的随机读写以及I/O 效率的提高，同时包含快照，克隆等功能。</p>
+<p><img src="http://i.imgur.com/gaR7WME.png" alt=""></p>
+<p>所述Hadoop 分布式文件系统包括：</p>
+<ul>
+<li>接收分布式文件系统客户端发送的访问请求；</li>
+<li>根据所述访问请求确定所述分布式文件系统客户端所要访问的存储单元以及所述存储单元对应的虚拟资源池状态，所述存储单元与其对应的虚拟资源池存储有相同的数据，所述虚拟资源池为根据具有相同活动周期的分布式文件系统客户端聚类生成；</li>
+<li>在确定所述存储单元对应的虚拟资源池处于上线状态时，向发起访问请求的分布式文件系统客户端返回包括客户端标识的访问响应消息，所述客户端标识所标识的分布式文件系统客户端为所述虚拟资源池中的一个，且根据所述访问请求确定。</li>
+</ul>
+<h2 id="云存储系统"><a href="#云存储系统" class="headerlink" title="云存储系统"></a>云存储系统</h2><p>申请人：<strong>镇江睿泰信息科技有限公司</strong></p>
+<p>本发明公开了一种云存储系统，包括基础读写模块、中心控制模块和客户端访问模块。</p>
+<ul>
+<li>基础读写模块是中心控制模块与底层文件系统交互的纽带，为中心控制模块提供数据存取服务；</li>
+<li>中心控制模块由前端处理模块、业务核心模块和元数据存储模块。</li>
+</ul>
+<p>客户端访问模块针对用户和文件提供两种不同的访问方式，面向用户提供Web 端访问，面向文件传输提供SDK 访问。</p>
+<p>本系统具有高可扩展、高可靠性，能够提供高效、快速、灵活的存储读取服务，不占用客户端的资源，满足用户离线大数据存储的需求。</p>
+<p><img src="http://i.imgur.com/dAMyYG4.png" alt=""></p>
+<h2 id="基于云存储的文件操作方法"><a href="#基于云存储的文件操作方法" class="headerlink" title="基于云存储的文件操作方法"></a>基于云存储的文件操作方法</h2><p>申请人：<strong>上海斐讯数据通信技术有限公司</strong></p>
+<p>本发明提出了一种基于云存储的文件操作方法，包括：</p>
+<ul>
+<li>a1）用户选择云储存文件操作；</li>
+<li>b1）进行云存储；</li>
+<li>c1）判断云存储是否完成；</li>
+<li>d1）当云存储完成时，进行常规文件操作。</li>
+</ul>
+<p>本发明所提出的基于云存储的文件操作方法，将云存储与文件操作进行了结合，提供了不同的体验方式，并且，用户在对文件进行操作时，可以选择云存储文件操作，以将文件传输至云服务器进行保存，从而快捷实现将文件进行备份，给用户带来了便利，还可以避免因为删除一些重要文件而给用户所造成的损失。</p>
+<p><img src="http://i.imgur.com/an6Oc2O.png" alt=""></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/patent/">patent</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-rbacinfo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/14/rbacinfo/" class="article-date">
+  	<time datetime="2015-07-14T15:15:17.000Z" itemprop="datePublished">2015-07-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/14/rbacinfo/">基于RBAC的权限控制</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于RBAC"><a href="#关于RBAC" class="headerlink" title="关于RBAC"></a>关于RBAC</h2><p>基于角色的访问控制（Role-Based Access Control ， <strong>RBAC</strong>）作为传统访问控制（自主访问，强制访问）的有前景的代替受到广泛的关注。在RBAC中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。这就极大地简化了权限的管理。在一个组织中，角色是为了完成各种工作而创造，用户则依据它的责任和资格来被指派相应的角色，用户可以很容易地从一个角色被指派到另一个角色。角色可依新的需求和系统的合并而赋予新的权限，而权限也可根据需要而从某角色中回收。角色与角色的关系可以建立起来以囊括更广泛的客观情况。</p>
+<p>RBAC支持三个著名的安全原则：<strong>最小权限原则</strong>，<strong>责任分离原则</strong> 和 <strong>数据抽象原则</strong>。</p>
+<ul>
+<li>（1）最小权限原则之所以被RBAC所支持，是因为RBAC可以将其角色配置成其完成任务所需要的最小的权限集。</li>
+<li>（2）责任分离原则可以通过调用相互独立互斥的角色来共同完成敏感的任务而体现，比如要求一个计帐员和财务管理员共参与同一过帐。</li>
+<li>（3）数据抽象可以通过权限的抽象来体现，如财务操作用借款、存款等抽象权限，而不用操作系统提供的典型的读、写、执行权限。然而这些原则必须通过RBAC各部件的详细配置才能得以体现。<br>RBAC有许多部件(BUCU)，这使得RBAC的管理多面化。尤其是，我们要分割这些问题来讨论：用户与角色的指派；角色与权限的指派；为定义角色的继承进行的角色与角色的指派。这些活动都要求把用户和权限联系起来。然而在很多情况下它们最好由不同的管理员或管理角色来做。对角色指派权限是典型的应用管理者的职责。银行应用中，把借款、存款操作权限指派给出纳角色，把批准贷款操作权限指派给经理角色。而将具体人员指派给相应的出纳角色和管理者角色是人事管理的范畴。角色与角色的指派包含用户与角色的指派、角色与权限的指派的一些特点。更一般来说，角色与角色的关系体现了更广泛的策略。</li>
+</ul>
+<h2 id="国内专利情况"><a href="#国内专利情况" class="headerlink" title="国内专利情况"></a>国内专利情况</h2><p><img src="http://i.imgur.com/oc3AdKj.png" alt=""></p>
+<h2 id="专利技术"><a href="#专利技术" class="headerlink" title="专利技术"></a>专利技术</h2><p>国内有关RBAC的相关专利比较多，这里举出一两个例子进行说明。</p>
+<h3 id="一种基于SSH网站实现RBAC访问权限控制的方法"><a href="#一种基于SSH网站实现RBAC访问权限控制的方法" class="headerlink" title="一种基于SSH网站实现RBAC访问权限控制的方法"></a>一种基于SSH网站实现RBAC访问权限控制的方法</h3><p>申请人：<strong>北京经开投资开发股份有限公司</strong><br>本发明公开了一种基于SSH 网站实现RBAC 访问权限控制的方法，包括以下步骤：</p>
+<ul>
+<li>用户对页面进行访问请求，判断Session 中的用户名变量是否为空，若为空，则跳转到登录页面让用户登录，否则将用户信息保存在所述Session 中；</li>
+<li>用户访问数据库，并将登录成功的用户信息保存在所述session 中；</li>
+<li>ORM 模块访问所述数据库，从所述数据库得到访问页面相应的权限信息；</li>
+<li>触发AOP 拦截器，所述AOP 拦截器从所述Session 中得到用户的权限信息；</li>
+<li>所述AOP 拦截器判断用户的权限信息，若包含访问页面相应的权限信息，则用户访问成功，否则访问失败。</li>
+</ul>
+<p>本发明的有益效果为：逻辑清晰、各个逻辑之间的耦合度低、程序的可重用性高、开发效率高。</p>
+<p><img src="http://i.imgur.com/7vfFykn.png" alt=""></p>
+<p>所述<strong>数据库</strong>包括：</p>
+<ul>
+<li>用户表，包括用户编码及用户名，用于储存用户信息；</li>
+<li>角色表，包括角色编码及角色名，用于储存角色信息；</li>
+<li>权限表，包括权限编码、权限名和URL 地址，用于储存具体的权限信息；</li>
+<li>用户角色表，包括用户编码和角色编码，实现用户和角色的多对多映射；</li>
+<li>角色权限表：包括角色编码和权限编码，实现角色和权限的多对多映射；</li>
+</ul>
+<p>所述角色表通过所述用户角色表与所述用户表进行多对多的关联；</p>
+<p>所述角色表通过所述角色权限表与所述权限表进行多对多关联。</p>
+<p>所述的一种基于SSH 网站实现RBAC 访问权限控制的方法，其特征在于，所述角色表中加入父类角色编码用以适应角色的分级。</p>
+<p>所述的一种基于SSH 网站实现RBAC 访问权限控制的方法，其特征在于，所述用户信息、所述角色信息和所述权限信息均以变量名的形式储存在session 中。</p>
+<hr>
+<h3 id="一种基于RBAC的权限管理系统"><a href="#一种基于RBAC的权限管理系统" class="headerlink" title="一种基于RBAC的权限管理系统"></a>一种基于RBAC的权限管理系统</h3><p>申请人：<strong>桂林长海科技有限责任公司</strong></p>
+<p>本发明涉及权限管理技术领域，具体是一种基于RBAC 的权限管理系统，包括用户单元、会话单元、角色单元、数据权限单元和功能权限单元。</p>
+<p><img src="http://i.imgur.com/epM8hOg.png" alt=""></p>
+<ul>
+<li>所述用户单元分别与会话单元和角色单元连接，向会话单元传递用户的会话数据，接收角色单元发送的角色配置，用户单元用于登陆权限管理装置，进行身份资料记录；</li>
+<li>所述会话单元与角色单元连接，接收用户单元的会话数据，并向角色单元发送激活角色数据，用于通过会话进程与用户交互，激活用户角色；</li>
+<li>所述角色单元分别与数据权限单元、功能权限单元连接，并分别向数据权限单元、功能权限单元发送访问请求，用于根据会话结果分配用户角色，以及确定的用户身份与所述用户所属角色之间的对应关系；</li>
+<li>所述数据权限单元，用于根据用户角色对用户发送的访问请求识别，分配数据权限，并对系统的具体数据范围的操作权限进行控制；</li>
+<li>所述功能权限单元，用于根据用户角色对用户发送的访问请求识别，向用户分配功能权限，对操作各个业务对应的应用模块的访问和操作权限进行控制。</li>
+</ul>
+<p>相对现有技术，本发明实现了用户与访问权限的逻辑分离，功能和数据的权限分离，使权限的配置和管理更加简单，降低用户的使用难度。</p>
+<hr>
+<h3 id="一种基于组织的RBAC访问控制模型"><a href="#一种基于组织的RBAC访问控制模型" class="headerlink" title="一种基于组织的RBAC访问控制模型"></a>一种基于组织的RBAC访问控制模型</h3><p>申请人：<strong>山东高速信息工程有限公司</strong></p>
+<p>一种基于组织的RBAC 访问控制模型，包括用户、组织、角色、对象、操作、会话和约束，引入了组织的概念，组织是模型的核心与基础元素，所有的对象与角色都隶属于某一个组织，都具有一个唯一的属主；<br>一个组织可以拥有多个用户，拥有多个角色，拥有多个对象，组织具有层次关系，组织间可以通过授权将一个组织的角色赋给另外一个组织使用。</p>
+<p><img src="http://i.imgur.com/4VScx4N.png" alt=""></p>
+<p>本发明的有益效果是：能够施加更加严格的安全策略，满足了灵活而复杂的系统授权需求，有效的解决了分级授权问题与复杂系统中繁多对象组织管理的问题，能够更方面的用以管理和组织对象，通过引入动态对象，增强了其适应性。</p>
+<p>所述的基于组织的RBAC 访问控制模型，其特征在于：将对象进行分类处理，分为静态对象和动态对象，静态对象是事先确定好的对象，动态对象是在运行中才能确定的对象，对象具有哪些操作事前不确定，只有在授权的过程中才能确定。</p>
+<p>所述的基于组织的RBAC 访问控制模型，其特征在于：引入了更多的约束：</p>
+<ul>
+<li>1）SC1 约束，对应RBAC 参考模型中UA 的SSD，包括最小权限约束和静态职责分离约束；</li>
+<li>2）SC2 约束，对应RBAC 参考模型中角色继承时的SSD，包括最小权限约束和静态职责分离约束，在角色继承过程中，一个角色不能同时继承具有分配互斥的两个角色；</li>
+<li>3）SC3 ：角色的使用范围约束，约束角色在整体的组织中的适用范围，其取值包括本级，本级及直属组织，本级及下级组织（子孙组织），不限制；</li>
+<li>4）SC4 约束，对应RBAC 标准中PA 的SSD，在本模型中特化为“能够建立关系的角色和对象必须隶属于同一个组织”；</li>
+<li>5）DC1 约束，对应RBAC 规范中Session 建立时的DSD，包括最小权限约束和静态职责分离约束；</li>
+<li>6）DC2 ：角色在组织间共享策略约束，可能的策略包括向上共享，同父下的同级共享。</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/patent/">patent</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jmeter-advanced" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/07/jmeter-advanced/" class="article-date">
+  	<time datetime="2015-07-07T15:21:12.000Z" itemprop="datePublished">2015-07-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/07/jmeter-advanced/">JMeter压力测试技术-脚本录制</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一节说到的HttpRequest 可以测试一下对Http请求的压力测试，不过这种方法是有局限，如果设置到登录验证的url，由于url中或者参数中携带了动态的用户SessionID，所以以上的方案就无法实现，这是可以通过脚本录制的方法，也就是录制下用户对网站进行的一系列操作，然后重复播放这段操作，就相当于N多个人进行操作。</p>
+<p>Jmeter支持第三方录制方式和代理录制方式。</p>
+<h2 id="第三方录制方式Badboy"><a href="#第三方录制方式Badboy" class="headerlink" title="第三方录制方式Badboy"></a>第三方录制方式Badboy</h2><p>Badboy是一款不错web自动化测试工具，利用它来录制脚本，并且录制的脚本可以直接保存为JMeter文件来使用。我无疑给我们带来了很大我方便。</p>
+<h3 id="安装Badboy"><a href="#安装Badboy" class="headerlink" title="安装Badboy"></a>安装Badboy</h3><p>下载地址 <a href="http://badboy.com.au/download/index" target="_blank" rel="external"> http://badboy.com.au/download/index</a>，按网页提示输入name/email/company等后下载标识为recommended的那个版本。这是一个可执行程序，下载之后双击，根据安装向导安装。</p>
+<h3 id="我的环境"><a href="#我的环境" class="headerlink" title="我的环境"></a>我的环境</h3><ul>
+<li><p>Badboy  version 2.1.1</p>
+</li>
+<li><p>Apache  JMeter-2.13 (需要JDK环境来运行)</p>
+</li>
+</ul>
+<h3 id="Badboy录制"><a href="#Badboy录制" class="headerlink" title="Badboy录制"></a>Badboy录制</h3><p>打开人badboy工具点击工栏目上的红色圆形按钮，在地址栏目中输入被测试项目的地址。<br><img src="http://i1.piimg.com/c8eb7949dc82c8e9.jpg" alt=""></p>
+<p>录制完成后，点击工具栏旁边黑色按钮，结束录制。</p>
+<p>选择“文件”–àExport to Jmeter…<br><img src="http://i1.piimg.com/b765c2942212af94.jpg" alt=""></p>
+<h3 id="JMeter导入录制结果"><a href="#JMeter导入录制结果" class="headerlink" title="JMeter导入录制结果"></a>JMeter导入录制结果</h3><p>打开Jmeter工具，选择“文件”–&gt;“打开”选择刚才保存的文件(.jmx类型)，将文件导入进来了。<br><img src="http://i1.piimg.com/9add734859bca331.jpg" alt=""></p>
+<h2 id="通过JMeter录制脚本"><a href="#通过JMeter录制脚本" class="headerlink" title="通过JMeter录制脚本"></a>通过JMeter录制脚本</h2><h3 id="脚本录制"><a href="#脚本录制" class="headerlink" title="脚本录制"></a>脚本录制</h3><p>脚本录制，JMeter启用WEB代理，浏览器把代理上网设置为JMeter所在的IP地址，自己电脑就是127.0.0.1代理端口默认8080。至于浏览器修改代理上网服务器，不做截图。</p>
+<p>Jmeter运行在目录  \apache-jmeter-2.10\bin下jmeter.dat文件，双击打开进入Jmeter界面</p>
+<p><img src="http://i3.piimg.com/14215eb5dfdd65a7.jpg" alt=""></p>
+<h3 id="Jmeter界面"><a href="#Jmeter界面" class="headerlink" title="Jmeter界面"></a>Jmeter界面</h3><p><img src="http://i3.piimg.com/f7d4879bfdf43460.jpg" alt=""></p>
+<p>建立测试计划，录制阶段不需要更改任何配置。名称可以自己改</p>
+<p><img src="http://i3.piimg.com/f6f0f4abc3710ad3.jpg" alt=""></p>
+<h3 id="Cookie管理器"><a href="#Cookie管理器" class="headerlink" title="Cookie管理器"></a>Cookie管理器</h3><p>添加一个Cookie管理器，该次测试是需要登陆操作，如果没有Cookie管理器，登陆后的HTTP请求，在脚本运行的时候，就不会带Cookie。应该知道后果吧，就是登陆成功后的请求提示你未登陆。添加就行不需要配置。</p>
+<p><img src="http://i3.piimg.com/da9aabfa750edc68.jpg" alt=""></p>
+<h3 id="在工作台启用HTTP代理服务器"><a href="#在工作台启用HTTP代理服务器" class="headerlink" title="在工作台启用HTTP代理服务器"></a>在工作台启用HTTP代理服务器</h3><p><img src="http://i3.piimg.com/e6ad31117b8aa6ff.jpg" alt=""></p>
+<p>配置目标控制器：选择刚刚建立的测试计划， Type选择HttpClient4。然后启动。</p>
+<p><img src="http://i3.piimg.com/5f959e84ebfac93c.jpg" alt=""></p>
+<h3 id="浏览器开启代理服务"><a href="#浏览器开启代理服务" class="headerlink" title="浏览器开启代理服务"></a>浏览器开启代理服务</h3><p><img src="http://i3.piimg.com/1a6b8dbcb1b0d997.jpg" alt=""></p>
+<p>JMeter官方提供了配置Firefox，Chrome，IE，Opera等浏览器的证书：</p>
+<p><strong>Installing the certificate in Firefox</strong></p>
+<ul>
+<li>Choose the following options:</li>
+<li>Tools / Options</li>
+<li>Advanced / Certificates</li>
+<li>View Certificates</li>
+<li>Authorities</li>
+<li>Import …</li>
+<li>Browse to the JMeter launch directory, and click on the file <strong><em>ApacheJMeterTemporaryRootCA.crt</em></strong>, press Open</li>
+<li>Click View and check that the certificate details agree with the ones displayed by the JMeter Test Script Recorder</li>
+<li>If OK, select “Trust this CA to identify web sites”, and press OK</li>
+<li>Close dialogs by pressing OK as necessary</li>
+</ul>
+<p><strong>Installing the certificate in Chrome or Internet Explorer</strong></p>
+<p>Both Chrome and Internet Explorer use the same trust store for certificates.</p>
+<ul>
+<li>Browse to the JMeter launch directory, and click on the file <strong><em>ApacheJMeterTemporaryRootCA.crt</em></strong>, and open it</li>
+<li>Click on the “Details” tab and check that the certificate details agree with the ones displayed by the JMeter Test Script Recorder</li>
+<li>If OK, go back to the “General” tab, and click on “Install Certificate …” and follow the Wizard prompts</li>
+</ul>
+<p><strong>Installing the certificate in Opera</strong></p>
+<ul>
+<li>Tools / Preferences / Advanced / Security</li>
+<li>Manage Certificates…</li>
+<li>Select “Intermediate” tab, click “Import…”</li>
+<li>Browse to the JMeter launch directory, and click on the file <strong><em>ApacheJMeterTemporaryRootCA.usr</em></strong>, and open it</li>
+</ul>
+<h3 id="进入脚本录制"><a href="#进入脚本录制" class="headerlink" title="进入脚本录制"></a>进入脚本录制</h3><p>进入脚本录制，按照预设的测试脚本过程，操作一次ECHSOP。</p>
+<p><img src="http://i3.piimg.com/2a6d561a483d4a83.jpg" alt=""></p>
+<p>登陆ECSHOP</p>
+<p><img src="http://i3.piimg.com/a6082b9e59932c64.jpg" alt=""></p>
+<p>进入用户管理中心，打开评论页面</p>
+<p><img src="http://i3.piimg.com/f46f6fab5f628d43.jpg" alt=""></p>
+<p>退出</p>
+<p><img src="http://i3.piimg.com/e223b3a015be6495.jpg" alt=""></p>
+<h3 id="筛选"><a href="#筛选" class="headerlink" title="筛选"></a>筛选</h3><p>以上操作后，录制已经完成。录制的页面中，可能有其他的访问在里面，可以将不需要的页面删除</p>
+<p><img src="http://i3.piimg.com/32be638280b0e92f.jpg" alt=""></p>
+<p>里面浏览器发起的请求也被录制下来，这种就可以删除。</p>
+<p>将干扰测试的页面删除完后保存</p>
+<p><img src="http://i3.piimg.com/39dfb04bdbb52a7c.jpg" alt=""></p>
+<h2 id="测试验证脚本脚本"><a href="#测试验证脚本脚本" class="headerlink" title="测试验证脚本脚本"></a>测试验证脚本脚本</h2><p>以上两种方法都可以录制脚本，录制完成后，运行一次。运行之前添加一个监听器，用于查看脚本运行情况，建议用观察结果树监听器，可以看到来回的HTTP交互。</p>
+<p><img src="http://i3.piimg.com/47f756add1812b68.jpg" alt=""></p>
+<p>运行</p>
+<p><img src="http://i3.piimg.com/01a715d8630f0253.jpg" alt=""></p>
+<p>运行完后通过结果树查看脚本运行结果，中间栏为脚本运行请求过的页面，都是绿色表示页面请求和响应都正常。再查看下关键页面的请求和响应参数，</p>
+<p>登陆的请求正常，账号songmin密码123456 正常提交，看下响应数据</p>
+<p><img src="http://i3.piimg.com/6545332171097339.jpg" alt=""></p>
+<p>响应数据，看到有登陆成功的关键字。OK  脚本没问题，其他页面不去验证了，测试时，根据测试流程验证关键的几个页面请求和响应数据，是否和正常操作对应。</p>
+<p><img src="http://i3.piimg.com/ec159540614d5346.jpg" alt=""></p>
+<h2 id="开始测试"><a href="#开始测试" class="headerlink" title="开始测试"></a>开始测试</h2><h3 id="添加报表"><a href="#添加报表" class="headerlink" title="添加报表"></a>添加报表</h3><p>报表格式很多种，根据自己情况使用。不清楚的话，可以都添加运行一次后，看那个报表更合适</p>
+<p><img src="http://i3.piimg.com/57313cdf4b91823d.jpg" alt=""></p>
+<p><img src="http://i3.piimg.com/c3f02a22952cd0cc.jpg" alt=""></p>
+<h3 id="编辑测试压力数据"><a href="#编辑测试压力数据" class="headerlink" title="编辑测试压力数据"></a>编辑测试压力数据</h3><p>300并发，10秒中300并发准备完成，循环次数永远，持续时间300秒<br><img src="http://i3.piimg.com/ae7f896df91bf855.jpg" alt=""></p>
+<p>运行脚本</p>
+<p>300线程数已经完成启动</p>
+<p><img src="http://i3.piimg.com/d101c0e17aafc428.jpg" alt=""></p>
+<h3 id="查看报表"><a href="#查看报表" class="headerlink" title="查看报表"></a>查看报表</h3><p>图形报表</p>
+<p><img src="http://i3.piimg.com/c02a3066162d0607.jpg" alt=""></p>
+<p>聚合报表，看到每个页面的响应时间，错误率，请求次数等。</p>
+<p><img src="http://i3.piimg.com/5d67f3704be36f0f.jpg" alt=""></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jmeter-base" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/07/jmeter-base/" class="article-date">
+  	<time datetime="2015-07-07T02:20:44.000Z" itemprop="datePublished">2015-07-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/07/jmeter-base/">JMeter压力测试技术-基础篇</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="http://jakarta.apache.org/jmeter/" target="_blank" rel="external">Apache JMeter</a>是一款强大的图形界面压力测试工具，是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测试但后来扩展到其他测试领域。</p>
+<p>Apache jmeter 可以用于对静态的和动态的资源（文件，Servlet，Perl脚本，java 对象，数据库和查询，FTP服务器等等）的性能进行测试。它可以用于对服务器，网络 或对象模拟繁重的负载来测试它们的强度或分析不同压力类型下的整体性能。你可以使用它做性能的图形分析或在大并发负载测试你的服务器/脚本/对象。</p>
+<p>Jmeter 是一个非常流行的性能测试工具，虽然与<em>LoadRunner</em>相比有很多不足，比如：它结果分析能力没有LoadRunner详细；很它的优点也有很多：</p>
+<ul>
+<li><p>开源，他是一款开源的免费软件，使用它你不需要支付任何费用，</p>
+</li>
+<li><p>小巧，相比LR的庞大（最新LR11将近4GB），它非常小巧，不需要安装，但需要JDK环境，因为它是使用java开发的工具。</p>
+</li>
+<li><p>功能强大，jmeter设计之初只是一个简单的web性能测试工具，但经过不段的更新扩展，现在可以完成数据库、FTP、LDAP、WebService等方面的测试。因为它的开源性，当然你也可以根据自己的需求扩展它的功能。</p>
+</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><a href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank" rel="external">从官网下载JMeter压缩包</a>，注意下载的是 <strong>apache-jmeter-2.13.zip</strong>  (不是 apache-jmeter-2.13_src.zip )， 目前最新版本是<strong>2.13</strong>。<br>下载解压后，在目录jakarta-jmeter-2.4\bin下可以见到一个jmeter.bat文件，双击此文件，打开初始界面如下图：<br><img src="http://i1.piimg.com/493a25a7d45d6c9c.png" alt=""></p>
+<p>注意的是上面显示的是中文，如果你想使用其他语言，比如英文，那么通过菜单选项-&gt;选择语言-&gt;英文即可，当然转为中文也是同样操作。</p>
+<h2 id="HTTP-Request"><a href="#HTTP-Request" class="headerlink" title="HTTP Request"></a>HTTP Request</h2><h3 id="建立一个线程组，如下图"><a href="#建立一个线程组，如下图" class="headerlink" title="建立一个线程组，如下图"></a>建立一个线程组，如下图</h3><p><img src="http://i1.piimg.com/5a9bb9e7f5dfff05.jpg" alt=""><br>为什么要建立线程组？原因很简单，因为我们要模拟多个线程（用户）来访问网站。<br>线程组创建界面如下图：</p>
+<p>名称可以随意填写，默认选中“继续”即可。<br>线程属性部分中，线程数是启动多少个线程，我这里填写的是60，Ramp-Up Period (in seconds)表示线程之间间隔多少时间允许，单位是秒，比如如果填写120，那么120/60=2表示60个线程间每隔2秒钟请求网站。</p>
+<p>Ramp-Up Period官方解释：</p>
+<pre><code>Ramp-up Period 
+How long JMeter should take to get all the threads started. 
+If there are 10 threads and a ramp-up time of 100 seconds, 
+then each thread will begin 10 seconds after the previous thread started, 
+for a total time of 100 seconds to get the test fully up to speed.
+</code></pre><p>循环次数：60个线程运行完毕算是一次，循环次数就是这样的一个请求过程运行多少次，我这里填写的是1000.<br>每次修改一个设置后，别忘记了保存一下。</p>
+<h3 id="设置请求服务器、压力链接等信息"><a href="#设置请求服务器、压力链接等信息" class="headerlink" title="设置请求服务器、压力链接等信息"></a>设置请求服务器、压力链接等信息</h3><p>接下来很自然的是，我们要测试的网站地址是什么？链接是什么？所以现在我们就来设置这些信息。<br>右键点击我们刚创建的线程组，在弹出的菜单中，选择添加-&gt;Sampler-&gt;Http请求，弹出如下图界面：<br><img src="http://i1.piimg.com/a9df3b873cd1907a.jpg" alt=""></p>
+<p>名称：随意填写</p>
+<p>注释：可有可无</p>
+<p>服务器名称或IP：我这里填写 zihou.me</p>
+<p>端口号：我这里填写80</p>
+<p>Timesout部分可以不填</p>
+<p>HTTP请求部分的协议：http，方法我选择的是GET，Content encoding我填的是UTF-8.</p>
+<p>路径：<br>这里值得一提的就是这个路径，假如你只是对一个链接进行压力测试，那么这里就非常简单了，你就直接填写一个链接就够了，比如http：//www.zihou.me，但很多情况下都不是这样的，我们这里需要多个链接，就如同刚开始讲到的那样，我们要将多个链接保存到一个文本文件中，然后随机读取进行压力测试。我们可以这么干，如图：</p>
+<p><img src="http://i1.piimg.com/aa9e4101cb8c01ef.png" alt=""></p>
+<p><img src="http://i1.piimg.com/fce6623fa5f56d09.png" alt=""></p>
+<p>在选择一个功能下拉列表中选择_StringFromFile，然后在本机新建一个测试文件text.txt，在第一行（你也可以不在第一行）的值中填写测试文件的路径，如下图：<br><img src="http://i1.piimg.com/e96df58d6efe03fe.png" alt=""></p>
+<p>然后点击“生成”按钮，在生成按钮的左边文本框中将生成一个字符串如：</p>
+<pre><code>${__StringFromFile(E:\test\test.txt,,,)}
+</code></pre><p>在测试文件中，我们每行写一个URL链接，如下格式：</p>
+<p>2011/03/26/3054</p>
+<p>2011/03/26/3052</p>
+<p>2011/03/26/3042</p>
+<p>2011/03/25/3040</p>
+<p>2011/03/25/3034</p>
+<p>2011/03/24/3027</p>
+<p>注意，每行前面并没有<span>http：//www.zihou.me</span>这样的信息，因为我们在前面已经填写了服务器地址为zihou.me，这里就没必要再为每个url填写这个相同前缀了；另外，上面的url格式也只是个例子，表示域名后的部分，但很多时候url后面跟的都是各参数，比如<span>http：//www.zihou.me/p?a=1&amp;b=3</span>，如果是这种情况，则上面的链接可以写为：<br><code>a=1&amp;b=3</code> 这样的形式。</p>
+<p>现在我们可以来填写前面所说的路径了，如下：</p>
+<pre><code>/ ${__StringFromFile(E:\test\test.txt,,,)}
+</code></pre><p>这样一来，当我们并非请求的时候，就会从test.txt中随机选择url来进行压力测试。</p>
+<p>另外值得注意的一个地方是，如果参数中有中文的情况，运行的时候可能会出现乱码，这个时候就需要注意你在Jmeter中的编码设置与你要请求的网页编码是一致的。</p>
+<p>路径文本框下面的选项，可以按默认的就成，Use multipart/form-data for HTTP POST是当请求中有附件的情况，一般情况下都不用选中的。</p>
+<p>同请求一起发送参数部分：如果你仅仅是对某一个固定的页面进行压力测试，那你就可以不用进行上面所说的在文本文件中设置URL的过程了，直接在这里设置就行了，这里的名称就是参数名，值就是参数值，在这里添加就OK了，但你如果是压力多个链接，那这里你可以不用填。</p>
+<h3 id="查看运行结果"><a href="#查看运行结果" class="headerlink" title="查看运行结果"></a>查看运行结果</h3><p>上面设置好后，接下来很自然的想到如何查看运行结果呢？Jmeter在这方面提供了好些个查看方式，有表格形式，有曲线形式等等，我个人认为查看表格形式就足够了！</p>
+<p>鼠标右键点击线程组，在弹出的菜单中选择添加-&gt;监听器-&gt;用表格查询结果，如下图：</p>
+<p><img src="http://i1.piimg.com/31a4622f9ff4b770.png" alt=""></p>
+<p><img src="http://i3.piimg.com/ea5df5c425e2720d.jpg" alt=""></p>
+<p>当然，你也可以选择其他查看方式，你也可以看到在监听器菜单中，有好多种方式。</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>好了，现在我们终于可以运行了！<br>选择菜单项运行-&gt;启动，如下图：</p>
+<p><img src="http://i1.piimg.com/f0db785148d2e1ee.png" alt=""></p>
+<p>当然，在运行前，你得把所有修改都保存了。<br>运行后的结果表格如下：</p>
+<p><img src="http://i1.piimg.com/da4ccd669b03a8bc.jpg" alt=""></p>
+<p>各属性如下：</p>
+<p><strong>Sample</strong>：每个请求的序号</p>
+<p><strong>Start Time</strong>：每个请求开始时间</p>
+<p><strong>Thread Name</strong>：每个线程的名称</p>
+<p><strong>Label</strong>：Http请求名称</p>
+<p><strong>Sample Time</strong>：每个请求所花时间，单位毫秒</p>
+<p><strong>Status</strong>：请求状态，如果为勾则表示成功，如果为叉表示失败。</p>
+<p><strong>Bytes</strong>：请求的字节数</p>
+<p>如果Status为叉，那很显然请求是失败了，但如果是勾，也并不能认为请求就一定完全成功了，因为还得看Bytes的字节数是否是所请求网页的正常大小值，如果不是则说明发生了丢包现象，也不是完全成功。</p>
+<h4 id="在下面还有几个参数"><a href="#在下面还有几个参数" class="headerlink" title="在下面还有几个参数"></a>在下面还有几个参数</h4><p><strong>样本数目（No of Samples）</strong>：也就是上面所说的请求个数，成功的情况下等于你设定的并发数目乘以循环次数。</p>
+<p><strong>平均(Average)</strong>：每个线程请求的平均时间</p>
+<p><strong>最新样本(Latest Sample)</strong>：表示服务器响应最后一个请求的时间</p>
+<p><strong>偏离（Deviation）</strong>：服务器响应时间变化、离散程度测量值的大小，或者，换句话说，就是数据的分布。</p>
+<p>好了，主要的就介绍这么多了，其实Jmeter做压力测试的范围远远不止于对Web，它还可以用于Java小服务程序、CGI 脚本、Java 对象、数据库， FTP 服务器等等，更多的使用可以根据自己的需要去研究掌握。</p>
+<p>最后还提到的一点是：你一定注意到了，HTTP请求和结果查看都是在线程组这一节点下创建的，其实，你也可以不用一定要在线程组下创建，你在测试计划下建立也可以，但创建在线程组下面可以使得我们的测试意图一目了然，也就是我们的HTTP请求和结果查看都是基于我们设定的线程组的。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/压力测试/">压力测试</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-webbind2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/18/webbind2/" class="article-date">
+  	<time datetime="2015-06-18T15:46:45.000Z" itemprop="datePublished">2015-06-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/18/webbind2/">站内账户绑定的介绍和实现</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在上一节说过绑定的一种实现，就是用第三方进行授权绑定，从而实现用户信息的共享。然后本节中将阐述另外一种全新的绑定方案 ——— 站内绑定。</p>
+<p>在同一个网站下，两个用户建立绑定关系，并且授权对方能够查看的信息范围。或许你会有此疑问：既然在同一网站之下，就应该可以加为好友关系，并且能够获取对方的用户信息，为何需要绑定，这样的绑定能够获取除好友关系之外的哪些权限？</p>
+<p>首先，同一网站下的用户，的确可以搜索到，并且可以加为好友关系，不过这种关系只是信息共享的低级部分，你只能查看到对方授权公开的信息，除此之外你一无所获。</p>
+<p>站内用户绑定，就是不仅仅实现信息共享的，是为两个在现实中有紧密联系的用户建立的一套信息互助系统，这种绑定是单向关系，并且这种绑定实际授权的不仅仅是信息，也是给予对方操作自己的<strong>权限</strong>，归根结底，这种绑定其实就<strong>权限管理</strong> , 但是这种权限管理与网站的权限管理有很大不同。</p>
+<ul>
+<li><p>网站权限管理是以系统为中心，用户拥有的权限都是对系统而言的 ， 是一套权限集；</p>
+</li>
+<li><p>而站内绑定的权限管理其实是以用户为中心的，每一个用户都是一套权限管理系统，并且拥有一套以自己为中心的权限集，管理着其他用户操作自己的权限。(当然每个用户依然拥有系统的权限)</p>
+</li>
+</ul>
+<p> 比如：</p>
+<p> <em>秘书</em>(A) 申请绑定 <em>老板</em>(B) ， <em>老板</em> 同意绑定并且授权 <em>秘书</em> 可以对他的日程进行编辑，那么 <em>秘书</em> 就可以进入 <em>老板</em> 的日程，并且拥有新增编辑的功能；</p>
+<p>这种绑定关系就是将同一系统中的两个用户建立起绑定关系，被绑定者可以授权绑定者一定的权限进行操作，除了以上的例子之外，可能还有 <em>老师</em> 和 <em>学生</em> 的绑定， <em>家长</em> 和 <em>孩子</em> 的绑定等等。</p>
+<p>绑定的步骤：</p>
+<ul>
+<li>用户A 申请绑定 用户B ;</li>
+<li>用户B 可以同意绑定、拒绝绑定或者忽略，如何B同意绑定，进而选择授权绑定者的权限；</li>
+<li>用户A 绑定成功， 就可以操作B给予他的操作权限；</li>
+</ul>
+<p>以上的绑定，其实就让A 能够 以B的身份去拿用户B的数据。</p>
+<p>下面将简单说一下绑定用户数据互通的实现过程。</p>
+<h3 id="构建用户代理类"><a href="#构建用户代理类" class="headerlink" title="构建用户代理类"></a>构建用户代理类</h3><p>用户对象中包含了绑定的用户或组织信息，当进入到绑定用户后，对被绑定者的任何授权操作都相当于被绑定者自己在操作。</p>
+<pre><code>public class UserProxy implements MethodInterceptor {
+
+    private User  target;
+    private Session currentSessoin;
+    private Object proxy;
+
+    public Object getProxy() {
+        return this.proxy;
+    }
+
+    /** 
+     * 创建代理对象 
+     *  
+     * @param target 
+     * @return 
+     */  
+    public Object getInstance(User target, Session userSession) {
+
+        //1
+        this.target         = target;
+        this.currentSessoin = userSession;
+
+        //2
+        Enhancer enhancer = new Enhancer();  
+        enhancer.setSuperclass(this.target.getClass());
+
+        //3 回调方法  
+        enhancer.setCallback(this);
+
+        proxy = enhancer.create();
+        //4 创建代理对象  
+        return proxy;
+    }
+
+}
+</code></pre><p>设置用户代理类的方法劫持，将对A用户的访问转移到对B用户的访问中，从而实现用户之间的单向数据操作。</p>
+<pre><code>@Override
+   public Object intercept(Object arg0, Method arg1, Object[] arg2,
+           MethodProxy arg3) throws Throwable {
+
+       if (currentSessoin.getBindingDomain() != null) {
+           // ..省略获取权限,如果有权限进行以下
+           if (arg1.getName().equals(&quot;getDomain&quot;)) {
+               return currentSessoin.getBindingDomain();
+           } 
+       } else if (currentSessoin.getBindingUser() != null) {
+           // ..省略获取权限,如果有权限进行以下
+           return arg1.invoke(currentSessoin.getBindingUser(), arg2);
+       }
+       return arg1.invoke(this.target, arg2);
+   }    
+</code></pre><h3 id="定义Session"><a href="#定义Session" class="headerlink" title="定义Session"></a>定义Session</h3><p>一个session就是一次会话</p>
+<pre><code>public class Session {
+
+    private String sessionID;
+
+    private User loginUser;         // 登录用户
+
+    private Domain bindingDomain;    // 绑定的组织
+
+    private User   bindingUser;        // 绑定的用户
+
+}
+</code></pre><h3 id="Session与用户代理绑定"><a href="#Session与用户代理绑定" class="headerlink" title="Session与用户代理绑定"></a>Session与用户代理绑定</h3><p>系统中每一个用户登录成功之后，都会生成一个相应的用户代理类与Session绑定，并且设置有失效的时间，超过失效时间或者用户主动退出后，Session和用户代理类就无效了。</p>
+<pre><code>public class SessionManagerImp implements SessionManager, InactiveSessionOperation {
+
+    /**
+     * 缓存Session
+     */
+    private Map&lt;String, Session&gt; cache = new HashMap&lt;String, Session&gt;();
+
+    private ReadWriteLock lock = new ReentrantReadWriteLock();
+
+    /**
+     * 扫描不活动的Session
+     */
+    private Timer scanTimer = new Timer();
+
+    /**
+     * 每次扫描的时间间隔，毫秒
+     */
+    private static final int SCANINTERVAL = 300000;
+
+    /**
+     * 失效的Session时间间隔
+     */
+    private static final int INACTIVEINTERVAL = 4 * SCANINTERVAL;
+
+    @Override
+    public Session openNewSession(User aUser, int resource) {
+
+        Session sess = new Session(Session.generateSessionID(), null, Calendar.getInstance(), resource);
+
+        //1
+        User userPr = (User)(new UserProxy().getInstance(aUser, sess));
+
+        //2
+        sess.setLoginUser(userPr);
+        sess.setTrueUser(aUser);
+
+        try {
+            this.lock.writeLock().lock();
+            cache.put(sess.getSessionID(), sess);
+
+        } finally {
+            this.lock.writeLock().unlock();
+        }
+
+        return sess;
+    }
+}
+</code></pre><p>只要设置了用户代理类的bindUser ， 对bindUser的任何操作就相当于bindUser自己去操作，当然这里还有更进一步的权限管理，在用bindUser去操作之前，需要先获取bindUser给当前用户的权限是哪些，如果这个操作并未授权，当前用户也无法调用。这里介绍的是绑定之后，绑定者 如何 获取 被绑定者的数据，并等同于被绑定者进行操作。</p>
+<p>这里没有介绍的如何进行绑定，这种授权方案从安全角度可以参考当下比较流行的OAuth协议（就像第三方授权登录一样），这一部分内容有很多资料，这里不做介绍。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-webbind1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/17/webbind1/" class="article-date">
+  	<time datetime="2015-06-17T15:46:26.000Z" itemprop="datePublished">2015-06-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/17/webbind1/">简介第三方网站账户绑定</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>绑定涉及到两种：</p>
+<ul>
+<li>第三方账户绑定</li>
+<li>站内账户绑定</li>
+</ul>
+<p>绑定实际就是实现信息共享，当前很多社交网站都实现了第三方登录的功能，但是涉及到信息安全，资金安全的电子商务网站， 比如支付宝就只有自家淘宝登录，这些网站需要从注册用户那获得更好的价值数据分析，并且电商用户的账号涉及到许多隐私问题，因此并没有其他第三方登录方式。</p>
+<p>第三方账户绑定的主体是<strong>多个网站</strong> ，<strong>一个用户</strong> : 用户为了实现不同网站之间的互通，而进行了账户绑定，方便用户实现不同网站的信息共享。</p>
+<p>而站内账户绑定的主体是<strong>一个网站</strong> ，<strong>多个用户</strong> : 在一个网站内，为了实现不同用户的信息共享，而进行的账户绑定，绑定者可以查看被绑定者的授权的信息。</p>
+<p>前者在国内有大量专利，而后者国内专利较少。由于篇幅问题，本文仅探讨<em>第三方账户绑定和登录</em>的问题，会在下一篇文章中来探讨<em>站内账户绑定</em>的实现。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>虽说现在的互联网产品注册流程极其简洁，但，那么多网站，为了你单独记一份密码占据脑磁盘，这个成本用户坚决不会花。因此，为用户提供第三方账户（如微信、qq、新浪微博等）进行登录就太有必要了。利用第三方社交账号登录网站成功后，就完成了对该社交账号的绑定过程，并且实现信息共享。</p>
+<p><img src="http://i1.piimg.com/d7cd4b7ccc8a313d.png" alt=""></p>
+<p>对于用户资源的授权来讲, OAuth并不是唯一的, 但是目前<strong>OAuth2.0</strong>应该已经是各种平台的事实标准了, 对于OAuth2.0协议, 有一系列RFC阐述了OAuth2.0。</p>
+<p>不过OAuth2。0虽然已经是一个标准， 但是各个平台对它的实现并不完全相同，但是最基本的流程是一样，所以要先了解这个协议。知道了大体流程之后你就可以结合具体的平台， 比如QQ或微博的开发文档来看。</p>
+<p>OAuth2.0分为四种鉴权方式, 已分别应对不同的需求, 比如说<em>web</em>或<em>app</em>. 通常我们在web端使用第一种Authorization Code方式。为了简单说明，我直接拿QQ做例子，简单说一下流程：</p>
+<ul>
+<li>当用户点击QQ登陆，你会通引导用户跳转到第三方登陆的登陆界面， 当用户成功登录以后会自动跳转回来，并附带一个code参数，接着你使用code就可以获得access token（访问令牌），对于QQ，由于第三方登录结合了Openid， 所以需要再通过token获取openid。这个openid是和QQ用户一一对应的, 使用access token + openid 即可获取用户信息。</li>
+</ul>
+<p>第三方平台和本地用户系统结合应该分为三种情况：</p>
+<ul>
+<li>本地未登录，第一次登录第三方：此时相当于注册，直接把第三方信息拉取来并注册成本地用户就可以了，并建立本地用户与第三方用户（openid）的绑定关系</li>
+<li>本地未登录，再次登录第三方：此时用户已注册，获取到openid后直接找出对应的本地用户即可</li>
+<li>本地登录，并绑定第三方： 这个只要将获取到的openid绑定到本地用户就可以了</li>
+</ul>
+<p>不禁会思考，绑定账号是根据什么绑定的？ </p>
+<ul>
+<li>那就是ID , 比如微博的uid , 腾讯的openid等等</li>
+</ul>
+<p>扩展第三方登录的时候， 每支持一种第三方登录，就多一张开放用户的关联表，自己的用户表不用变：</p>
+<p>如weibo：(id access_token uid 用户表ID)；</p>
+<p>如qq：(id access_token openid 用户表ID)；</p>
+<p>当然，你也可以简单，把这几种表，合并为一张表也行，用个type区分下</p>
+<p>如：(id access_token openid 用户表ID type)</p>
+<h2 id="国内专利情况"><a href="#国内专利情况" class="headerlink" title="国内专利情况"></a>国内专利情况</h2><p><img src="http://i4.piimg.com/ca50b38833d49b94.png" alt=""></p>
+<p><img src="http://i4.piimg.com/61bb87e17d36fa0c.png" alt=""></p>
+<h2 id="涉及技术专利"><a href="#涉及技术专利" class="headerlink" title="涉及技术专利"></a>涉及技术专利</h2><h3 id="身份标识绑定方法及系统"><a href="#身份标识绑定方法及系统" class="headerlink" title="身份标识绑定方法及系统"></a>身份标识绑定方法及系统</h3><p>申请人：<strong>腾讯科技(深圳)有限公司</strong></p>
+<p>一种身份标识绑定方法，包括以下步骤：</p>
+<ul>
+<li>获取第一身份标识，第一身份标识用于登录第一网站；</li>
+<li>通过第一身份标识登录第二网站；</li>
+<li>获取用于登录第二网站的第二身份标识；</li>
+<li>建立第一身份标识与第二身份标识之间的<strong>映射关系</strong>。</li>
+</ul>
+<p>上述身份标识绑定方法及系统在通过第一身份标识登录第二网站时将用户的第一身份标识与原有的第二身份标识进行绑定，从而再次登录第二网站时由用户的第一身份标识即可找到关联的第二身份标识，通过统一的第一身份标识即可实现第二网站的登录，在用户通过第一身份标识登录进入第二网站时也能够识别出第一身份标识所对应的用户与第二身份标识对应的用户为<strong>同一个用户</strong>，实现利用单一身份标识在不同网站上的登陆互通，为用户登录提供了方便。</p>
+<p><img src="http://i4.piimg.com/fdeae2d3e855e8ed.png" alt=""></p>
+<h3 id="第三方授权登录方法、开放平台及系统"><a href="#第三方授权登录方法、开放平台及系统" class="headerlink" title="第三方授权登录方法、开放平台及系统"></a>第三方授权登录方法、开放平台及系统</h3><p>申请人：<strong>腾讯科技(深圳)有限公司</strong></p>
+<p>本发明涉及一种第三方授权登录方法、开放平台及系统，其方法包括 ：</p>
+<ul>
+<li>开放平台进入页面接收用户终端对第三方站点的授权指令 ；</li>
+<li>当用户终端授权连接成功后，根据预定的开放平台登录回跳协议，将用户终端的第一登录标识 OpenID 和第一登录密钥 OpenKey 传递给第三方站点 ；</li>
+<li>由第三方站点根据第一OpenID和第一OpenKey进行基于用户终端的授权登录。</li>
+</ul>
+<p>本发明可以实现多种形态的登录，用户不需要注册和管理多个网站的登录账号，只需通过一个开放平台的注册账号，经过授权即可访问多个网站，为用户提供方便，而且实现简单。</p>
+<p><img src="http://i4.piimg.com/f7b42ecf3b6e5eb7.png" alt=""></p>
+<h3 id="登录第三方站点的方法和服务器"><a href="#登录第三方站点的方法和服务器" class="headerlink" title="登录第三方站点的方法和服务器"></a>登录第三方站点的方法和服务器</h3><p>申请人：<strong>百度在线网络技术(北京)有限公司</strong></p>
+<p>本发明提出一种登录第三方站点的方法和装置，该方法包括：</p>
+<ul>
+<li>接收浏览器发送的第一请求消息，所述第一请求消息是所述浏览器在加载的页面中包含预设信息时发送的；</li>
+<li>根据第一请求消息获取第三方站点的应用信息，以及获取用户信息，并根据应用信息和用户信息得到用户信息加密串；</li>
+<li>将所述用户信息加密串发送给所述浏览器，以使浏览器将用户信息加密串发送给第三方站点服务端，以使第三方站点服务端成功解密用户信息加密串后对用户进行自动登录第三方站点的处理。</li>
+</ul>
+<p>该方法可以实现用户在流量分发入口产品上处于登录状态时点击链接进入第三方站点时，无需主动登录就能够在该第三方站点上也处于登录状态，并保证用户信息的安全性。</p>
+<p><img src="http://i4.piimg.com/d8a9c4ac8e29e923.png" alt=""></p>
+<h3 id="第三方应用的注册和登录方法及系统"><a href="#第三方应用的注册和登录方法及系统" class="headerlink" title="第三方应用的注册和登录方法及系统"></a>第三方应用的注册和登录方法及系统</h3><p>申请人：<strong>广州唯品会信息科技有限公司</strong></p>
+<p>一种第三方应用的注册和登录方法和系统，其方法包括 ：</p>
+<ul>
+<li>在第三方应用注册启动后，采集注册用户的生物特征信息，并进行鉴权，若鉴权通过，则向服务器发送注册指令 ；</li>
+<li>在服务器接收到注册指令后，获取第三方应用的标识及其对应的用户信息，生成第三应用对应的用户账号和令牌值，存储三者之间的映射关系，并将令牌值发送至第三方应用 ；</li>
+<li>在第三方应用接收并存储令牌值后，确认注册成功 ；</li>
+<li>在第三方应用接收到登录用户的登录触发指令时，采集登录用户的生物特征信息，并进行鉴权，若鉴权通过，将第三方应用的<br>标识和令牌值发送至服务器 ；</li>
+<li>服务器利用标识和令牌值查找出该第三方应用对应的用户账号，并发送至第三方应用进行登录。</li>
+</ul>
+<p>本申请提高注册效率。</p>
+<p><img src="http://i4.piimg.com/7aeef35899790ff6.png" alt=""></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

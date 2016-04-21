@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>网站账户访问权限的设置系统及方法 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文所涉及到的专利是由 携程计算机技术（上海）有限公司 于 2014.07.02 申请。
+摘要本系统公开了一种网站账户访问权限的设置系统及方法，方法包括 ：
+S1、为每个网站账户设置唯一的身份标识码 ；
+S2、为每个网站账户绑定两个以上的访问权限，每个访问权限均列有网站账户的唯一的身份标识码、访问方式以及访问窗口之间的对应关系 ；
+S3、为每个访问权限设置对应的网站服务的范围 ；
+S4、在接收到由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网站账户访问权限的设置系统及方法">
+<meta property="og:url" content="http://yoursite.com/2015/06/02/web-permission-ctrip/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="本文所涉及到的专利是由 携程计算机技术（上海）有限公司 于 2014.07.02 申请。
+摘要本系统公开了一种网站账户访问权限的设置系统及方法，方法包括 ：
+S1、为每个网站账户设置唯一的身份标识码 ；
+S2、为每个网站账户绑定两个以上的访问权限，每个访问权限均列有网站账户的唯一的身份标识码、访问方式以及访问窗口之间的对应关系 ；
+S3、为每个访问权限设置对应的网站服务的范围 ；
+S4、在接收到由">
+<meta property="og:image" content="http://i1.piimg.com/963b171b2346478c.png">
+<meta property="og:image" content="http://i1.piimg.com/5058a322b038ba16.png">
+<meta property="og:image" content="http://i1.piimg.com/d42298ce36560953.png">
+<meta property="og:updated_time" content="2016-04-21T02:03:15.269Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网站账户访问权限的设置系统及方法">
+<meta name="twitter:description" content="本文所涉及到的专利是由 携程计算机技术（上海）有限公司 于 2014.07.02 申请。
+摘要本系统公开了一种网站账户访问权限的设置系统及方法，方法包括 ：
+S1、为每个网站账户设置唯一的身份标识码 ；
+S2、为每个网站账户绑定两个以上的访问权限，每个访问权限均列有网站账户的唯一的身份标识码、访问方式以及访问窗口之间的对应关系 ；
+S3、为每个访问权限设置对应的网站服务的范围 ；
+S4、在接收到由">
+<meta name="twitter:image" content="http://i1.piimg.com/963b171b2346478c.png">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12.5px;">backbone</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/cluster/" style="font-size: 12.5px;">cluster</a> <a href="/tags/file/" style="font-size: 12.5px;">file</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 12.5px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 20px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/spring/" style="font-size: 17.5px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 17.5px;">web</a> <a href="/tags/webservice/" style="font-size: 10px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12.5px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-web-permission-ctrip" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/02/web-permission-ctrip/" class="article-date">
+  	<time datetime="2015-06-02T13:26:59.000Z" itemprop="datePublished">2015-06-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网站账户访问权限的设置系统及方法
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/patent/">patent</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文所涉及到的专利是由 <strong>携程计算机技术（上海）有限公司</strong> 于 <strong>2014.07.02</strong> 申请。</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本系统公开了一种网站账户访问权限的设置系统及方法，方法包括 ：</p>
+<p>S1、为每个网站账户设置唯一的身份标识码 ；</p>
+<p>S2、为每个网站账户绑定两个以上的访问权限，每个访问权限均列有网站账户的唯一的身份标识码、访问方式以及访问窗口之间的对应关系 ；</p>
+<p>S3、为每个访问权限设置对应的网站服务的范围 ；</p>
+<p>S4、在接收到由网站账户发出的访问请求后，从所述访问请求中查询出网站账户的身份标识码、访问方式以及访问窗口，并确定网站账户的访问权限 ；</p>
+<p>S5、根据确定出的访问权限为网站账户提供对应的网站服务。</p>
+<p>本系统采用访问方式及访问窗口等参数为同一个网站账户的不同身份设置不同的访问权限，方便了网站对用户多个身份的统一管理。</p>
+<p><img src="http://i1.piimg.com/963b171b2346478c.png" alt=""></p>
+<ol>
+<li><p>一种网站账户访问权限的设置方法，其特征在于，包括以下步骤 ：</p>
+<ul>
+<li>S1、为每个网站账户设置一唯一的身份标识码 ；</li>
+<li>S2、为每个网站账户绑定两个以上的访问权限，每个访问权限均列有所述网站账户的唯一的身份标识码、访问方式以及访问窗口之间的对应关系 ；</li>
+<li>S3、为每个访问权限设置一对应的网站服务的范围 ；</li>
+<li>S4、在接收到由一网站账户发出的访问请求后，从所述访问请求中查询出网站账户的身份标识码、访问方式以及访问窗口，并确定网站账户的访问权限 ；</li>
+<li>S5、根据步骤 S4 中确定出的访问权限为网站账户提供对应的网站服务。</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>如 1 所述的设置方法，其特征在于，所述身份标识码为用户注册所述网站账户时输入的身份证号码、手机号码或邮箱地址。</li>
+</ol>
+<ol>
+<li>如 1 所述的设置方法，其特征在于，所述访问权限包括散客访问权限及商旅访问权限。</li>
+</ol>
+<ol>
+<li>如 3 所述的设置方法，其特征在于，所述访问方式包括电话访问及网络访问，当所述访问方式为电话访问时，所述访问窗口包括散客电话窗口及商旅电话窗口，当所述访问方式为网络访问时，所述访问窗口包括散客登录页面及商旅登录页面。</li>
+</ol>
+<ol>
+<li>如 1 所述的设置方法，其特征在于，步骤 S3 中还为不同的访问权限设置不同的级别，并为级别更高的访问权限设置更大的网站服务的范围。</li>
+</ol>
+<ol>
+<li><p>一种网站账户访问权限的设置系统，其特征在于，包括 ：</p>
+<ul>
+<li>网站账户设置模块，用于为每个网站账户设置一唯一的身份标识码 ；</li>
+<li>绑定模块，用于为每个网站账户绑定两个以上的访问权限，每个访问权限均列有所述网站账户的唯一的身份标识码、访问方式 网站服务设置模块，用于为每个访问权限设置一对应的网站服务的范围 ；</li>
+<li>查询模块，用于在接收到由一网站账户发出的访问请求后，从所述访问请求中查询出网站账户的身份标识码、访问方式以及访问窗口，并确定网站账户的访问权限 ；</li>
+<li>网站服务提供模块，用于根据确定出的访问权限为网站账户提供对应的网站服务。</li>
+</ul>
+</li>
+<li><p>如 6 所述的设置系统，其特征在于，所述身份标识码为用户注册所述网站账户时输入的身份证号码、手机号码或邮箱地址。</p>
+</li>
+</ol>
+<ol>
+<li>如 6 所述的设置系统，其特征在于，所述访问权限包括散客访问权限及商旅访问权限。</li>
+</ol>
+<ol>
+<li>如 8 所述的设置系统，其特征在于，所述访问方式包括电话访问及网络访问，当所述访问方式为电话访问时，所述访问窗口包括散客电话窗口及商旅电话窗口，当所述访问方式为网络访问时，所述访问窗口包括散客登录页面及商旅登录页面。</li>
+</ol>
+<ol>
+<li>如 6 所述的设置系统，其特征在于，所述网站服务设置模块还为不同的访问权限设置不同的级别，并为级别更高的访问权限设置更大的网站服务的范围。</li>
+</ol>
+<h2 id="技术领域"><a href="#技术领域" class="headerlink" title="技术领域"></a>技术领域</h2><p>本系统涉及一种网站账户访问权限的设置系统及方法，特别是涉及一种适用于用户的网站账户有多种身份且不同的身份对应不同的访问权限的网站账户访问权限的设置系统以及一种利用所述设置系统实现的网站账户访问权限的设置方法。</p>
+<h2 id="背景技术"><a href="#背景技术" class="headerlink" title="背景技术"></a>背景技术</h2><p>现在的在线购物网站为了用户的使用方便以及更好地服务用户，都提供了注册网站账户的功能，用户可以通过在购物网站上注册网站账户从而成为网站会员，并且在注册时输入一些相应的用户信息，这样，购物网站就能够将用户信息与网站账户进行绑定，从而<br>有针对性地为用户提供购物服务。但是，对于有些在线购物网站来说，能够让同一个用户针对不同的服务界面注册多个身份，导致同一个用户的不同身份之间有不同的权限以及不同的功能，这导致用户的身份账户体系结构复杂，且账户体系之间相互交错容易造成各种异常问题。</p>
+<p>现有的身份识别技术，往往需要对用户的网站帐户进行多种权限的定义，涉及到一整套的规则和权限识别的逻辑以及安全控制。比如要设定帐户 A 是否可以使用功能 B，则需要额外增加一个标示帐户 A 权限的标识，同时在功能 B 的对应区域模块增加一个标识的识别，涉及到多方面的修改，非常复杂也非常繁琐，导致很容易出错。</p>
+<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><p>本系统要解决的技术问题是为了克服现有技术中在线购物网站的身份账户体系结构复杂、相互交错容易造成各种异常问题的缺陷，提供一种适用于用户的网站账户有多种身份且不同的身份对应不同的访问权限的网站账户访问权限的设置系统以及一种利用所述设置系统实现的网站账户访问权限的设置方法。</p>
+<p></p><p></p>
+<div style="background:#4A4A4A;border-radius:8px;color:white;font-size:1.2em;">通过下述技术方案来解决上述技术问题</div>
+
+<p><strong>本系统提供了一种网站账户访问权限的设置<font color="red">方法</font></strong>，其特点在于，包括以下步骤 ：</p>
+<ul>
+<li>S1、为每个网站账户设置一唯一的身份标识码 ；</li>
+<li>S2、为每个网站账户绑定两个以上的访问权限，每个访问权限均列有所述网站账户的唯一的身份标识码、访问方式以及访问窗口之间的对应关系 ；</li>
+<li>S3、为每个访问权限设置一对应的网站服务的范围 ；</li>
+<li>S4、在接收到由一网站账户发出的访问请求后，从所述访问请求中查询出网站账户的身份标识码、访问方式以及访问窗口，并确定网站账户的访问权限 ；</li>
+<li>S5、根据步骤 S4 中确定出的访问权限为网站账户提供对应的网站服务。</li>
+</ul>
+<p>对于同一个网站账户来说，会因为访问方式及访问窗口的不同而获得不同的访问权限，进而对应的会获得不同范围的网站服务。</p>
+<p>较佳地，所述身份标识码为用户注册所述网站账户时输入的身份证号码、手机号码或邮箱地址。作为标识用户的网站账户的唯一标示，对于不同可信任级别的标示，可以对应地设置不同级别的网站服务的范围。</p>
+<p>较佳地，所述访问权限包括散客访问权限及商旅访问权限。</p>
+<p>较佳地，所述访问方式包括电话访问及网络访问，当所述访问方式为电话访问时，所述访问窗口包括散客电话窗口及商旅电话窗口，当所述访问方式为网络访问时，所述访问窗口包括散客登录页面及商旅登录页面。</p>
+<p>较佳地，步骤 S3 中还为不同的访问权限设置不同的级别，并为级别更高的访问权限设置更大的网站服务的范围。</p>
+<p><strong>本系统的目的在于还提供了一种网站账户访问权限的设置<font color="red">系统</font></strong>，其特点在于，包括 ：</p>
+<ul>
+<li>网站账户设置模块，用于为每个网站账户设置一唯一的身份标识码 ；</li>
+<li>绑定模块，用于为每个网站账户绑定两个以上的访问权限，每个访问权限均列有所述网站账户的唯一的身份标识码、访问方式以及访问窗口之间的对应关系 ；</li>
+<li>网站服务设置模块，用于为每个访问权限设置一对应的网站服务的范围 ；</li>
+<li>查询模块，用于在接收到由一网站账户发出的访问请求后，从所述访问请求中查询出网站账户的身份标识码、访问方式以及访问窗口，并确定网站账户的访问权限 ；</li>
+<li>网站服务提供模块，用于根据确定出的访问权限为网站账户提供对应的网站服务。</li>
+</ul>
+<p>较佳地，所述身份标识码为用户注册所述网站账户时输入的身份证号码、手机号码或邮箱地址。</p>
+<p>较佳地，所述访问权限包括散客访问权限及商旅访问权限。</p>
+<p>较佳地，所述访问方式包括电话访问及网络访问，当所述访问方式为电话访问时，所述访问窗口包括散客电话窗口及商旅电话窗口，当所述访问方式为网络访问时，所述访问窗口包括散客登录页面及商旅登录页面。</p>
+<p>较佳地，所述网站服务设置模块还为不同的访问权限设置不同的级别，并为级别更高的访问权限设置更大的网站服务的范围。</p>
+<p></p><p></p>
+<p><div style="background:#4A4A4A;border-radius:8px;color:white;font-size:1.2em;">本系统的积极进步效果</div><br>本系统的积极进步效果在于 ：本系统能够采用访问方式及访问窗口等参数为同一个网站账户的不同身份设置不同的访问权限，从而很好地区分了同一个网站账户的不同身份，使得网站根据同一用户的不同访问及登录方式就能够为用户提供对应的不同范围的网<br>站服务，方便了网站对同一用户的多个身份进行统一服务和管理，同时也提升了用户的使用体验。</p>
+<h2 id="附图说明"><a href="#附图说明" class="headerlink" title="附图说明"></a>附图说明</h2><p>图 1 为本发明的一较佳实施例的网站账户访问权限的设置系统的模块示意图。</p>
+<p>图 2 为本发明的一较佳实施例的网站账户访问权限的设置方法的流程图。</p>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><p>如图 1 所示，本发明的网站账户访问权限的设置系统包括一网站账户设置模块 1、一绑定模块 2、一网站服务设置模块3、一查询模块 4 以及一网站服务提供模块 5。</p>
+<p>所述网站账户设置模块 1 为购物网站的每个网站账户设置一唯一的身份标识码，用户在购物网站上注册时需要输入一些个人身份信息，所述网站账户设置模块 1 就从网站的后台服务器的数据库中查询出与每个网站账户注册时输入的个人身份信息，并利用个人身份信息为每个网站账户设置唯一的身份标识码。</p>
+<p>所述身份标识码会作为每个网站账户的唯一标示，以与其他账户区分开来，所述身份标识码具体可以为用户在注册网站账户时输入的身份证号码、手机号码或邮箱地址，而作为唯一标示，身份证号码、手机号码及邮箱地址的可信任级别则依次由高到低。</p>
+<p>所述绑定模块 2 则为每个网站账户绑定两个以上的访问权限，在本实施例中，访问权限包括散客访问权限及商旅访问权限，而每个访问权限中均列有所述网站账户的唯一的身份标识码访问方式以及访问窗口之间的对应关系。具体地，访问方式可以包括电话访<br>问 (offline 访问操作，即针对线下的客服组的访问操作 ) 及网络访问 (online 访问操作，即在线的网络访问操作 )，当所述访问方式为电话访问时，所述访问窗口包括散客电话窗口及商旅电话窗口，以分别对应散客访问权限及商旅访问权限，此时用户的身份标识码优选地为手机号码，所述散客电话窗口例如可以是以 1010 开头的客服电话，所述商旅电话窗口例如可以是以 400 开头的客服电话。当所述访问方式为网络访问时，在购物网站上会分别设置散客登录界面及商旅登录界面，以分别对应散客访问权限及商旅访问权限，其中登录界面中需要输入的参数为用户网站账户的身份标识码，例如身份证号码或邮箱地址。</p>
+<p>所述网站服务设置模块 3 则为每个访问权限设置对应的网站服务的范围，具体可以为不同的访问权限设置不同的级别，并为级别更高的访问权限设置更大的网站服务的范围，即对于散客访问权限和商旅访问权限，分别设置不同的网站服务，从而使得用户利用不同的访问权限访问网站时能够获得不同范围的网站服务，使得网站服务更具有针对性，同时也方便了用户的操作。例如，散客访问权限对应的网站服务可以有返还现金、使用支付宝、微信支付等第三方的支付方式，而商旅访问权限对应的网站服务可以在此基础上再增加按月结算账单等支付功能，并且二者所能够看到的商品种类和数量以及对应的价格也可以不相同。</p>
+<p>当用户登录网站后，若需要某一网站服务，则可以直接发出访问请求，例如可以直接通过手机拨打网站的表征不同访问窗口的客服电话，如以 1010 开头或 400 开头的客服电话，此时的用户网站账户的身份标识码为手机号码，访问方式为电话访问，若拨打以 1010开头的客服电话，则访问窗口为散客电话窗口，此时对应散客访问权限，若拨打以 400 开头的客服电话，则访问窗口为商旅电话窗口，此时对应商旅访问权限 ；或者用户也可以通过网络访问，此时在购物网站上会分别设置散客登录界面及商旅登录界，用户可以选择其中的一个登录界面直接进行登录，此时的身份标识码为身份证号码或邮箱地址，访问方式则为网络访问，散客登录界面对应散客访问权限，商旅登录界面则对应商旅访问权限。</p>
+<p>在用户发出访问请求后，所述查询模块 4 会从所述访问请求中查询出网站账户的身份标识码 ( 以确定唯一的用户身份 )、访问方式以及访问窗口 ( 具体如上所述 )，并根据上述查询出的信息来确定网站账户的访问权限 ( 即为散客访问权限还是商旅访问权限 )。</p>
+<p>所述网站服务提供模块 5 则根据确定出的访问权限为网站账户提供对应的网站服务。</p>
+<p>这样，利用本系统的网站账户访问权限的设置系统就能够采用访问方式及访问窗口等参数为同一个网站账户的不同身份设置不同的访问权限，实现了在不对用户的网站账户进行物理拆分和不对网站账户系统造成根本影响的前提下对用户网站账户的访问权限进行创建，使得网站根据同一用户的不同访问及登录方式就能够对用户的不同访问权限进行区分，从而为用户提供对应的不同范围的网站服务。</p>
+<p>如图 2 所示，本发明利用本实施例的网站账户访问权限的设置系统实现的网站账户访问权限的设置方法包括以下步骤 ：</p>
+<ul>
+<li>步骤 101、为每个网站账户设置一唯一的身份标识码。</li>
+<li>步骤 102、为每个网站账户绑定两个以上的访问权限，每个访问权限均列有所述网站账户的唯一的身份标识码、访问方式以及访问窗口之间的对应关系。</li>
+<li>步骤 103、为每个访问权限设置一对应的网站服务的范围。</li>
+<li>步骤 104、在接收到由一网站账户发出的访问请求后，从所述访问请求中查询出网站账户的身份标识码、访问方式以及访问窗口，并确定网站账户的访问权限。</li>
+<li>步骤 105、根据步骤 104 中确定出的访问权限为网站账户提供对应的网站服务。</li>
+</ul>
+<p><img src="http://i1.piimg.com/5058a322b038ba16.png" alt=""></p>
+<p><img src="http://i1.piimg.com/d42298ce36560953.png" alt=""></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/17/webbind1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          简介第三方网站账户绑定
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/02/project-manager-ctrip/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">项目流程管理系统</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

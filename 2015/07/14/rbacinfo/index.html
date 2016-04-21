@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>基于RBAC的权限控制 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于RBAC基于角色的访问控制（Role-Based Access Control ， RBAC）作为传统访问控制（自主访问，强制访问）的有前景的代替受到广泛的关注。在RBAC中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。这就极大地简化了权限的管理。在一个组织中，角色是为了完成各种工作而创造，用户则依据它的责任和资格来被指派相应的角色，用户可以很容易地从一个角色被指派到另一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于RBAC的权限控制">
+<meta property="og:url" content="http://yoursite.com/2015/07/14/rbacinfo/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="关于RBAC基于角色的访问控制（Role-Based Access Control ， RBAC）作为传统访问控制（自主访问，强制访问）的有前景的代替受到广泛的关注。在RBAC中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。这就极大地简化了权限的管理。在一个组织中，角色是为了完成各种工作而创造，用户则依据它的责任和资格来被指派相应的角色，用户可以很容易地从一个角色被指派到另一">
+<meta property="og:image" content="http://i.imgur.com/oc3AdKj.png">
+<meta property="og:image" content="http://i.imgur.com/7vfFykn.png">
+<meta property="og:image" content="http://i.imgur.com/epM8hOg.png">
+<meta property="og:image" content="http://i.imgur.com/4VScx4N.png">
+<meta property="og:updated_time" content="2016-04-21T01:54:08.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于RBAC的权限控制">
+<meta name="twitter:description" content="关于RBAC基于角色的访问控制（Role-Based Access Control ， RBAC）作为传统访问控制（自主访问，强制访问）的有前景的代替受到广泛的关注。在RBAC中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。这就极大地简化了权限的管理。在一个组织中，角色是为了完成各种工作而创造，用户则依据它的责任和资格来被指派相应的角色，用户可以很容易地从一个角色被指派到另一">
+<meta name="twitter:image" content="http://i.imgur.com/oc3AdKj.png">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12.5px;">backbone</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/cluster/" style="font-size: 12.5px;">cluster</a> <a href="/tags/file/" style="font-size: 12.5px;">file</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 12.5px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 20px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/spring/" style="font-size: 17.5px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 17.5px;">web</a> <a href="/tags/webservice/" style="font-size: 10px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12.5px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-rbacinfo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/14/rbacinfo/" class="article-date">
+  	<time datetime="2015-07-14T15:15:17.000Z" itemprop="datePublished">2015-07-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于RBAC的权限控制
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/patent/">patent</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于RBAC"><a href="#关于RBAC" class="headerlink" title="关于RBAC"></a>关于RBAC</h2><p>基于角色的访问控制（Role-Based Access Control ， <strong>RBAC</strong>）作为传统访问控制（自主访问，强制访问）的有前景的代替受到广泛的关注。在RBAC中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。这就极大地简化了权限的管理。在一个组织中，角色是为了完成各种工作而创造，用户则依据它的责任和资格来被指派相应的角色，用户可以很容易地从一个角色被指派到另一个角色。角色可依新的需求和系统的合并而赋予新的权限，而权限也可根据需要而从某角色中回收。角色与角色的关系可以建立起来以囊括更广泛的客观情况。</p>
+<p>RBAC支持三个著名的安全原则：<strong>最小权限原则</strong>，<strong>责任分离原则</strong> 和 <strong>数据抽象原则</strong>。</p>
+<ul>
+<li>（1）最小权限原则之所以被RBAC所支持，是因为RBAC可以将其角色配置成其完成任务所需要的最小的权限集。</li>
+<li>（2）责任分离原则可以通过调用相互独立互斥的角色来共同完成敏感的任务而体现，比如要求一个计帐员和财务管理员共参与同一过帐。</li>
+<li>（3）数据抽象可以通过权限的抽象来体现，如财务操作用借款、存款等抽象权限，而不用操作系统提供的典型的读、写、执行权限。然而这些原则必须通过RBAC各部件的详细配置才能得以体现。<br>RBAC有许多部件(BUCU)，这使得RBAC的管理多面化。尤其是，我们要分割这些问题来讨论：用户与角色的指派；角色与权限的指派；为定义角色的继承进行的角色与角色的指派。这些活动都要求把用户和权限联系起来。然而在很多情况下它们最好由不同的管理员或管理角色来做。对角色指派权限是典型的应用管理者的职责。银行应用中，把借款、存款操作权限指派给出纳角色，把批准贷款操作权限指派给经理角色。而将具体人员指派给相应的出纳角色和管理者角色是人事管理的范畴。角色与角色的指派包含用户与角色的指派、角色与权限的指派的一些特点。更一般来说，角色与角色的关系体现了更广泛的策略。</li>
+</ul>
+<h2 id="国内专利情况"><a href="#国内专利情况" class="headerlink" title="国内专利情况"></a>国内专利情况</h2><p><img src="http://i.imgur.com/oc3AdKj.png" alt=""></p>
+<h2 id="专利技术"><a href="#专利技术" class="headerlink" title="专利技术"></a>专利技术</h2><p>国内有关RBAC的相关专利比较多，这里举出一两个例子进行说明。</p>
+<h3 id="一种基于SSH网站实现RBAC访问权限控制的方法"><a href="#一种基于SSH网站实现RBAC访问权限控制的方法" class="headerlink" title="一种基于SSH网站实现RBAC访问权限控制的方法"></a>一种基于SSH网站实现RBAC访问权限控制的方法</h3><p>申请人：<strong>北京经开投资开发股份有限公司</strong><br>本发明公开了一种基于SSH 网站实现RBAC 访问权限控制的方法，包括以下步骤：</p>
+<ul>
+<li>用户对页面进行访问请求，判断Session 中的用户名变量是否为空，若为空，则跳转到登录页面让用户登录，否则将用户信息保存在所述Session 中；</li>
+<li>用户访问数据库，并将登录成功的用户信息保存在所述session 中；</li>
+<li>ORM 模块访问所述数据库，从所述数据库得到访问页面相应的权限信息；</li>
+<li>触发AOP 拦截器，所述AOP 拦截器从所述Session 中得到用户的权限信息；</li>
+<li>所述AOP 拦截器判断用户的权限信息，若包含访问页面相应的权限信息，则用户访问成功，否则访问失败。</li>
+</ul>
+<p>本发明的有益效果为：逻辑清晰、各个逻辑之间的耦合度低、程序的可重用性高、开发效率高。</p>
+<p><img src="http://i.imgur.com/7vfFykn.png" alt=""></p>
+<p>所述<strong>数据库</strong>包括：</p>
+<ul>
+<li>用户表，包括用户编码及用户名，用于储存用户信息；</li>
+<li>角色表，包括角色编码及角色名，用于储存角色信息；</li>
+<li>权限表，包括权限编码、权限名和URL 地址，用于储存具体的权限信息；</li>
+<li>用户角色表，包括用户编码和角色编码，实现用户和角色的多对多映射；</li>
+<li>角色权限表：包括角色编码和权限编码，实现角色和权限的多对多映射；</li>
+</ul>
+<p>所述角色表通过所述用户角色表与所述用户表进行多对多的关联；</p>
+<p>所述角色表通过所述角色权限表与所述权限表进行多对多关联。</p>
+<p>所述的一种基于SSH 网站实现RBAC 访问权限控制的方法，其特征在于，所述角色表中加入父类角色编码用以适应角色的分级。</p>
+<p>所述的一种基于SSH 网站实现RBAC 访问权限控制的方法，其特征在于，所述用户信息、所述角色信息和所述权限信息均以变量名的形式储存在session 中。</p>
+<hr>
+<h3 id="一种基于RBAC的权限管理系统"><a href="#一种基于RBAC的权限管理系统" class="headerlink" title="一种基于RBAC的权限管理系统"></a>一种基于RBAC的权限管理系统</h3><p>申请人：<strong>桂林长海科技有限责任公司</strong></p>
+<p>本发明涉及权限管理技术领域，具体是一种基于RBAC 的权限管理系统，包括用户单元、会话单元、角色单元、数据权限单元和功能权限单元。</p>
+<p><img src="http://i.imgur.com/epM8hOg.png" alt=""></p>
+<ul>
+<li>所述用户单元分别与会话单元和角色单元连接，向会话单元传递用户的会话数据，接收角色单元发送的角色配置，用户单元用于登陆权限管理装置，进行身份资料记录；</li>
+<li>所述会话单元与角色单元连接，接收用户单元的会话数据，并向角色单元发送激活角色数据，用于通过会话进程与用户交互，激活用户角色；</li>
+<li>所述角色单元分别与数据权限单元、功能权限单元连接，并分别向数据权限单元、功能权限单元发送访问请求，用于根据会话结果分配用户角色，以及确定的用户身份与所述用户所属角色之间的对应关系；</li>
+<li>所述数据权限单元，用于根据用户角色对用户发送的访问请求识别，分配数据权限，并对系统的具体数据范围的操作权限进行控制；</li>
+<li>所述功能权限单元，用于根据用户角色对用户发送的访问请求识别，向用户分配功能权限，对操作各个业务对应的应用模块的访问和操作权限进行控制。</li>
+</ul>
+<p>相对现有技术，本发明实现了用户与访问权限的逻辑分离，功能和数据的权限分离，使权限的配置和管理更加简单，降低用户的使用难度。</p>
+<hr>
+<h3 id="一种基于组织的RBAC访问控制模型"><a href="#一种基于组织的RBAC访问控制模型" class="headerlink" title="一种基于组织的RBAC访问控制模型"></a>一种基于组织的RBAC访问控制模型</h3><p>申请人：<strong>山东高速信息工程有限公司</strong></p>
+<p>一种基于组织的RBAC 访问控制模型，包括用户、组织、角色、对象、操作、会话和约束，引入了组织的概念，组织是模型的核心与基础元素，所有的对象与角色都隶属于某一个组织，都具有一个唯一的属主；<br>一个组织可以拥有多个用户，拥有多个角色，拥有多个对象，组织具有层次关系，组织间可以通过授权将一个组织的角色赋给另外一个组织使用。</p>
+<p><img src="http://i.imgur.com/4VScx4N.png" alt=""></p>
+<p>本发明的有益效果是：能够施加更加严格的安全策略，满足了灵活而复杂的系统授权需求，有效的解决了分级授权问题与复杂系统中繁多对象组织管理的问题，能够更方面的用以管理和组织对象，通过引入动态对象，增强了其适应性。</p>
+<p>所述的基于组织的RBAC 访问控制模型，其特征在于：将对象进行分类处理，分为静态对象和动态对象，静态对象是事先确定好的对象，动态对象是在运行中才能确定的对象，对象具有哪些操作事前不确定，只有在授权的过程中才能确定。</p>
+<p>所述的基于组织的RBAC 访问控制模型，其特征在于：引入了更多的约束：</p>
+<ul>
+<li>1）SC1 约束，对应RBAC 参考模型中UA 的SSD，包括最小权限约束和静态职责分离约束；</li>
+<li>2）SC2 约束，对应RBAC 参考模型中角色继承时的SSD，包括最小权限约束和静态职责分离约束，在角色继承过程中，一个角色不能同时继承具有分配互斥的两个角色；</li>
+<li>3）SC3 ：角色的使用范围约束，约束角色在整体的组织中的适用范围，其取值包括本级，本级及直属组织，本级及下级组织（子孙组织），不限制；</li>
+<li>4）SC4 约束，对应RBAC 标准中PA 的SSD，在本模型中特化为“能够建立关系的角色和对象必须隶属于同一个组织”；</li>
+<li>5）DC1 约束，对应RBAC 规范中Session 建立时的DSD，包括最小权限约束和静态职责分离约束；</li>
+<li>6）DC2 ：角色在组织间共享策略约束，可能的策略包括向上共享，同父下的同级共享。</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/17/cloudstorageinfo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          云存储文件系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/07/jmeter-advanced/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JMeter压力测试技术-脚本录制</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

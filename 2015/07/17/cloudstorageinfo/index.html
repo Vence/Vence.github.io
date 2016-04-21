@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>云存储文件系统 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言在信息时代，对文件的管理和使用更加趋向云存储。
+云存储是在云计算(cloud computing)概念上延伸和发展出来的一个新的概念，是一种新兴的 网络存储技术 ，是
+指通过集群应用、网络技术或分布式文件系统等功能，将网络中大量各种不同类型的存储设备通过应用软件集合起来协同工作，共同对外提供数据存储和业务访问功能的一个系统。当云计算系统运算和处理的核心是大量数据的存储和管理时，云计算系统中就需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云存储文件系统">
+<meta property="og:url" content="http://yoursite.com/2015/07/17/cloudstorageinfo/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="前言在信息时代，对文件的管理和使用更加趋向云存储。
+云存储是在云计算(cloud computing)概念上延伸和发展出来的一个新的概念，是一种新兴的 网络存储技术 ，是
+指通过集群应用、网络技术或分布式文件系统等功能，将网络中大量各种不同类型的存储设备通过应用软件集合起来协同工作，共同对外提供数据存储和业务访问功能的一个系统。当云计算系统运算和处理的核心是大量数据的存储和管理时，云计算系统中就需">
+<meta property="og:image" content="http://i.imgur.com/ao7akWo.png">
+<meta property="og:image" content="http://i.imgur.com/P8mc8TZ.png">
+<meta property="og:image" content="http://i.imgur.com/M1FtLAm.png">
+<meta property="og:image" content="http://i.imgur.com/gaR7WME.png">
+<meta property="og:image" content="http://i.imgur.com/dAMyYG4.png">
+<meta property="og:image" content="http://i.imgur.com/an6Oc2O.png">
+<meta property="og:updated_time" content="2016-04-21T01:50:35.346Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="云存储文件系统">
+<meta name="twitter:description" content="前言在信息时代，对文件的管理和使用更加趋向云存储。
+云存储是在云计算(cloud computing)概念上延伸和发展出来的一个新的概念，是一种新兴的 网络存储技术 ，是
+指通过集群应用、网络技术或分布式文件系统等功能，将网络中大量各种不同类型的存储设备通过应用软件集合起来协同工作，共同对外提供数据存储和业务访问功能的一个系统。当云计算系统运算和处理的核心是大量数据的存储和管理时，云计算系统中就需">
+<meta name="twitter:image" content="http://i.imgur.com/ao7akWo.png">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12.5px;">backbone</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/cluster/" style="font-size: 12.5px;">cluster</a> <a href="/tags/file/" style="font-size: 12.5px;">file</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 12.5px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 20px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/spring/" style="font-size: 17.5px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 17.5px;">web</a> <a href="/tags/webservice/" style="font-size: 10px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12.5px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-cloudstorageinfo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/17/cloudstorageinfo/" class="article-date">
+  	<time datetime="2015-07-17T03:56:49.000Z" itemprop="datePublished">2015-07-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      云存储文件系统
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/patent/">patent</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在信息时代，对文件的管理和使用更加趋向云存储。</p>
+<p><strong>云存储</strong>是在<em>云计算</em>(cloud computing)概念上延伸和发展出来的一个新的概念，是一种新兴的 <strong><em>网络存储技术</em></strong> ，是</p>
+<p><font style="border-bottom:solid 2px #4B0082">指通过集群应用、网络技术或分布式文件系统等功能，将网络中大量各种不同类型的存储设备通过应用软件集合起来协同工作，共同对外提供数据存储和业务访问功能的一个系统</font>。当云计算系统运算和处理的核心是大量数据的存储和管理时，云计算系统中就需要配置大量的存储设备，那么云计算系统就转变成为一个云存储系统，所以<font style="border-bottom:solid 2px #4B0082">云存储是一个以数据存储和管理为核心的云计算系统</font>。简单来说，云存储就是将储存资源放到云上供人存取的一种新兴方案。使用者可以在任何时间、任何地方，透过任何可连网的装置连接到云上方便地存取数据。</p>
+<h2 id="专利情况"><a href="#专利情况" class="headerlink" title="专利情况"></a>专利情况</h2><p><img src="http://i.imgur.com/ao7akWo.png" alt=""></p>
+<p>从以上分析报告中，可以简单看出，云存储技术是在2010年开始兴起，并在2014年达到了研究的高峰期，在目前云存储依然是值得研究的技术，更是未来云计算发展的趋势。</p>
+<h2 id="专利技术"><a href="#专利技术" class="headerlink" title="专利技术"></a>专利技术</h2><h3 id="云存储"><a href="#云存储" class="headerlink" title="云存储"></a>云存储</h3><p>申请人： <strong>苹果公司</strong></p>
+<p>本发明的方法、系统和装置，以及编码在计算机存储介质上的计算机程序，用于数据存储。在一个方面中，方法包括以下动作：</p>
+<ul>
+<li>识别来自应用的运行中查询；</li>
+<li>根据一个或多个应用特定访问策略确定多个数据项中该应用拥有查看许可的一个或多个数据项；</li>
+<li>以及将该一个或多个数据项呈现给该应用，而不呈现该多个数据项中的其他数据项。</li>
+</ul>
+<p><img src="http://i.imgur.com/P8mc8TZ.png" alt=""></p>
+<ol>
+<li>从与用户账号相关联的第一计算设备接收数据项，该数据项与在所述第一计算设备上运行的应用相关联；</li>
+<li>确定存储所述数据项的容器，该容器专用于与所述第一计算设备相关联的所述用户账号、并且专用于所述应用；</li>
+<li>将所述数据项存储在所述容器中；</li>
+<li>以及向与所述用户账号相关联的一个或多个其他设备发送关于所述数据项的通知，所述通知包括与所述数据项相关联的所述应用的标识。</li>
+</ol>
+<p><img src="http://i.imgur.com/M1FtLAm.png" alt=""></p>
+<h3 id="云存储文件系统"><a href="#云存储文件系统" class="headerlink" title="云存储文件系统"></a>云存储文件系统</h3><p>申请人：<strong>西安邮电大学</strong></p>
+<p>本发明公开了一种云存储文件系统，在Hadoop 分布式文件系统基础之上实现日志结构块存储系统：</p>
+<ul>
+<li>所述Hadoop 分布式文件系统，用于提供分布式的存储介质；</li>
+<li>所述日志结构块存储系统包括快照单元，克隆单元，块压缩单元，缓存单元等等。</li>
+</ul>
+<p>本发明的优点在于通过封装<strong>HDFS</strong>(Hadoop Distributed File-System)接口实现<strong>HLBS</strong>(Hadoop Log-Structured<br>Block-Storage System)的接口，在此基础上实现<strong>LBS</strong>(Log-Structured Block-Storage System)，最终实现创新型Hadoop 分布式日志结构块存储系统，从而实现对数据的随机读写以及I/O 效率的提高，同时包含快照，克隆等功能。</p>
+<p><img src="http://i.imgur.com/gaR7WME.png" alt=""></p>
+<p>所述Hadoop 分布式文件系统包括：</p>
+<ul>
+<li>接收分布式文件系统客户端发送的访问请求；</li>
+<li>根据所述访问请求确定所述分布式文件系统客户端所要访问的存储单元以及所述存储单元对应的虚拟资源池状态，所述存储单元与其对应的虚拟资源池存储有相同的数据，所述虚拟资源池为根据具有相同活动周期的分布式文件系统客户端聚类生成；</li>
+<li>在确定所述存储单元对应的虚拟资源池处于上线状态时，向发起访问请求的分布式文件系统客户端返回包括客户端标识的访问响应消息，所述客户端标识所标识的分布式文件系统客户端为所述虚拟资源池中的一个，且根据所述访问请求确定。</li>
+</ul>
+<h2 id="云存储系统"><a href="#云存储系统" class="headerlink" title="云存储系统"></a>云存储系统</h2><p>申请人：<strong>镇江睿泰信息科技有限公司</strong></p>
+<p>本发明公开了一种云存储系统，包括基础读写模块、中心控制模块和客户端访问模块。</p>
+<ul>
+<li>基础读写模块是中心控制模块与底层文件系统交互的纽带，为中心控制模块提供数据存取服务；</li>
+<li>中心控制模块由前端处理模块、业务核心模块和元数据存储模块。</li>
+</ul>
+<p>客户端访问模块针对用户和文件提供两种不同的访问方式，面向用户提供Web 端访问，面向文件传输提供SDK 访问。</p>
+<p>本系统具有高可扩展、高可靠性，能够提供高效、快速、灵活的存储读取服务，不占用客户端的资源，满足用户离线大数据存储的需求。</p>
+<p><img src="http://i.imgur.com/dAMyYG4.png" alt=""></p>
+<h2 id="基于云存储的文件操作方法"><a href="#基于云存储的文件操作方法" class="headerlink" title="基于云存储的文件操作方法"></a>基于云存储的文件操作方法</h2><p>申请人：<strong>上海斐讯数据通信技术有限公司</strong></p>
+<p>本发明提出了一种基于云存储的文件操作方法，包括：</p>
+<ul>
+<li>a1）用户选择云储存文件操作；</li>
+<li>b1）进行云存储；</li>
+<li>c1）判断云存储是否完成；</li>
+<li>d1）当云存储完成时，进行常规文件操作。</li>
+</ul>
+<p>本发明所提出的基于云存储的文件操作方法，将云存储与文件操作进行了结合，提供了不同的体验方式，并且，用户在对文件进行操作时，可以选择云存储文件操作，以将文件传输至云服务器进行保存，从而快捷实现将文件进行备份，给用户带来了便利，还可以避免因为删除一些重要文件而给用户所造成的损失。</p>
+<p><img src="http://i.imgur.com/an6Oc2O.png" alt=""></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/17/addressbookinfo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          通讯录专利技术整理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/14/rbacinfo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于RBAC的权限控制</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
