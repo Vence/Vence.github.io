@@ -7,24 +7,18 @@
   <title>SpringMVC实现文件下载 | 王文路的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="文件下载的时候要保证客户端弹出的保存框中的文件名不出现乱码，并且文件类型正确。
-后台代码如下：
-@RequestMapping(value = &amp;quot;/api/{sessionid}/documents/download/{documentid}&amp;quot;)
-public void download(@PathVariable(&amp;quot;sessionid&amp;quot;)String se">
+后台代码如下：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC实现文件下载">
 <meta property="og:url" content="http://yoursite.com/2015/05/12/springmvc-filedownload/index.html">
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="文件下载的时候要保证客户端弹出的保存框中的文件名不出现乱码，并且文件类型正确。
-后台代码如下：
-@RequestMapping(value = &amp;quot;/api/{sessionid}/documents/download/{documentid}&amp;quot;)
-public void download(@PathVariable(&amp;quot;sessionid&amp;quot;)String se">
-<meta property="og:updated_time" content="2016-04-21T01:42:53.613Z">
+后台代码如下：">
+<meta property="og:updated_time" content="2016-04-21T03:24:51.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC实现文件下载">
 <meta name="twitter:description" content="文件下载的时候要保证客户端弹出的保存框中的文件名不出现乱码，并且文件类型正确。
-后台代码如下：
-@RequestMapping(value = &amp;quot;/api/{sessionid}/documents/download/{documentid}&amp;quot;)
-public void download(@PathVariable(&amp;quot;sessionid&amp;quot;)String se">
+后台代码如下：">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -223,14 +217,8 @@ public void download(@PathVariable(&amp;quot;sessionid&amp;quot;)String se">
     <div class="article-entry" itemprop="articleBody">
       
         <p>文件下载的时候要保证客户端弹出的保存框中的文件名不出现乱码，并且文件类型正确。</p>
-<p>后台代码如下：</p>
-<pre><code>@RequestMapping(value = &quot;/api/{sessionid}/documents/download/{documentid}&quot;)
-public void download(@PathVariable(&quot;sessionid&quot;)String sessionID,
-        @PathVariable(&quot;documentid&quot;)String docID,
-        HttpServletRequest request,
-        HttpServletResponse response) throws UnsupportedEncodingException{
-
-    response.setCharacterEncoding(&quot;utf-8&quot;);
+<p>后台代码如下：<br><a id="more"></a><br>    @RequestMapping(value = “/api/{sessionid}/documents/download/{documentid}”)<br>    public void download(@PathVariable(“sessionid”)String sessionID,<br>            @PathVariable(“documentid”)String docID,<br>            HttpServletRequest request,<br>            HttpServletResponse response) throws UnsupportedEncodingException{</p>
+<pre><code>    response.setCharacterEncoding(&quot;utf-8&quot;);
     request.setCharacterEncoding(&quot;utf-8&quot;);
 
     if ((docID == null || docID.length() == 0)) return;

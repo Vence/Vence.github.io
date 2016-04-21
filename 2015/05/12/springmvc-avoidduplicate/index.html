@@ -7,18 +7,18 @@
   <title>防止表单重复提交 | 王文路的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="用表单进行文件上传的过程中，比较容易发生的就是重复提交，这样会造成很多无效的数据，为此，我的项目中加入了防止重复提交机制。防止重复提交的原理就是，在页面生成的时候，后台会为页面生成一个token，前端在上传的时候将token值传给后台，后台实现上传后就会销毁token,如果前端还是用token来上传，就会被判定是重复提交。具体步骤和实现如下：
-定义SpringMVC注解用注解实现后台防止重复提交的">
+定义SpringMVC注解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="防止表单重复提交">
 <meta property="og:url" content="http://yoursite.com/2015/05/12/springmvc-avoidduplicate/index.html">
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="用表单进行文件上传的过程中，比较容易发生的就是重复提交，这样会造成很多无效的数据，为此，我的项目中加入了防止重复提交机制。防止重复提交的原理就是，在页面生成的时候，后台会为页面生成一个token，前端在上传的时候将token值传给后台，后台实现上传后就会销毁token,如果前端还是用token来上传，就会被判定是重复提交。具体步骤和实现如下：
-定义SpringMVC注解用注解实现后台防止重复提交的">
-<meta property="og:updated_time" content="2016-04-21T01:54:32.750Z">
+定义SpringMVC注解">
+<meta property="og:updated_time" content="2016-04-21T03:24:45.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="防止表单重复提交">
 <meta name="twitter:description" content="用表单进行文件上传的过程中，比较容易发生的就是重复提交，这样会造成很多无效的数据，为此，我的项目中加入了防止重复提交机制。防止重复提交的原理就是，在页面生成的时候，后台会为页面生成一个token，前端在上传的时候将token值传给后台，后台实现上传后就会销毁token,如果前端还是用token来上传，就会被判定是重复提交。具体步骤和实现如下：
-定义SpringMVC注解用注解实现后台防止重复提交的">
+定义SpringMVC注解">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -217,7 +217,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>用表单进行文件上传的过程中，比较容易发生的就是重复提交，这样会造成很多无效的数据，为此，我的项目中加入了防止重复提交机制。防止重复提交的<strong>原理</strong>就是，在页面生成的时候，后台会为页面生成一个token，前端在上传的时候将token值传给后台，后台实现上传后就会销毁token,如果前端还是用token来上传，就会被判定是重复提交。具体步骤和实现如下：</p>
-<h2 id="定义SpringMVC注解"><a href="#定义SpringMVC注解" class="headerlink" title="定义SpringMVC注解"></a>定义SpringMVC注解</h2><p>用注解实现后台防止重复提交的开关：</p>
+<h2 id="定义SpringMVC注解"><a href="#定义SpringMVC注解" class="headerlink" title="定义SpringMVC注解"></a>定义SpringMVC注解</h2><a id="more"></a>
+<p>用注解实现后台防止重复提交的开关：</p>
 <pre><code>/**
  * 
  * 防止重复提交注解，用于方法上

@@ -6,20 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Java创建WebService服务及客户端实现 | 王文路的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简介WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：http://developer.51cto.com/art/200908/147125.htm，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。
-Axi">
+  <meta name="description" content="简介WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：http://developer.51cto.com/art/200908/147125.htm，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java创建WebService服务及客户端实现">
 <meta property="og:url" content="http://yoursite.com/2015/05/28/webservice-user/index.html">
 <meta property="og:site_name" content="王文路的博客">
-<meta property="og:description" content="简介WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：http://developer.51cto.com/art/200908/147125.htm，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。
-Axi">
+<meta property="og:description" content="简介WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：http://developer.51cto.com/art/200908/147125.htm，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。">
 <meta property="og:image" content="http://i1.piimg.com/43f03797b1efef5c.png">
-<meta property="og:updated_time" content="2016-04-21T02:06:16.533Z">
+<meta property="og:updated_time" content="2016-04-21T03:25:25.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java创建WebService服务及客户端实现">
-<meta name="twitter:description" content="简介WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：http://developer.51cto.com/art/200908/147125.htm，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。
-Axi">
+<meta name="twitter:description" content="简介WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：http://developer.51cto.com/art/200908/147125.htm，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。">
 <meta name="twitter:image" content="http://i1.piimg.com/43f03797b1efef5c.png">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
@@ -218,7 +215,7 @@ Axi">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：<a href="http://developer.51cto.com/art/200908/147125.htm" target="_blank" rel="external">http://developer.51cto.com/art/200908/147125.htm</a>，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：<a href="http://developer.51cto.com/art/200908/147125.htm" target="_blank" rel="external">http://developer.51cto.com/art/200908/147125.htm</a>，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。<br><a id="more"></a></p>
 <h2 id="Axis2下载和部署"><a href="#Axis2下载和部署" class="headerlink" title="Axis2下载和部署"></a>Axis2下载和部署</h2><p>Axis2是Apache开发的一个开源项目，再次感叹Apache的伟大！<br>下载地址：<a href="http://mirror.bit.edu.cn/apache//axis/axis2/java/core/1.6.2/axis2-1.6.2-war.zip" target="_blank" rel="external"> http://mirror.bit.edu.cn/apache//axis/axis2/java/core/1.6.2/axis2-1.6.2-war.zip</a></p>
 <p>将其内axis2.war解压到<tomcat安装目录>/webapps下，启动Tomcat，war包会自动解压，访问<a href="http://localhost:8080/axis2/" target="_blank" rel="external">http://localhost:8080/axis2/</a> ，如果看到欢迎主页，则说明部署成功。</tomcat安装目录></p>
 <h2 id="配置Axis2"><a href="#配置Axis2" class="headerlink" title="配置Axis2"></a>配置Axis2</h2><p>＜Tomcat安装目录＞/webapps/axis2/WEB-INF/conf/axis2.xml，配置其内两个属性，以便调试。</p>

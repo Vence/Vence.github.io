@@ -15,7 +15,7 @@
 <meta property="og:description" content="本文所涉及到的专利是由 携程计算机技术（上海）有限公司 于 2015.01.28 申请。
 摘要本文公开了一种项目流程管理系统，包括用于确定项目的信息并将所述信息存入数据库、然后创建项目的进度计划及资源规划的项目初始化模块，用于记录并更新项目的操作日志以及项目中各个任务的状态、维护项目的信息的项目跟踪模块，用于进行项目的查询、查询结果的导出、以及根据查询结果获取相关统计结果的项目组合模块，用于筛选和">
 <meta property="og:image" content="http://i1.piimg.com/e74c35cbbc11abc5.png">
-<meta property="og:updated_time" content="2016-04-21T02:03:48.386Z">
+<meta property="og:updated_time" content="2016-04-21T03:24:33.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="项目流程管理系统">
 <meta name="twitter:description" content="本文所涉及到的专利是由 携程计算机技术（上海）有限公司 于 2015.01.28 申请。
@@ -221,7 +221,7 @@
         <p>本文所涉及到的专利是由 <strong>携程计算机技术（上海）有限公司</strong> 于 <strong>2015.01.28</strong> 申请。</p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文公开了一种项目流程管理系统，包括用于确定项目的信息并将所述信息存入数据库、然后创建项目的进度计划及资源规划的项目初始化模块，用于记录并更新项目的操作日志以及项目中各个任务的状态、维护项目的信息的项目跟踪模块，用于进行项目的查询、查询结果的导出、以及根据查询结果获取相关统计结果的项目组合模块，用于筛选和用户信息相匹配的项目的信息、进度计划、资源规划，然后展示筛选结果的日历模块，以及用于提供看板以根据分类信息展示项目中的任务状态及所属版本的敏捷模块。本文的项目流程管理系统整合了完整的开发流程，规范了项目管理流程，使得项目开发阶段模板化，并且资源调配实时性、可视化，便于管理。</p>
 <p><img src="http://i1.piimg.com/e74c35cbbc11abc5.png" alt=""></p>
-<p>图1</p>
+<p>图1<br><a id="more"></a></p>
 <p></p><p></p>
 <div style="background:#4A4A4A;border-radius:8px;color:white;font-size:1.2em;">一种项目流程管理系统</div><br> 所述的项目流程管理系统，其特征在于，包括<strong>项目初始化模块</strong>、<strong>项目跟踪模块</strong>、<strong>项目组合模块</strong>、<strong>日历模块</strong>和<strong>敏捷模块</strong>；<br><br>所述<strong><em>项目初始化模块</em></strong>用于确定项目的信息并将所述信息存入数据库，并创建项目的进度计划及资源规划，其中，进度计划包括项目所包含的任务及任务中各个阶段的开始时间、完成时间和 / 或工作量，资源规划包括项目所占用的人员各个任务的工作量及工作时间；<br><br>所述<strong><em>项目跟踪模块</em></strong>用于记录并更新项目的操作日志以及项目中各个任务的状态，以及维护项目的信息 ；<br><br>所述<strong><em>项目组合模块</em></strong>用于进行项目的查询、查询结果的导出、以及根据查询结果获取与进度计划和 / 或资源规划相关的统计结果 ；<br><br>所述<strong><em>日历模块</em></strong>用于获取输入的用户信息，并筛选和所述用户信息相匹配的项目的信息、进度计划、资源规划，并以日历的形式展示筛选得到的结果 ；<br><br>所述<strong><em>敏捷模块</em></strong>用于提供若干看板，每一看板对应于一分类信息，每一看板用于根据对应的分类信息展示项目中的任务的状态及所属版本。<br><br><p><br><div style="background:#4A4A4A;border-radius:8px;color:white;font-size:1.2em;">甘特图</div><br>所述的项目流程管理系统，其特征在于，所述项目跟踪模块还用于提供以甘特图形式呈现的项目的进度计划以及接收输入的超链接并显示超链接链接的页面内容。<br><br></p><p><br><div style="background:#4A4A4A;border-radius:8px;color:white;font-size:1.2em;">面板工具模块</div><br>所述的项目流程管理系统，其特征在于，所述项目流程管理系统还包括面板工具模块，所述面板工具模块用于提供项目过滤、项目统计、二维项目过滤统计以及项目分组。<br><br></p><p><br><div style="background:#4A4A4A;border-radius:8px;color:white;font-size:1.2em;">报表模块</div><br>所述的项目流程管理系统，其特征在于，所述项目流程管理系统还包括报表模块，用于定制报表，所述报表包括以下几项中的至少一项 ：项目报表、结项报表、工作量统计报表、资源报表、交付报表。<br><br></p><p><br><div style="background:#4A4A4A;border-radius:8px;color:white;font-size:1.2em;">基于JIRA插件</div><br>任意一项所述的项目流程管理系统，其特征在于，所述项目流程管理系统基于 Jira 插件开发。<br><br>## 背景技术<br>Jira 是目前比较流行的<strong>基于 Java 架构的 B/S 缺陷跟踪管理系统</strong>，但其只能单一bug 跟踪、无法统一整合整个开发流程，市面上也没有包含了项目管理流程的相关 Jira 插件。<br><br>## 主要内容<br><br>本系统要解决的技术问题是为了克服现有技术中的项目流程管理系统无法统一整合完整的开发流程的缺陷，提出一种项目流程管理系统。<br></p><p><br><div style="background:#4A4A4A;border-radius:8px;color:white;font-size:1.2em;">通过下述技术方案来解决上述技术问题</div>
 

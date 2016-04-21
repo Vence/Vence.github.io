@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="关于Require的使用因为 javascript 天生的缺点，语言本身没有集成命名空间的概念，所以变量名、函数名很容易发生冲突。大家想尽了各种办法，给 js 添加命名空间的概念，其中最成熟的套路，就是 RequireJS 这种。
 总之，RequireJS 定义了(define)一个命名空间，在定义的时候，顺便引用了需要使用其他命名空间。我们注意到，按照 RequireJS 的术语，它把命名空间叫">
-<meta property="og:updated_time" content="2016-04-21T01:54:20.522Z">
+<meta property="og:updated_time" content="2016-04-21T03:24:41.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用RequireJS实现异步加载脚本">
 <meta name="twitter:description" content="关于Require的使用因为 javascript 天生的缺点，语言本身没有集成命名空间的概念，所以变量名、函数名很容易发生冲突。大家想尽了各种办法，给 js 添加命名空间的概念，其中最成熟的套路，就是 RequireJS 这种。
@@ -219,8 +219,7 @@
         <h2 id="关于Require的使用"><a href="#关于Require的使用" class="headerlink" title="关于Require的使用"></a>关于Require的使用</h2><p>因为 javascript 天生的缺点，语言本身没有集成命名空间的概念，所以变量名、函数名很容易发生冲突。大家想尽了各种办法，给 js 添加命名空间的概念，其中最成熟的套路，就是 RequireJS 这种。</p>
 <p>总之，RequireJS 定义了(define)一个命名空间，在定义的时候，顺便引用了需要使用其他命名空间。我们注意到，按照 RequireJS 的术语，它把命名空间叫做“模块”。注意，在这里，RequireJS 定义的模块(命名空间)是匿名的，没有取名，这是和c#不同的地方。</p>
 <p>但这个不要紧，因为其他 js 在用到你这个 js 的时候，一般是根据文件名称加载的，同时可以通过上面的 xx 这种方式，给模块(命名空间)自定义别名，所以，取不取名，还真不是关键。</p>
-<hr>
-<h3 id="Require配置"><a href="#Require配置" class="headerlink" title="Require配置"></a>Require配置</h3><p>页面中要加载require.js并指明主要入口文件。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h3 id="Require配置"><a href="#Require配置" class="headerlink" title="Require配置"></a>Require配置</h3><p>页面中要加载require.js并指明主要入口文件。</p>
 <pre><code>&lt;!--data-main=&quot;main&quot;，等号右边的main指的main.js,相当于入口--&gt;
 &lt;script type=&quot;text/javascript&quot; data-main=&quot;&lt;%=path%&gt;/lib/main&quot; src=&quot;&lt;%=path%&gt;/lib/require.js&quot;&gt;&lt;/script&gt;
 </code></pre><p>对于入口文件中作如下设置:</p>

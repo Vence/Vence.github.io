@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://i1.piimg.com/78ae9814515c6a45.jpg">
 <meta property="og:image" content="http://i1.piimg.com/9105d9532616b843.jpg">
 <meta property="og:image" content="http://i1.piimg.com/78ae9814515c6a45.jpg">
-<meta property="og:updated_time" content="2016-04-21T02:05:10.046Z">
+<meta property="og:updated_time" content="2016-04-21T03:24:01.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LVS三种负载均衡方式比较">
 <meta name="twitter:description" content="1、什么是LVS？　　首先简单介绍一下LVS (Linux Virtual Server)到底是什么东西，其实它是一种集群(Cluster)技术，采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器">
@@ -223,7 +223,7 @@
         <h2 id="1、什么是LVS？"><a href="#1、什么是LVS？" class="headerlink" title="1、什么是LVS？"></a>1、什么是LVS？</h2><p>　　首先简单介绍一下LVS (Linux Virtual Server)到底是什么东西，其实它是一种集群(Cluster)技术，采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。</p>
 <p>　　为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。一般来说，LVS集</p>
 <p>　　群采用三层结构，其体系结构如图所示：</p>
-<p><img src="http://i1.piimg.com/852ce2f7f65dba54.jpg" alt="LVS集群的体系结构"></p>
+<p><img src="http://i1.piimg.com/852ce2f7f65dba54.jpg" alt="LVS集群的体系结构"><br><a id="more"></a></p>
 <p>　</p>
 <h2 id="2、LVS主要组成部分为："><a href="#2、LVS主要组成部分为：" class="headerlink" title="2、LVS主要组成部分为："></a>2、LVS主要组成部分为：</h2><p>　　负载调度器(load balancer/ Director)，它是整个集群对外面的前端机，负责将客户的请求发送到一组服务器上执行，而客户认为服务是来自一个IP地址(我们可称之为虚拟IP地址)上的。</p>
 <p>　　服务器池(server pool/ Realserver)，是一组真正执行客户请求的服务器，执行的服务一般有WEB、MAIL、FTP和DNS等。</p>

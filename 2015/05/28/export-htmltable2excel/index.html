@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="导出前端Table到Excel功能，如果后台去做， 的确可以忽略考虑浏览器的兼容性问题 ，但是后台需要用正则表达式进行匹配每行的数据，并且还要考虑合并单元格问题，复杂度很大 。
 如果前端可以直接将table对象转换成excel通用对象的话，那么只要将table里的内容复制到excel中就能实现导出功能。以下程序就是在前端上实现下载到excel功能，不过缺陷是有浏览器的兼容性问题，需要利用Activ">
-<meta property="og:updated_time" content="2016-04-21T01:39:55.302Z">
+<meta property="og:updated_time" content="2016-04-21T03:23:26.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端HTML中table对象导出到Excel">
 <meta name="twitter:description" content="导出前端Table到Excel功能，如果后台去做， 的确可以忽略考虑浏览器的兼容性问题 ，但是后台需要用正则表达式进行匹配每行的数据，并且还要考虑合并单元格问题，复杂度很大 。
@@ -217,7 +217,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>导出前端Table到Excel功能，如果后台去做， 的确可以忽略考虑浏览器的兼容性问题 ，但是后台需要用正则表达式进行匹配每行的数据，并且还要考虑合并单元格问题，复杂度很大 。</p>
-<p>如果前端可以直接将table对象转换成excel通用对象的话，那么只要将table里的内容复制到excel中就能实现导出功能。以下程序就是在前端上实现下载到excel功能，不过缺陷是有浏览器的兼容性问题，需要利用ActiveXObject来开启Excel程序，以下程序只能在IE中实现。</p>
+<p>如果前端可以直接将table对象转换成excel通用对象的话，那么只要将table里的内容复制到excel中就能实现导出功能。以下程序就是在前端上实现下载到excel功能，不过缺陷是有浏览器的兼容性问题，需要利用ActiveXObject来开启Excel程序，以下程序只能在IE中实现。<br><a id="more"></a></p>
 <pre><code>/**
  * ========================导出到Excel===================================================
  * 

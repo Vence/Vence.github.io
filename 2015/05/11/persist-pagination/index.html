@@ -7,21 +7,18 @@
   <title>Hibernate和Mybatis的分页功能实现 | 王文路的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="持久层实现分页功能分页功能在很多场合都会使用，比如如果有很多的资料，不分页的话网页效率将会堪忧， 用户体验也不好，分页功能有效缓解大数据的压力，这里所讲分页功能，主要是对数据库中的结构化数据而言的。
-持久层框架我用过两种：Hibernate 和 Mybatis 。 这里将两种框架的分页功能进行实现。
-Hibernate分页Hiberntae 分页比较简单，因为Hibernate自带了分页功能，直接">
+持久层框架我用过两种：Hibernate 和 Mybatis 。 这里将两种框架的分页功能进行实现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hibernate和Mybatis的分页功能实现">
 <meta property="og:url" content="http://yoursite.com/2015/05/11/persist-pagination/index.html">
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="持久层实现分页功能分页功能在很多场合都会使用，比如如果有很多的资料，不分页的话网页效率将会堪忧， 用户体验也不好，分页功能有效缓解大数据的压力，这里所讲分页功能，主要是对数据库中的结构化数据而言的。
-持久层框架我用过两种：Hibernate 和 Mybatis 。 这里将两种框架的分页功能进行实现。
-Hibernate分页Hiberntae 分页比较简单，因为Hibernate自带了分页功能，直接">
-<meta property="og:updated_time" content="2016-04-21T01:53:45.996Z">
+持久层框架我用过两种：Hibernate 和 Mybatis 。 这里将两种框架的分页功能进行实现。">
+<meta property="og:updated_time" content="2016-04-21T03:24:19.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate和Mybatis的分页功能实现">
 <meta name="twitter:description" content="持久层实现分页功能分页功能在很多场合都会使用，比如如果有很多的资料，不分页的话网页效率将会堪忧， 用户体验也不好，分页功能有效缓解大数据的压力，这里所讲分页功能，主要是对数据库中的结构化数据而言的。
-持久层框架我用过两种：Hibernate 和 Mybatis 。 这里将两种框架的分页功能进行实现。
-Hibernate分页Hiberntae 分页比较简单，因为Hibernate自带了分页功能，直接">
+持久层框架我用过两种：Hibernate 和 Mybatis 。 这里将两种框架的分页功能进行实现。">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -220,7 +217,7 @@ Hibernate分页Hiberntae 分页比较简单，因为Hibernate自带了分页功�
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="持久层实现分页功能"><a href="#持久层实现分页功能" class="headerlink" title="持久层实现分页功能"></a>持久层实现分页功能</h2><p>分页功能在很多场合都会使用，比如如果有很多的资料，不分页的话网页效率将会堪忧， 用户体验也不好，分页功能有效缓解大数据的压力，这里所讲分页功能，主要是对数据库中的结构化数据而言的。</p>
-<p>持久层框架我用过两种：<strong>Hibernate</strong> 和 <strong>Mybatis</strong> 。 这里将两种框架的分页功能进行实现。</p>
+<p>持久层框架我用过两种：<strong>Hibernate</strong> 和 <strong>Mybatis</strong> 。 这里将两种框架的分页功能进行实现。<br><a id="more"></a></p>
 <h3 id="Hibernate分页"><a href="#Hibernate分页" class="headerlink" title="Hibernate分页"></a>Hibernate分页</h3><p>Hiberntae 分页比较简单，因为Hibernate自带了分页功能，直接进行配置即可：</p>
 <pre><code>@Override
 public ChannelTalkItem[] findByPage(final String channelID, final int startPos,

@@ -7,24 +7,18 @@
   <title>基于MultipartFile实现多文件上传 | 王文路的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="用Spring下的MultipartFile实现多文件上传功能Spring自带了多文件上传功能，主要是spring下的MultipartFile实现的，在实现多文件上传之前，要保证导入了Spring的包文件。以下是我的项目中导入Spring包。
-pom.xml
-&amp;lt;dependency&amp;gt;
-    &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId">
+pom.xml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于MultipartFile实现多文件上传">
 <meta property="og:url" content="http://yoursite.com/2015/05/12/springmvc-multipartfile/index.html">
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="用Spring下的MultipartFile实现多文件上传功能Spring自带了多文件上传功能，主要是spring下的MultipartFile实现的，在实现多文件上传之前，要保证导入了Spring的包文件。以下是我的项目中导入Spring包。
-pom.xml
-&amp;lt;dependency&amp;gt;
-    &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId">
-<meta property="og:updated_time" content="2016-04-21T01:54:56.437Z">
+pom.xml">
+<meta property="og:updated_time" content="2016-04-21T03:24:54.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于MultipartFile实现多文件上传">
 <meta name="twitter:description" content="用Spring下的MultipartFile实现多文件上传功能Spring自带了多文件上传功能，主要是spring下的MultipartFile实现的，在实现多文件上传之前，要保证导入了Spring的包文件。以下是我的项目中导入Spring包。
-pom.xml
-&amp;lt;dependency&amp;gt;
-    &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId">
+pom.xml">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -223,25 +217,8 @@ pom.xml
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="用Spring下的MultipartFile实现多文件上传功能"><a href="#用Spring下的MultipartFile实现多文件上传功能" class="headerlink" title="用Spring下的MultipartFile实现多文件上传功能"></a>用Spring下的MultipartFile实现多文件上传功能</h2><p>Spring自带了多文件上传功能，主要是spring下的MultipartFile实现的，在实现多文件上传之前，要保证导入了Spring的包文件。以下是我的项目中导入Spring包。</p>
-<p>pom.xml</p>
+<p>pom.xml<br><a id="more"></a><br>        <dependency><br>            <groupid>org.springframework</groupid><br>            <artifactid>spring-web</artifactid><br>        </dependency><br>        <dependency><br>            <groupid>org.springframework</groupid><br>            <artifactid>spring-context</artifactid><br>        </dependency><br>        <dependency><br>            <groupid>org.springframework</groupid><br>            <artifactid>spring-core</artifactid><br>        </dependency><br>        <dependency><br>            <groupid>org.springframework</groupid><br>            <artifactid>spring-webmvc</artifactid><br>        </dependency></p>
 <pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
-&lt;/dependency&gt;
-
-&lt;dependency&gt;
     &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
     &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
     &lt;version&gt;1.3&lt;/version&gt;

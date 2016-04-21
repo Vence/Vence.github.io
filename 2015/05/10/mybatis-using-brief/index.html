@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="对于持久层框架，我们比较熟悉的是Hibernate，这是一款功能非常强大的持久框。除此之外，还有一款比较流行的框架 - Mybatis
 什么是Mybatis？mybatis是数据映射器（数据映射器层：用于在对象和数据库之间搬运数据，同时保证对象、数据库和数据映射器层本身相对独立。Martin Fowler 《企业应用架构模式》） mybatis不是直接把类映射为数据库表，而是把sql语句的参数与结">
-<meta property="og:updated_time" content="2016-04-21T01:53:23.978Z">
+<meta property="og:updated_time" content="2016-04-21T03:24:05.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="持久框架Mybatis的应用">
 <meta name="twitter:description" content="对于持久层框架，我们比较熟悉的是Hibernate，这是一款功能非常强大的持久框。除此之外，还有一款比较流行的框架 - Mybatis
@@ -217,8 +217,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>对于持久层框架，我们比较熟悉的是Hibernate，这是一款功能非常强大的持久框。除此之外，还有一款比较流行的框架 - <strong>Mybatis</strong></p>
-<h3 id="什么是Mybatis？"><a href="#什么是Mybatis？" class="headerlink" title="什么是Mybatis？"></a>什么是Mybatis？</h3><p>mybatis是数据映射器（数据映射器层：用于在对象和数据库之间搬运数据，同时保证对象、数据库和数据映射器层本身相对独立。Martin Fowler 《企业应用架构模式》） mybatis不是直接把类映射为数据库表，而是把sql语句的参数与结果（即输入与输出）映射为类。为如何在类和数据库间建立映射带来了更大的灵活性。同时也更好的隔离了数据库设计和应用程序中使用的对象模型。</p>
-<p>从以上描述上可以很容易的看出Mybatis是将结果集映射成类，这种半自动化持久框架的最大特点就是具有很强的灵活性。何为半自动化，就是相对于Hibernate的全自动而言的，因为Mybatis需要为每一个持久层的接口定义一个sql语句，接口的执行，就是执行这些sql，每一个持久层方法都需要手动设置sql语句，所以更加灵活</p>
+<h3 id="什么是Mybatis？"><a href="#什么是Mybatis？" class="headerlink" title="什么是Mybatis？"></a>什么是Mybatis？</h3><p>mybatis是数据映射器（数据映射器层：用于在对象和数据库之间搬运数据，同时保证对象、数据库和数据映射器层本身相对独立。Martin Fowler 《企业应用架构模式》） mybatis不是直接把类映射为数据库表，而是把sql语句的参数与结果（即输入与输出）映射为类。为如何在类和数据库间建立映射带来了更大的灵活性。同时也更好的隔离了数据库设计和应用程序中使用的对象模型。<br><a id="more"></a><br>从以上描述上可以很容易的看出Mybatis是将结果集映射成类，这种半自动化持久框架的最大特点就是具有很强的灵活性。何为半自动化，就是相对于Hibernate的全自动而言的，因为Mybatis需要为每一个持久层的接口定义一个sql语句，接口的执行，就是执行这些sql，每一个持久层方法都需要手动设置sql语句，所以更加灵活</p>
 <p>对于Mybatis更多的介绍请参阅<a href="http://limingnihao.iteye.com/" title="黎明你好的技术博客" target="_blank" rel="external">黎明你好的技术博客</a>博主的博客<a href="http://limingnihao.iteye.com/blog/781671" title="Mybatis 的讲解" target="_blank" rel="external">http://limingnihao.iteye.com/blog/781671</a>，比较基础和详细。</p>
 <p>可以看出mybatis持久框架主要涉及到了三个类，分别是Model模型，是要将结果集映射成的数据模型，Mapper 接口文件，对应持久层的接口；还有一个xml配置文件，用sql语句实现Mapper的接口。以下给出三种文件的例子：</p>
 <p>Domain.java</p>

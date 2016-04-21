@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="感谢原文编辑
 因为最近的项目要用到多web服务器实现访问负载和集群，负载调度使用的是LVS，而非apache的负载调度，因为在高访问量和大并发量的时候LVS的性能比APACHE好。然后在web服务器上是使用tomcat5.5.25做应用服务器，对于tomcat的集群有两种方式，这个主要是针对 session而言的。一种就是 sticky模式 ，即黏性会话模式；另外一种就是 session复制模式">
-<meta property="og:updated_time" content="2016-04-21T01:39:17.930Z">
+<meta property="og:updated_time" content="2016-04-21T03:25:02.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tomcat集群之Session复制配置">
 <meta name="twitter:description" content="感谢原文编辑
@@ -217,8 +217,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>感谢<a href="http://www.cnblogs.com/peter9/archive/2011/12/18/2362138.html" target="_blank" rel="external">原文编辑</a></p>
-<p>因为最近的项目要用到多web服务器实现访问负载和集群，负载调度使用的是<strong>LVS</strong>，而非apache的负载调度，因为在高访问量和大并发量的时候LVS的性能比APACHE好。然后在web服务器上是使用tomcat5.5.25做应用服务器，对于tomcat的集群有两种方式，这个主要是针对 session而言的。一种就是 <strong>sticky模式</strong> ，即黏性会话模式；另外一种就是 <strong>session复制模式</strong> 了。</p>
-<p>所谓sticky模式就是说同一个用户的访问请求都被派送到同一个tomcat实例上，这样我们就无须在多台服务器之间实现session共享了，这是其好处，不好的地方就是不能实现 failureover了，一但用户访问的机器挂掉，那么其session就会丢失。</p>
+<p>因为最近的项目要用到多web服务器实现访问负载和集群，负载调度使用的是<strong>LVS</strong>，而非apache的负载调度，因为在高访问量和大并发量的时候LVS的性能比APACHE好。然后在web服务器上是使用tomcat5.5.25做应用服务器，对于tomcat的集群有两种方式，这个主要是针对 session而言的。一种就是 <strong>sticky模式</strong> ，即黏性会话模式；另外一种就是 <strong>session复制模式</strong> 了。<br><a id="more"></a><br>所谓sticky模式就是说同一个用户的访问请求都被派送到同一个tomcat实例上，这样我们就无须在多台服务器之间实现session共享了，这是其好处，不好的地方就是不能实现 failureover了，一但用户访问的机器挂掉，那么其session就会丢失。</p>
 <p>而session复制模式就可以很好的解决failureover的问题，即使某一台web服务器挂掉了，用户的请求还会被负载到其他的web服务器上，而且session也被复制了，这样对用户而言就像是在同一台机器上操作一样，不好的地方就是session复制需要系统资源和网络的开销，尤其是当web服务器多的时候或session里存储的数据量大的时候，这点将会比较的明显（不过自己还没有做这方面的测试）。</p>
 <p>针对这两种方式的弊端和好处，我们可以采用将两种方式结合的方式来达到更好的效果，那就是sticky+session复制模式了。用户的请求按照 sticky方式被分发到同一个web服务器上，同时tomcat在后台做异步复制（非同步）session到其他web服务器，这样我们使用 sticky的简便性，同时又有了一定的容错能力。</p>
 <p>下面我就将自己的tomcat集群配置经验跟大家分享一下，呵呵。现在想来，其实tomcat的集群配置真的是非常简单，几乎不需要改什么东西了。我今天就在windows上用一台机器来跑两个tomcat实例，下面是一些基础条件：</p>

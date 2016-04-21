@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="很多系统都会有多重系统角色，并且每个角色的权限都是不一样的，进行权限管理是一件非常复杂的事情，我这里只是对方法进行权限管理，将权限跟API一一对应起来，如果对这和API没有权限，就无法使用该API，当然这种方法级别的权限管理，范围还是太大，有待进一步细化。
 具体的原理就是：使用权限码，假设我的使用的是128位的权限码，那都能设置128种方法的权限，如果需要更多，可以继续加。每一个API方法都对应唯">
-<meta property="og:updated_time" content="2016-04-21T01:54:55.208Z">
+<meta property="og:updated_time" content="2016-04-21T03:24:58.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Spring实现用户权限管理">
 <meta name="twitter:description" content="很多系统都会有多重系统角色，并且每个角色的权限都是不一样的，进行权限管理是一件非常复杂的事情，我这里只是对方法进行权限管理，将权限跟API一一对应起来，如果对这和API没有权限，就无法使用该API，当然这种方法级别的权限管理，范围还是太大，有待进一步细化。
@@ -217,7 +217,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>很多系统都会有多重系统角色，并且每个角色的权限都是不一样的，进行权限管理是一件非常复杂的事情，我这里只是对方法进行权限管理，将权限跟API一一对应起来，如果对这和API没有权限，就无法使用该API，当然这种方法级别的权限管理，范围还是太大，有待进一步细化。</p>
-<p>具体的原理就是：<strong>使用权限码，假设我的使用的是128位的权限码，那都能设置128种方法的权限，如果需要更多，可以继续加。每一个API方法都对应唯一一个权限码，即当前位是1其余位都是0；每一个用户拥有一个128为的权限集，如果当前位对应1的话，就说明该用户可以操作这个API，否则就是无权限。</strong></p>
+<p>具体的原理就是：<strong>使用权限码，假设我的使用的是128位的权限码，那都能设置128种方法的权限，如果需要更多，可以继续加。每一个API方法都对应唯一一个权限码，即当前位是1其余位都是0；每一个用户拥有一个128为的权限集，如果当前位对应1的话，就说明该用户可以操作这个API，否则就是无权限。</strong><br><a id="more"></a></p>
 <h2 id="用户权限集"><a href="#用户权限集" class="headerlink" title="用户权限集"></a>用户权限集</h2><p>每个用户都拥有一个128位权限集，用两个long类型实现。</p>
 <p>User.java</p>
 <pre><code>@JsonIgnoreProperties(value = {&quot;permissionCodeHigh&quot;, &quot;permissionCodeLow&quot;})

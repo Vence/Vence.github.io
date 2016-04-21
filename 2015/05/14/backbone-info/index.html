@@ -6,21 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Backbone技术解析 | 王文路的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Backbone是一款前端MVC框架，对于前段开发人员，将会产生很多的便利，使得我们的前端代码更容易维护；但是无可否认，使用Backbone进行前端开发无疑增加了前端开发人员的工作量，因为了解并熟悉Backbone的机制是需要时间的。不过清晰的代码逻辑、高维护性依然使得很多项目采用了Backbone框架，对于稍微大一点的项目，前端业务逻辑可能比较复杂，代码组织可能比代码实现更加重要。
-当然前端开发">
+  <meta name="description" content="Backbone是一款前端MVC框架，对于前段开发人员，将会产生很多的便利，使得我们的前端代码更容易维护；但是无可否认，使用Backbone进行前端开发无疑增加了前端开发人员的工作量，因为了解并熟悉Backbone的机制是需要时间的。不过清晰的代码逻辑、高维护性依然使得很多项目采用了Backbone框架，对于稍微大一点的项目，前端业务逻辑可能比较复杂，代码组织可能比代码实现更加重要。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Backbone技术解析">
 <meta property="og:url" content="http://yoursite.com/2015/05/14/backbone-info/index.html">
 <meta property="og:site_name" content="王文路的博客">
-<meta property="og:description" content="Backbone是一款前端MVC框架，对于前段开发人员，将会产生很多的便利，使得我们的前端代码更容易维护；但是无可否认，使用Backbone进行前端开发无疑增加了前端开发人员的工作量，因为了解并熟悉Backbone的机制是需要时间的。不过清晰的代码逻辑、高维护性依然使得很多项目采用了Backbone框架，对于稍微大一点的项目，前端业务逻辑可能比较复杂，代码组织可能比代码实现更加重要。
-当然前端开发">
+<meta property="og:description" content="Backbone是一款前端MVC框架，对于前段开发人员，将会产生很多的便利，使得我们的前端代码更容易维护；但是无可否认，使用Backbone进行前端开发无疑增加了前端开发人员的工作量，因为了解并熟悉Backbone的机制是需要时间的。不过清晰的代码逻辑、高维护性依然使得很多项目采用了Backbone框架，对于稍微大一点的项目，前端业务逻辑可能比较复杂，代码组织可能比代码实现更加重要。">
 <meta property="og:image" content="http://i1.piimg.com/09633998bbe6c0d8.jpg">
 <meta property="og:image" content="http://i1.piimg.com/267f1debcf5b8776.jpg">
-<meta property="og:updated_time" content="2016-04-21T02:07:08.359Z">
+<meta property="og:updated_time" content="2016-04-21T03:23:08.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Backbone技术解析">
-<meta name="twitter:description" content="Backbone是一款前端MVC框架，对于前段开发人员，将会产生很多的便利，使得我们的前端代码更容易维护；但是无可否认，使用Backbone进行前端开发无疑增加了前端开发人员的工作量，因为了解并熟悉Backbone的机制是需要时间的。不过清晰的代码逻辑、高维护性依然使得很多项目采用了Backbone框架，对于稍微大一点的项目，前端业务逻辑可能比较复杂，代码组织可能比代码实现更加重要。
-当然前端开发">
+<meta name="twitter:description" content="Backbone是一款前端MVC框架，对于前段开发人员，将会产生很多的便利，使得我们的前端代码更容易维护；但是无可否认，使用Backbone进行前端开发无疑增加了前端开发人员的工作量，因为了解并熟悉Backbone的机制是需要时间的。不过清晰的代码逻辑、高维护性依然使得很多项目采用了Backbone框架，对于稍微大一点的项目，前端业务逻辑可能比较复杂，代码组织可能比代码实现更加重要。">
 <meta name="twitter:image" content="http://i1.piimg.com/09633998bbe6c0d8.jpg">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
@@ -219,8 +216,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://www.css88.com/doc/backbone/" target="_blank" rel="external">Backbone</a>是一款前端MVC框架，对于前段开发人员，将会产生很多的便利，使得我们的前端代码更容易维护；但是无可否认，使用Backbone进行前端开发无疑增加了前端开发人员的工作量，因为了解并熟悉Backbone的机制是需要时间的。不过清晰的代码逻辑、高维护性依然使得很多项目采用了Backbone框架，对于稍微大一点的项目，前端业务逻辑可能比较复杂，代码组织可能比代码实现更加重要。</p>
-<p>当然前端开发框架还有很多，比如更流行的RegularJS，比Backbone拥有更多的用户，不过Bakbone的小巧和灵活性依然是ResgularJS不能比较的。Backbone拥有更多的可能性，所以对于前端开发人员的技术要求更高一点，对于一个初次接触Backbone的童鞋来说，熟悉Backbone机制比什么都重要，不然写出的各种View和绑定事件一定会让你抓狂不已。</p>
+        <p><a href="http://www.css88.com/doc/backbone/" target="_blank" rel="external">Backbone</a>是一款前端MVC框架，对于前段开发人员，将会产生很多的便利，使得我们的前端代码更容易维护；但是无可否认，使用Backbone进行前端开发无疑增加了前端开发人员的工作量，因为了解并熟悉Backbone的机制是需要时间的。不过清晰的代码逻辑、高维护性依然使得很多项目采用了Backbone框架，对于稍微大一点的项目，前端业务逻辑可能比较复杂，代码组织可能比代码实现更加重要。<br><a id="more"></a><br>当然前端开发框架还有很多，比如更流行的RegularJS，比Backbone拥有更多的用户，不过Bakbone的小巧和灵活性依然是ResgularJS不能比较的。Backbone拥有更多的可能性，所以对于前端开发人员的技术要求更高一点，对于一个初次接触Backbone的童鞋来说，熟悉Backbone机制比什么都重要，不然写出的各种View和绑定事件一定会让你抓狂不已。</p>
 <p>不幸的是Backbone没有告诉我们如何组织代码，让很多开发者对于如何加载所需脚本是比较迷茫的，所以将require与Backbone集成起来。require可以帮助我们轻松组织Backbone。</p>
 <p>为了方便多个view的加载，我们使用requir.js与Backbone集成起来,关于require的内容，在上一章节中介绍过。</p>
 <p>首先给大家看一下全球js库和框架的使用比例：</p>
