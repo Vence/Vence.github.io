@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Java动态代理 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.相关概念1.1代理在某些情况下，我们不希望或是不能直接访问对象A,而是通过访问一个中介对象B,由B去访问A达成目的，这种方式我们就成为代理。
+这里对象A所属类我们成为委托类，也成为被代理类，对象B所属类成为代理类。
+代理优点有：
+
+隐藏委托类的实现
+解耦，不改变委托类代码的情况下做一些额外处理，比如添加初始判断及其他公共操作
+
+根据程序运行前代理类是否已经存在，可以将代理分为静态代理和动态代理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java动态代理">
+<meta property="og:url" content="http://yoursite.com/2016/04/21/javaproxy/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="1.相关概念1.1代理在某些情况下，我们不希望或是不能直接访问对象A,而是通过访问一个中介对象B,由B去访问A达成目的，这种方式我们就成为代理。
+这里对象A所属类我们成为委托类，也成为被代理类，对象B所属类成为代理类。
+代理优点有：
+
+隐藏委托类的实现
+解耦，不改变委托类代码的情况下做一些额外处理，比如添加初始判断及其他公共操作
+
+根据程序运行前代理类是否已经存在，可以将代理分为静态代理和动态代理">
+<meta property="og:updated_time" content="2016-04-21T04:42:48.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java动态代理">
+<meta name="twitter:description" content="1.相关概念1.1代理在某些情况下，我们不希望或是不能直接访问对象A,而是通过访问一个中介对象B,由B去访问A达成目的，这种方式我们就成为代理。
+这里对象A所属类我们成为委托类，也成为被代理类，对象B所属类成为代理类。
+代理优点有：
+
+隐藏委托类的实现
+解耦，不改变委托类代码的情况下做一些额外处理，比如添加初始判断及其他公共操作
+
+根据程序运行前代理类是否已经存在，可以将代理分为静态代理和动态代理">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12px;">backbone</a> <a href="/tags/blog/" style="font-size: 12px;">blog</a> <a href="/tags/cluster/" style="font-size: 12px;">cluster</a> <a href="/tags/file/" style="font-size: 14px;">file</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 14px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 18px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/spring/" style="font-size: 16px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 16px;">web</a> <a href="/tags/webservice/" style="font-size: 12px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-javaproxy" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/21/javaproxy/" class="article-date">
+  	<time datetime="2016-04-21T01:34:30.000Z" itemprop="datePublished">2016-04-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java动态代理
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-相关概念"><a href="#1-相关概念" class="headerlink" title="1.相关概念"></a>1.相关概念</h2><h3 id="1-1代理"><a href="#1-1代理" class="headerlink" title="1.1代理"></a>1.1代理</h3><p>在某些情况下，我们不希望或是不能直接访问对象A,而是通过访问一个中介对象B,由B去访问A达成目的，这种方式我们就成为代理。</p>
+<p>这里对象A所属类我们成为委托类，也成为被代理类，对象B所属类成为代理类。</p>
+<p>代理优点有：</p>
+<ul>
+<li>隐藏委托类的实现</li>
+<li>解耦，不改变委托类代码的情况下做一些额外处理，比如添加初始判断及其他公共操作</li>
+</ul>
+<p>根据程序运行前代理类是否已经存在，可以将代理分为静态代理和动态代理。<br><a id="more"></a></p>
+<h3 id="1-2静态代理"><a href="#1-2静态代理" class="headerlink" title="1.2静态代理"></a>1.2静态代理</h3><p>代理类在程序运行前已经存在的代理方式成为静态代理。</p>
+<p>通过上面解释可以知道，由开发人员编写或是编译器生成代理类的方式都属于静态代理。<br>源码中实现了一个静态代理的实例：</p>
+<p><code>ClassA</code> 是委托类 ， <code>ClassB</code>是代理类，<code>ClassB</code>中的函数都是直接调用<code>ClassA</code>相应函数，并且可以隐藏<code>ClassA</code>的<code>operateMethod3()</code>函数。</p>
+<p>静态代理中代理类和委托类也常常继承同一父类或实现同一接口。</p>
+<h3 id="1-3动态代理"><a href="#1-3动态代理" class="headerlink" title="1.3动态代理"></a>1.3动态代理</h3><p>代理类在程序运行前不存在，运行时由程序动态生成的代理方式成为动态代理。</p>
+<p>Java提供了动态代理的实现方式，可以在运行时刻动态生成代理类。这种代理方式的一大好处是可以方便对代理类的函数做统一或特殊处理，如记录所有函数的执行时间、所有函数执行前添加验证判断、对某个特殊函数进行特殊操作，而不用像静态代理方式那样需要修改每一个函数。</p>
+<h2 id="2-动态代理实例"><a href="#2-动态代理实例" class="headerlink" title="2.动态代理实例"></a>2.动态代理实例</h2><p>实现动态代理包括三步：</p>
+<ul>
+<li>新建委托类</li>
+<li>实现<code>InvocationHandler</code>接口，这是负责连接代理类或委托类的中间类必须实现的接口</li>
+<li>通过<code>Proxy</code>类新建代理类对象</li>
+</ul>
+<h3 id="2-1-新建委托类"><a href="#2-1-新建委托类" class="headerlink" title="2.1 新建委托类"></a>2.1 新建委托类</h3><pre><code>public interface Operate {
+
+    public void operateMethod1();
+
+    public void operateMethod2();
+
+    public void operateMethod3();
+
+}
+</code></pre><p>实现：</p>
+<pre><code>public class OperateImpl implements Operate{
+
+    @Override
+    public void operateMethod1() {
+        // TODO Auto-generated method stub
+        System.out.println(&quot;Invoke operateMethod1&quot;);
+        sleep(110);
+    }
+
+    @Override
+    public void operateMethod2() {
+        // TODO Auto-generated method stub
+        System.out.println(&quot;Invoke oprateMethod2&quot;);
+        sleep(120);
+    }
+
+    @Override
+    public void operateMethod3() {
+        // TODO Auto-generated method stub
+        System.out.println(&quot;Invoke operateMethod3&quot;);
+        sleep(130);
+    }
+
+    private static void sleep(long millSecond){
+        try {
+            Thread.sleep(millSecond);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+</code></pre><p><code>Operate</code>是一个接口，定义了一些函数，我们要统计这些函数的执行时间。</p>
+<p><code>OperateImpl</code>是委托类，实现<code>Operate</code>接口。每个函数简单输出字符串，并等待一段时间。</p>
+<p>动态代理要求委托类必须实现某个接口，比如这里委托类<code>OperateImpl</code>实现了<code>Operate</code>。</p>
+<h3 id="2-2实现InvocationHandler接口"><a href="#2-2实现InvocationHandler接口" class="headerlink" title="2.2实现InvocationHandler接口"></a>2.2实现InvocationHandler接口</h3><pre><code>public class TimingInvocationHandler implements InvocationHandler {
+
+    private Object target;
+
+
+    public TimingInvocationHandler(Object target) {
+        super();
+        this.target = target;
+    }
+
+    public TimingInvocationHandler() {
+        super();
+    }
+
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args)
+            throws Throwable {
+
+        long start =  System.currentTimeMillis();
+
+        Object obj = method.invoke(target, args);
+
+        System.out.println(method.getName() + &quot;cost time is :&quot; + (System.currentTimeMillis() - start)); 
+
+        return obj;
+    }
+
+}
+</code></pre><p>target 属性表示委托类对象。</p>
+<p>InvocationHandler 是负责连接代理类和委托类的中间类必须实现的接口。其中只有一个：</p>
+<pre><code>public Object invoke(Object proxy, Method method, Object[] args)
+</code></pre><p>函数需要去实现，参数：</p>
+<ul>
+<li><code>Proxy</code>表示下面2.3通过<code>Proxy.newProxyInstance()</code>生成的代理类对象</li>
+<li><code>Method</code>表示代理对象被调用的函数</li>
+<li><code>args</code>表示代理类对象被调用的函数的参数</li>
+</ul>
+<p>调用代理类对象的每个函数实际最终都是调用了<code>InvocationHandelr</code>的<code>invoke</code>函数。这里我们在<code>invoke</code>实现最红刚添加了开始结束计时，其中还调用了委托类对象<code>target</code>的相应函数，这样便完成了统计执行时间的需求。</p>
+<p><code>invoke</code>函数中我们也可以通过对<code>method</code>做一些判断，从而对某些函数特殊处理。</p>
+<h3 id="2-3通过Proxy类静态函数生成代理对象"><a href="#2-3通过Proxy类静态函数生成代理对象" class="headerlink" title="2.3通过Proxy类静态函数生成代理对象"></a>2.3通过Proxy类静态函数生成代理对象</h3><pre><code>public class Main {
+
+public static void main(String[] args){
+
+    // create proxy instance
+    TimingInvocationHandler timingInvocationHandler
+     = new TimingInvocationHandler(new OperateImpl());
+
+    Operate operate = (Operate)Proxy.newProxyInstance(Operate.class.getClassLoader(), new Class[]{Operate.class},
+            timingInvocationHandler);
+
+
+    // call method of proxy instance
+
+    operate.operateMethod1();
+
+    System.out.println();
+
+    operate.operateMethod2();
+
+    System.out.println();
+
+    operate.operateMethod3();
+
+}
+}
+</code></pre><p>这里我们先将委托类对象 <code>new OperateImpl()</code> 作为<code>TimingInvocationHandler</code>构造函数入参创建<code>timingInvocationHandler</code>对象；</p>
+<p>然后通过<code>xy.newProxyInstance(...)</code>函数新建了一个代理对象，实际代理类就是在这时候动态生成的。我们调用该代理对象的函数就会调用到<code>timingInvocationHandler</code>的<code>invoke</code>函数（是不是有点类似静态代理） ， 而invoke函数实现中调用委托类对象 <code>new OperateImpl()</code> 相应的    <code>method</code>。</p>
+<pre><code>public static Object newProxyInstance(ClassLoader loader,
+                                     Class&lt;?&gt;[] interfaces,
+                                     InvocationHandler h)
+   throws IllegalArgumentException
+</code></pre><ul>
+<li><code>loader</code>表示类加载器</li>
+<li><code>interfaces</code> 表示委托类的接口，生成代理类时需要实现这些接口</li>
+<li><code>h</code>是<code>InvocationHandler</code>实现类接口，负责连接代理类和委托类的中间类。</li>
+</ul>
+<p>我们可以这样理解，如上的动态代理实现实际是双层的静态代理，开发者提供了委托类B ,程序动态生成了代理类A。开发者还需要提供一个实现了InvocationHandler的之类C,子类C连接代理类A和委托类B，它是代理类A的委托类，委托类B的代理类。用户直接调用代理类A的对象，A将调用转发给委托类C，委托类C再讲调用转发给它的委托类B.</p>
+<h2 id="3-动态代理原理"><a href="#3-动态代理原理" class="headerlink" title="3.动态代理原理"></a>3.动态代理原理</h2><p>实际上面最后一段已经说明了动态代理的真正原理。我们来仔细分析下。</p>
+<h3 id="3-1生成的动态代理类代码"><a href="#3-1生成的动态代理类代码" class="headerlink" title="3.1生成的动态代理类代码"></a>3.1生成的动态代理类代码</h3><p>下面是上面示例程序运行时自动生成的动态代理类代码，如何得到这些生成的代码请见ProxyUtils，查看 class 文件可使用 jd-gui</p>
+<pre><code>import com.codekk.java.test.dynamicproxy.Operate; 
+import java.lang.reflect.InvocationHandler; 
+import java.lang.reflect.Method; 
+import java.lang.reflect.Proxy; 
+import java.lang.reflect.UndeclaredThrowableException;  
+public final class $Proxy0 extends Proxy   implements Operate {   
+private static Method m4;   
+private static Method m1;   
+private static Method m5;   
+private static Method m0;   
+private static Method m3;   
+private static Method m2;    
+
+public $Proxy0(InvocationHandler paramInvocationHandler)     throws    {     
+    super(paramInvocationHandler);   
+}    
+
+public final void operateMethod1()     throws    {     
+    try     {      
+        h.invoke(this, m4, null);       return;     
+    } catch (Error|RuntimeException localError)     {      
+        throw localError;     
+    } catch (Throwable localThrowable)     {      
+        throw new UndeclaredThrowableException(localThrowable);     
+    }   
+}    
+
+public final boolean equals(Object paramObject)     throws    {     
+
+    try     {      
+        return ((Boolean)h.invoke(this, m1, new Object[] { paramObject })).booleanValue();     
+    }   catch (Error|RuntimeException localError)     {       
+        throw localError;    
+    }   catch (Throwable localThrowable)     {       
+        throw new UndeclaredThrowableException(localThrowable);     
+    }   
+}    
+
+public final void operateMethod2()     throws    {     
+    try     {      
+        h.invoke(this, m5, null);       return;     
+    } catch (Error|RuntimeException localError)     {       
+        throw localError;     
+    }  catch (Throwable localThrowable)     {      
+        throw new UndeclaredThrowableException(localThrowable); 
+    }   
+}    
+
+public final int hashCode()     throws    {    
+    try     {       
+        return ((Integer)h.invoke(this, m0, null)).intValue();     
+    } catch (Error|RuntimeException localError)     {      
+        throw localError;     
+    }catch (Throwable localThrowable)     {      
+        throw new UndeclaredThrowableException(localThrowable); 
+    }   
+}   
+
+public final void operateMethod3()     throws    {     
+    try     {       
+        h.invoke(this, m3, null);       return;     
+    }  catch (Error|RuntimeException localError)     {       
+        throw localError;     
+    }catch (Throwable localThrowable)     {       
+        throw new UndeclaredThrowableException(localThrowable);    
+    }  
+}    
+
+public final String toString()     throws    {     
+    try     {       
+        return (String)h.invoke(this, m2, null);     
+    }  catch (Error|RuntimeException localError)     {       
+        throw localError;     
+    }  catch (Throwable localThrowable)     {       
+        throw new UndeclaredThrowableException(localThrowable);     
+    }   
+}    
+
+static   {     
+    try     {      
+        m4 = Class.forName(&quot;com.codekk.java.test.dynamicproxy.Operate&quot;).getMethod(&quot;operateMethod1&quot;, new Class[0]);       
+        m1 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;equals&quot;, new Class[] { Class.forName(&quot;java.lang.Object&quot;) });       
+        m5 = Class.forName(&quot;com.codekk.java.test.dynamicproxy.Operate&quot;).getMethod(&quot;operateMethod2&quot;, new Class[0]);       
+        m0 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;hashCode&quot;, new Class[0]);      
+        m3 = Class.forName(&quot;com.codekk.java.test.dynamicproxy.Operate&quot;).getMethod(&quot;operateMethod3&quot;, new Class[0]);       
+        m2 = Class.forName(&quot;java.lang.Object&quot;).getMethod(&quot;toString&quot;, new Class[0]);       return;     
+    }catch (NoSuchMethodException localNoSuchMethodException)     {       
+        throw new NoSuchMethodError(localNoSuchMethodException.getMessage());     
+    }catch (ClassNotFoundException localClassNotFoundException)     {       
+        throw new NoClassDefFoundError(localClassNotFoundException.getMessage());     }   
+    } 
+} 
+</code></pre><p>从中我们可以看出动态生成的代理类是以    <code>$Proxy</code>为类名前缀，继承自<code>Proxy</code>，并且实现了<code>Proxy.newProxyInstance(…)</code>第二个参数传入的所有接口的类。<br>如果代理类实现的接口中存在非 public 接口，则其包名为该接口的包名，否则为com.sun.proxy。<br>其中的operateMethod1()、operateMethod2()、operateMethod3()函数都是直接交给h去处理，h在父类Proxy中定义为</p>
+<pre><code>protected InvocationHandler h; 
+</code></pre><p>即为Proxy.newProxyInstance(…)第三个参数。<br>所以InvocationHandler的子类 C 连接代理类 A 和委托类 B，它是代理类 A 的委托类，委托类 B 的代理类。</p>
+<h3 id="3-2生成动态代理类原理"><a href="#3-2生成动态代理类原理" class="headerlink" title="3.2生成动态代理类原理"></a>3.2生成动态代理类原理</h3><p>以下针对 Java 1.6 源码进行分析，动态代理类是在调用Proxy.newProxyInstance(…)函数时生成的。</p>
+<h4 id="（1）-newProjectInstance-…"><a href="#（1）-newProjectInstance-…" class="headerlink" title="（1） newProjectInstance(…)"></a>（1） newProjectInstance(…)</h4><pre><code>public static Object newProxyInstance(ClassLoader loader,  Class&lt;?&gt;[] interfaces, InvocationHandler h)     throws IllegalArgumentException {     
+
+if (h == null) {        
+    throw new NullPointerException();     
+ }     
+
+ /*      * Look up or generate the designated proxy class.      */     
+ Class cl = getProxyClass(loader, interfaces);      
+
+ /*      * Invoke its constructor with the designated invocation handler.      */     
+ try {         
+
+    Constructor cons = cl.getConstructor(constructorParams);         
+
+    return (Object) cons.newInstance(new Object[] { h });     
+ } catch (NoSuchMethodException e) {         
+    throw new InternalError(e.toString());     
+ } catch (IllegalAccessException e) {         
+    throw new InternalError(e.toString());    
+ } catch (InstantiationException e) {         
+    throw new InternalError(e.toString());     
+ } catch (InvocationTargetException e) {         
+    throw new InternalError(e.toString());     
+} 
+ } 
+</code></pre><h4 id="（2）getProxyClass-…"><a href="#（2）getProxyClass-…" class="headerlink" title="（2）getProxyClass(…)"></a>（2）getProxyClass(…)</h4><p>函数代码及解释如下(省略了)：</p>
+<p>函数主要包括三部分：</p>
+<ul>
+<li>入参 interfaces 检验，包含是否在入参指定的 ClassLoader 内、是否是 Interface、interfaces 中是否有重复</li>
+<li><p>以接口名对应的 List 为 key 查找代理类，如果结果为：</p>
+<ul>
+<li>弱引用，表示代理类已经在缓存中；</li>
+<li>pendingGenerationMarker 对象，表示代理类正在生成中，等待生成完成返回；</li>
+<li>null 表示不在缓存中且没有开始生成，添加标记到缓存中，继续生成代理类。</li>
+</ul>
+</li>
+<li><p>如果代理类不存在调用ProxyGenerator.generateProxyClass(…)生成代理类并存入缓存，通知在等待的缓存。</p>
+</li>
+</ul>
+<p>函数中几个注意的地方：</p>
+<ul>
+<li>代理类的缓存 key 为接口名对应的 List，接口顺序不同表示不同的 key 即不同的代理类。</li>
+<li>如果 interfaces 中存在非 public 的接口，则所有非 public 接口必须在同一包下面，后续生成的代理类也会在该包下面。</li>
+<li>代理类如果在 ClassLoader 中已经存在的情况没有做处理。</li>
+<li>可以开启 System Properties 的sun.misc.ProxyGenerator.saveGeneratedFiles开关，保存动态类到目的地址。</li>
+</ul>
+<p>Java 1.7 的实现略有不同，通过getProxyClass0(…)函数实现，实现中调用代理类的缓存，判断代理类在缓存中是否已经存在，存在直接返回，不存在则调用proxyClassCache的valueFactory属性进行动态生成，valueFactory的apply函数与上面的getProxyClass(…)函数逻辑类似。</p>
+<h2 id="4-使用场景"><a href="#4-使用场景" class="headerlink" title="4.使用场景"></a>4.使用场景</h2><h3 id="4-1J2EE-Web-开发中-Spring-的-AOP-面向切面编程-特性"><a href="#4-1J2EE-Web-开发中-Spring-的-AOP-面向切面编程-特性" class="headerlink" title="4.1J2EE Web 开发中 Spring 的 AOP(面向切面编程) 特性"></a>4.1J2EE Web 开发中 Spring 的 AOP(面向切面编程) 特性</h3><p>作用：目标函数之间解耦。</p>
+<p>比如在 Dao 中，每次数据库操作都需要开启事务，而且在操作的时候需要关注权限。一般写法是在 Dao 的每个函数中添加相应逻辑，造成代码冗余，耦合度高。<br>使用动态代理前伪代码如下：</p>
+<pre><code>Dao {    
+     insert() {        
+         判断是否有保存的权限；        
+         开启事务；         
+         插入；         
+         提交事务；     
+    }     
+
+     delete() {        
+         判断是否有删除的权限；         
+         开启事务；         
+         删除；         
+         提交事务；     
+      } 
+} 
+</code></pre><p>使用动态代理的伪代码如下：</p>
+<pre><code>// 使用动态代理，组合每个切面的函数，而每个切面只需要关注自己的逻辑就行，达到减少代码，松耦合的效果 
+invoke(Object proxy, Method method, Object[] args)                     throws Throwable {     
+    判断是否有权限；     
+    开启事务；    
+     Object ob = method.invoke(dao, args)；    
+     提交事务；     
+    return ob;  
+} 
+</code></pre><h3 id="4-2基于-REST-的-Android-端网络请求框架-Retrofit"><a href="#4-2基于-REST-的-Android-端网络请求框架-Retrofit" class="headerlink" title="4.2基于 REST 的 Android 端网络请求框架 Retrofit"></a>4.2基于 REST 的 Android 端网络请求框架 Retrofit</h3><p>作用：简化网络请求操作。</p>
+<p>一般情况下每个网络请求我们都需要调用一次HttpURLConnection或者HttpClient进行请求，或者像Volley一样丢进等待队列中，Retrofit 极大程度简化了这些操作，示例代码如下:</p>
+<pre><code>public interface GitHubService {  
+     @GET(&quot;/users/{user}/repos&quot;)  
+     List&lt;Repo&gt; listRepos(@Path(&quot;user&quot;) String user); 
+}  
+
+RestAdapter restAdapter = new RestAdapter.Builder()     
+    .setEndpoint(&quot;https://api.github.com&quot;) .build();  
+
+GitHubService service = restAdapter.create(GitHubService.class); 
+</code></pre><p>以后我们只需要直接调用:</p>
+<pre><code>List&lt;Repo&gt; repos = service.listRepos(&quot;octocat&quot;); 
+</code></pre><p>即可开始网络请求，Retrofit的原理就是基于动态代理，它同时用到了注解的原理，本文不做深入介绍，具体请等待Retrofit 源码解析完成。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/21/aop-demo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          关于AOP的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/21/javahttpclientinfo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java网络连接之HttpURLConnection与HttpClient 区别及联系</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

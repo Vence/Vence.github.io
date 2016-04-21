@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>关于Mybatis动态赋值的三种方式 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言在Mybatis经常会遇到sql语句中携带参数的问题，Mybatis提供了几种方式进行动态赋值，有些方式也是我在网上找寻无果后，查看源码所得的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Mybatis动态赋值的三种方式">
+<meta property="og:url" content="http://yoursite.com/2016/04/21/mybatis-parameter-info/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="前言在Mybatis经常会遇到sql语句中携带参数的问题，Mybatis提供了几种方式进行动态赋值，有些方式也是我在网上找寻无果后，查看源码所得的。">
+<meta property="og:updated_time" content="2016-04-21T04:42:50.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于Mybatis动态赋值的三种方式">
+<meta name="twitter:description" content="前言在Mybatis经常会遇到sql语句中携带参数的问题，Mybatis提供了几种方式进行动态赋值，有些方式也是我在网上找寻无果后，查看源码所得的。">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12px;">backbone</a> <a href="/tags/blog/" style="font-size: 12px;">blog</a> <a href="/tags/cluster/" style="font-size: 12px;">cluster</a> <a href="/tags/file/" style="font-size: 14px;">file</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 14px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 18px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/spring/" style="font-size: 16px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 16px;">web</a> <a href="/tags/webservice/" style="font-size: 12px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-mybatis-parameter-info" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/21/mybatis-parameter-info/" class="article-date">
+  	<time datetime="2016-04-21T02:50:30.000Z" itemprop="datePublished">2016-04-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于Mybatis动态赋值的三种方式
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Mybatis经常会遇到sql语句中携带参数的问题，Mybatis提供了几种方式进行动态赋值，有些方式也是我在网上找寻无果后，查看源码所得的。<br><a id="more"></a></p>
+<h2 id="动态赋值的三种方式"><a href="#动态赋值的三种方式" class="headerlink" title="动态赋值的三种方式"></a>动态赋值的三种方式</h2><h2 id="使用-parameter"><a href="#使用-parameter" class="headerlink" title="使用_parameter"></a>使用_parameter</h2><pre><code>public Integer test(String email );
+</code></pre><p>对应xml</p>
+<pre><code> &lt;select id=&quot;test&quot; resultType=&quot;java.lang.Integer&quot;&gt;  
+    SELECT count(*) from TEUser 
+    &lt;if test=&quot;_parameter !=null&quot;&gt;
+        where Email = #{0}
+    &lt;/if&gt;
+&lt;/select&gt;
+</code></pre><p>这种方式只能确保在一个参数的时候有效的，当只有一个参数的时候<code>_parameter</code>就代表是动态的参数；但是如果有多个参数的时候，<code>_paramter</code>的类型就变成了包装类型， 当两个参数都为null,<code>_paramter</code>也不会为null,所以此时判定是无效的。</p>
+<h2 id="使用Map"><a href="#使用Map" class="headerlink" title="使用Map"></a>使用Map</h2><p>这个是万能的使用方式，不过麻烦是，你必须将参数全部包装在map里面；<br>调用的时候要将参数包装进入Map</p>
+<pre><code>public Integer test(Map map);
+</code></pre><p>对应xml</p>
+<pre><code> &lt;select id=&quot;test&quot; resultType=&quot;java.lang.Integer&quot;&gt;  
+    SELECT count(*) from TEUser 
+    &lt;if test=&quot;email !=null&quot;&gt;
+        where Email = #{0}
+    &lt;/if&gt;
+&lt;/select&gt;
+</code></pre><p>此时要保证map中有key 为 <code>email</code>的值。</p>
+<h2 id="使用param1-param2…"><a href="#使用param1-param2…" class="headerlink" title="使用param1,param2…"></a>使用param1,param2…</h2><p>这个是第一种方式的扩展，这种方式，就能轻松获取指定顺序的参数， _param后面跟的就是参数的序号，不过需要注意的是 与mybatis的参数<code>#{0}</code>从0开始排序不同， _param是从1开始排序的，<br>也就是说你要取第一个参数应该用 <code>_param1</code> ;</p>
+<pre><code>public Integer test(String email , String name);
+</code></pre><p>对应xml</p>
+<pre><code> &lt;select id=&quot;test&quot; resultType=&quot;java.lang.Integer&quot;&gt;  
+    SELECT count(*) from TEUser 
+    &lt;if test=&quot;param1 !=null&quot;&gt;
+        where Email = #{0}
+    &lt;/if&gt;
+&lt;/select&gt;
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/21/pullword/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          中文分词
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/21/aop-demo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于AOP的使用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
