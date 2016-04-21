@@ -4,17 +4,33 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Tag: spring | 王文路的博客</title>
+  <title>Spring中使用mysql数据库的方法 | 王文路的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="王文路的博客">
-<meta property="og:url" content="http://yoursite.com/tags/spring/index.html">
+  <meta name="description" content="需要基本的Maven依赖&amp;lt;!-- jbpc驱动 --&amp;gt;
+&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;commons-dbcp&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;commons-dbcp&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;1.4&amp;lt;/version&amp;gt;
+&amp;lt;/d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring中使用mysql数据库的方法">
+<meta property="og:url" content="http://yoursite.com/2016/04/21/springwithmysql/index.html">
 <meta property="og:site_name" content="王文路的博客">
-<meta property="og:description">
+<meta property="og:description" content="需要基本的Maven依赖&amp;lt;!-- jbpc驱动 --&amp;gt;
+&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;commons-dbcp&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;commons-dbcp&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;1.4&amp;lt;/version&amp;gt;
+&amp;lt;/d">
+<meta property="og:updated_time" content="2016-04-21T06:12:05.680Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="王文路的博客">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Spring中使用mysql数据库的方法">
+<meta name="twitter:description" content="需要基本的Maven依赖&amp;lt;!-- jbpc驱动 --&amp;gt;
+&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;commons-dbcp&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;commons-dbcp&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;1.4&amp;lt;/version&amp;gt;
+&amp;lt;/d">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -175,187 +191,127 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-springwithmysql" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/04/21/springwithmysql/" class="archive-article-date">
-  	<time datetime="2016-04-21T06:10:33.000Z" itemprop="datePublished">Apr 21</time>
+    <div class="article-meta">
+      <a href="/2016/04/21/springwithmysql/" class="article-date">
+  	<time datetime="2016-04-21T06:10:33.000Z" itemprop="datePublished">2016-04-21</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/21/springwithmysql/">Spring中使用mysql数据库的方法</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring中使用mysql数据库的方法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+      </div>
       
-        </div></section>
+    
+    <div class="article-entry" itemprop="articleBody">
       
+        <h2 id="需要基本的Maven依赖"><a href="#需要基本的Maven依赖" class="headerlink" title="需要基本的Maven依赖"></a>需要基本的Maven依赖</h2><pre><code>&lt;!-- jbpc驱动 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-dbcp&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-dbcp&lt;/artifactId&gt;
+    &lt;version&gt;1.4&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- mysql --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.37&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><a id="more"></a>
+<h2 id="Spring配置"><a href="#Spring配置" class="headerlink" title="Spring配置"></a>Spring配置</h2><pre><code>&lt;!-- 连接数据库 --&gt;
+&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot; /&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;&gt;
+    &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;
+    &lt;/property&gt;
+    &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/teworks&quot; &gt;
+    &lt;/property&gt;
+    &lt;property name=&quot;username&quot; value=&quot;root&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;password&quot; value=&quot;123&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- ***事务** --&gt;
+&lt;bean name=&quot;transactionManager&quot;
+    class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+&lt;tx:advice id=&quot;userTxAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+    &lt;tx:attributes&gt;
+        &lt;tx:method name=&quot;delete*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;
+            rollback-for=&quot;java.lang.Exception&quot; no-rollback-for=&quot;java.lang.RuntimeException&quot; /&gt;
+        &lt;tx:method name=&quot;insert*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;
+            rollback-for=&quot;java.lang.RuntimeException&quot; /&gt;
+        &lt;tx:method name=&quot;update*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;
+            rollback-for=&quot;java.lang.Exception&quot; /&gt;
+
+        &lt;tx:method name=&quot;add*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;
+            rollback-for=&quot;java.lang.Exception&quot; /&gt;                
+        &lt;tx:method name=&quot;modify*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;
+            rollback-for=&quot;java.lang.Exception&quot; /&gt;    
+
+        &lt;tx:method name=&quot;find*&quot; propagation=&quot;SUPPORTS&quot; /&gt;
+        &lt;tx:method name=&quot;get*&quot; propagation=&quot;SUPPORTS&quot; /&gt;
+        &lt;tx:method name=&quot;select*&quot; propagation=&quot;SUPPORTS&quot; /&gt;
+
+        &lt;tx:method name=&quot;*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;false&quot;
+            rollback-for=&quot;java.lang.Exception&quot; /&gt;
+    &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+</code></pre><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><blockquote>
+<p>这是基本的数据库连接方式　，需要结合其他ＯＲＭ框架进行访问，比如Hibernate 和 Mybatis等等，关于Hibernate和Mybatis究竟需要哪些包以及如何配置，请查阅其他资料。</p>
+</blockquote>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
+    </div>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/05/12/springmvc-permission/" class="archive-article-date">
-  	<time datetime="2015-05-12T13:47:39.000Z" itemprop="datePublished">May 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/05/12/springmvc-permission/">基于Spring实现用户权限管理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/permission/">permission</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/21/pullword/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">中文分词</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/05/12/springmvc-avoidduplicate/" class="archive-article-date">
-  	<time datetime="2015-05-12T13:47:02.000Z" itemprop="datePublished">May 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/05/12/springmvc-avoidduplicate/">防止表单重复提交</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/05/12/springmvc-filedownload/" class="archive-article-date">
-  	<time datetime="2015-05-12T04:47:22.000Z" itemprop="datePublished">May 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/05/12/springmvc-filedownload/">SpringMVC实现文件下载</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/file/">file</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/05/12/springmvc-multipartfile/" class="archive-article-date">
-  	<time datetime="2015-05-12T01:46:21.000Z" itemprop="datePublished">May 12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/05/12/springmvc-multipartfile/">基于MultipartFile实现多文件上传</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/file/">file</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 </div>
       <footer id="footer">
@@ -381,9 +337,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
