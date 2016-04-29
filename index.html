@@ -177,6 +177,70 @@
 
       <div class="body-wrap">
   
+    <article id="post-javamethod-messageformat" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/29/javamethod-messageformat/" class="article-date">
+  	<time datetime="2016-04-29T08:14:15.000Z" itemprop="datePublished">2016-04-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/29/javamethod-messageformat/">Java中MessageFormat的使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用于字符串替换，你还在用以下的这种方法吗？</p>
+<pre><code>String.format(String format, Object... args)
+</code></pre><p>这是String类型的静态方法，但是除此之外，JDK提供了更好用的字符串替换方法，就是</p>
+<pre><code>MessageFormat.format(String pattern, Object ... arguments)
+</code></pre><p>MessageFormat本身与语言环境无关，而与用户提供给MessageFormat的模式和用于已插入参数的子格式模式有关，以生成适用于不同语言环境的消息。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/04/29/javamethod-messageformat/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-mysql-errorr" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -739,67 +803,6 @@ where Id =
       
         <p class="article-more-link">
           <a  href="/2016/04/21/javahttpclientinfo/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-html2word" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/21/html2word/" class="article-date">
-  	<time datetime="2016-04-21T01:10:30.000Z" itemprop="datePublished">2016-04-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/21/html2word/">Html不失真转换成Word文件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>内容不失真转换成word文件，需要先将内容转换成html格式，然后利用<strong>POI</strong>对html直接转换成word文件，这里不失真的意思是指：对于html中的字体，字号，样式和图片不失真地转换到word中。</p>
-<p><strong><a href="https://github.com/Vence/DailyTools">Github源码地址</a></strong><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/04/21/html2word/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

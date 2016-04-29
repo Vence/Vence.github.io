@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Java中MessageFormat的使用 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="用于字符串替换，你还在用以下的这种方法吗？
+String.format(String format, Object... args)
+这是String类型的静态方法，但是除此之外，JDK提供了更好用的字符串替换方法，就是
+MessageFormat.format(String pattern, Object ... arguments)
+MessageFormat本身与语言环境无关，而与用户提供给">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中MessageFormat的使用">
+<meta property="og:url" content="http://yoursite.com/2016/04/29/javamethod-messageformat/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="用于字符串替换，你还在用以下的这种方法吗？
+String.format(String format, Object... args)
+这是String类型的静态方法，但是除此之外，JDK提供了更好用的字符串替换方法，就是
+MessageFormat.format(String pattern, Object ... arguments)
+MessageFormat本身与语言环境无关，而与用户提供给">
+<meta property="og:updated_time" content="2016-04-29T08:32:18.150Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java中MessageFormat的使用">
+<meta name="twitter:description" content="用于字符串替换，你还在用以下的这种方法吗？
+String.format(String format, Object... args)
+这是String类型的静态方法，但是除此之外，JDK提供了更好用的字符串替换方法，就是
+MessageFormat.format(String pattern, Object ... arguments)
+MessageFormat本身与语言环境无关，而与用户提供给">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12px;">backbone</a> <a href="/tags/blog/" style="font-size: 14px;">blog</a> <a href="/tags/cluster/" style="font-size: 12px;">cluster</a> <a href="/tags/file/" style="font-size: 14px;">file</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 14px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 18px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/retrofit/" style="font-size: 10px;">retrofit</a> <a href="/tags/spring/" style="font-size: 18px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 16px;">web</a> <a href="/tags/webservice/" style="font-size: 12px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-javamethod-messageformat" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/29/javamethod-messageformat/" class="article-date">
+  	<time datetime="2016-04-29T08:14:15.000Z" itemprop="datePublished">2016-04-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java中MessageFormat的使用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用于字符串替换，你还在用以下的这种方法吗？</p>
+<pre><code>String.format(String format, Object... args)
+</code></pre><p>这是String类型的静态方法，但是除此之外，JDK提供了更好用的字符串替换方法，就是</p>
+<pre><code>MessageFormat.format(String pattern, Object ... arguments)
+</code></pre><p>MessageFormat本身与语言环境无关，而与用户提供给MessageFormat的模式和用于已插入参数的子格式模式有关，以生成适用于不同语言环境的消息。<br><a id="more"></a></p>
+<h3 id="MessageFormat模式（主要部分）："><a href="#MessageFormat模式（主要部分）：" class="headerlink" title="MessageFormat模式（主要部分）："></a>MessageFormat模式（主要部分）：</h3><pre><code>FormatElement:
+         { ArgumentIndex }：是从0开始的入参位置索引。
+         { ArgumentIndex , FormatType }
+         { ArgumentIndex , FormatType , FormatStyle }
+
+ FormatType: ：指定使用不同的Format子类对入参进行格式化处理。值范围如下：
+         number：调用NumberFormat进行格式化
+         date：调用DateFormat进行格式化
+         time：调用DateFormat进行格式化
+         choice：调用ChoiceFormat进行格式化
+
+ FormatStyle:：设置FormatType中使用的格式化样式。值范围如下：
+         short
+         medium
+         long
+         full
+         integer
+         currency
+         percent
+         SubformatPattern (子格式模式，形如#.##)
+</code></pre><p>以str为例，在这个字符串中：</p>
+<pre><code>1. {0} 和 {1,number,short} 和 {2,number,#.#}; 都属于FormatElement，0,1,2是ArgumentIndex。
+2. {1,number,short} 里面的number属于FormatType，short则属于FormatStyle。
+3. {1,number,#.#} 里面的#.#就属于子格式模式。
+</code></pre><p>指定FormatType和FormatStyle是为了生成日期格式的值、不同精度的数字、百分比类型等等。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><blockquote>
+<p><strong>1</strong>、ArgumentIndex必须是非负整数，它的个数不只限于0到9这10个，它可以用0到9的数字组成，因此可以有好多个，如：</p>
+</blockquote>
+<pre><code>String msg = &quot;{0}{1}{2}{3}{4}{5}{6}{7}{8}&quot;;  
+Object [] array = new Object[]{&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,&quot;I&quot;,};         
+String value = MessageFormat.format(msg, array);  
+
+System.out.println(value);  // 输出：ABCDEFGHI  
+</code></pre><blockquote>
+<p><strong>2</strong>、格式化字符串时，两个单引号才表示一个单引号，单个单引号会被省略，除非中文单引号不会被省略，如：</p>
+</blockquote>
+<pre><code>String value = MessageFormat.format(&quot;oh, {0} is &apos;a&apos; pig&quot;, &quot;ZhangSan&quot;);  
+
+System.out.println(value);  // 输出：oh, ZhangSan is a pig  
+</code></pre><p>给字母a加上单引号，如：</p>
+<pre><code>String value = MessageFormat.format(&quot;oh, {0} is &apos;&apos;a&apos;&apos; pig&quot;, &quot;ZhangSan&quot;);
+System.out.println(value);  // 输出：oh, ZhangSan is &apos;a&apos; pig
+</code></pre><p>如果需要显示双引号要进行转移，比如：String msg = “oh, {0} is \”a\” pig”;</p>
+<blockquote>
+<p><strong>3</strong>、单引号会使其后面的占位符均失效，导致直接输出占位符。</p>
+</blockquote>
+<pre><code>MessageFormat.format(&quot;{0}{1}&quot;, 1, 2); // 结果12
+MessageFormat.format(&quot;&apos;{0}{1}&quot;, 1, 2); // 结果{0}{1}
+MessageFormat.format(&quot;&apos;{0}&apos;-{1}&quot;, 1, 2); // 结果{0}-2
+</code></pre><p>使用双引号和两个单引号没有关系，比如</p>
+<pre><code>String value = MessageFormat.format(&quot;oh, &apos;&apos;{0}&apos;&apos; is a pig&quot;, &quot;ZhangSan&quot;);
+System.out.println(value);  // 输出：oh, &apos;ZhangSan&apos; is a pig
+</code></pre><p>又比如，使用子格式模式，多了一个单引号：</p>
+<pre><code>String value = MessageFormat.format(&quot;oh, {0,number,#.#} is good num&quot;, Double.valueOf(&quot;3.1415&quot;));
+System.out.println(value);  // 输出：oh, 3.1 is good num
+</code></pre><blockquote>
+<p><strong>4</strong>、无论是有引号字符串还是无引号字符串，左花括号都是不支持的，如：</p>
+</blockquote>
+<pre><code>String value = MessageFormat.format(&quot;oh, } is good num&quot;, Double.valueOf(&quot;3.1415&quot;));
+System.out.println(value);  // 输出：oh, } is good num
+</code></pre><p>如果使用左花括号会出现异常</p>
+<pre><code>String value = MessageFormat.format(&quot;oh, { is good num&quot;, Double.valueOf(&quot;3.1415&quot;));
+System.out.println(value);  // java.lang.IllegalArgumentException: Unmatched braces in the pattern.
+</code></pre><p>因此要使用到左花括号需要使用单引号配合使用<br>MessageFormat.format(“‘{‘{0}}”, “X-rapido”); // {X-rapido}<br>还有一个有趣的现象，如果出现两个或2个以上左花括号，就会出现分割字符串，但是右花括号就没问题，虽然没有任何意义，实际应用我们也用不到</p>
+<pre><code>String value = MessageFormat.format(&quot;oh, {{ is good num", "d");
+	System.out.println(value);  // oh, 
+
+	String value = MessageFormat.format("oh, }} is good num&quot;, &quot;d&quot;);
+System.out.println(value);  // oh, }} is good num 
+</code></pre><blockquote>
+<p><strong>5</strong>、关于MessageFormat.format方法：<br>每调用一次MessageFormat.format方法，都会新创建MessageFormat的一个实例，相当于MessageFormat只使用了一次。MessageFormat类的format方法如下：</p>
+</blockquote>
+<pre><code>public static String format(String pattern, Object ... arguments)   
+{  
+    MessageFormat temp = new MessageFormat(pattern);  
+    return temp.format(arguments);  
+}  
+</code></pre><p>  因此若要多次格式同一个模式的字符串，那么创建一个MessageFormat实例在执行格式化操作比较好些</p>
+<pre><code>String message = &quot;oh, {0} is a pig&quot;;  
+MessageFormat messageFormat = new MessageFormat(message);  
+Object[] array = new Object[]{&quot;ZhangSan&quot;};  
+String value = messageFormat.format(array);  
+
+System.out.println(value); 
+</code></pre><p>关于MessageFormat的详细资料请参阅JAVA文档：<a href="http://docs.oracle.com/javase/7/docs/api/java/text/MessageFormat.html" target="_blank" rel="external">http://docs.oracle.com/javase/7/docs/api/java/text/MessageFormat.html</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/29/mysql-errorr/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mysql报错ERROR 1093</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
