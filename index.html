@@ -205,59 +205,7 @@
       
         <h2 id="1．确认服务器处于安全的状态"><a href="#1．确认服务器处于安全的状态" class="headerlink" title="1．确认服务器处于安全的状态"></a>1．确认服务器处于安全的状态</h2><p>也就是没有人能够任意地连接MySQL数据库。<br>因为在重新设置MySQL的root密码的期间，MySQL数据库完全出于没有密码保护的状态下，其他的用户也可以任意地登录和修改MySQL的信息。可以采用将MySQL对外的端口封闭，并且停止Apache以及所有的用户进程的方法实现服务器的准安全状态。最安全的状态是到服务器的Console上面操作，并且拔掉网线。</p>
 <h2 id="2．修改MySQL的登录设置："><a href="#2．修改MySQL的登录设置：" class="headerlink" title="2．修改MySQL的登录设置："></a>2．修改MySQL的登录设置：</h2><pre><code>[root@CentOS ~]# vi /etc/my.cnf
-</code></pre><p>在[mysqld]的段中加上一句：</p>
-<pre><code>skip-grant-tables
-</code></pre><p>例如：</p>
-<pre><code>[mysqld]
-skip-grant-tables
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-user=mysql
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=
-</code></pre><p>保存并且退出vi(ESC后输入<code>:wq</code>，表示保存并退出)。</p>
-<h2 id="3．重新启动mysqld"><a href="#3．重新启动mysqld" class="headerlink" title="3．重新启动mysqld"></a>3．重新启动mysqld</h2><pre><code>[root@CentOS ~]# service mysqld restart
-Stopping mysqld:                                           [  OK  ]
-Starting mysqld:                                           [  OK  ]
-</code></pre><h2 id="4．登录并修改MySQL的root密码"><a href="#4．登录并修改MySQL的root密码" class="headerlink" title="4．登录并修改MySQL的root密码"></a>4．登录并修改MySQL的root密码</h2><pre><code>[root@CentOS ~]# /usr/bin/mysql
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 2
-Server version: 5.1.69 Source distribution
-
-Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.
-
-mysql&gt; USE mysql;
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
-
-Database changed
-mysql&gt; UPDATE user SET Password = password ( &apos;NewPassword&apos; ) WHERE User = &apos;root&apos; ;
-Query OK, 3 rows affected (0.00 sec)
-Rows matched: 3  Changed: 3  Warnings: 0
-
-mysql&gt; flush privileges;
-Query OK, 0 rows affected (0.00 sec)
-
-mysql&gt; quit
-Bye
-</code></pre><p>这里需要说明的是，由于mysql版本不同，可能user表的字段也是不相同的，比如在5.7.2版本中，验证密码字段不是叫<code>password</code> 而是 <code>authentication_string</code> ，为保险起见，可以先查看字段：</p>
-<pre><code>select * from user where user = &apos;root&apos;
-</code></pre><p>在表中看到了值类似如下的格式</p>
-<pre><code>*3E285BD7D12C3AF6836BD9D20C763B80E23FB16D
-</code></pre><p>那么该列就是密码了，确定列之后在执行修改语句，特别要主要的是密码需要用password函数进行加密。</p>
-<h2 id="5．将MySQL的登录设置修改回来"><a href="#5．将MySQL的登录设置修改回来" class="headerlink" title="5．将MySQL的登录设置修改回来"></a>5．将MySQL的登录设置修改回来</h2><pre><code>[root@CentOS ~]# vi /etc/my.cnf
-</code></pre><p>将刚才在[mysqld]的段中加上的<code>skip-grant-tables</code>删除<br>保存并且退出vi。</p>
-<h2 id="6．重新启动mysqld"><a href="#6．重新启动mysqld" class="headerlink" title="6．重新启动mysqld"></a>6．重新启动mysqld</h2><pre><code>[root@CentOS ~]# service mysqld restart
-Stopping mysqld:                                           [  OK  ]
-Starting mysqld:                                           [  OK  ]
-</code></pre><p>看看这样是不是就解决问题了呢！</p>
-
+</code></pre>
       
     </div>
     
@@ -273,6 +221,10 @@ Starting mysqld:                                           [  OK  ]
 	<a class="article-category-link" href="/categories/linus/">linus</a>
 	</div>
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/05/13/centos-mysql-forgotpwd/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -332,6 +284,10 @@ Starting mysqld:                                           [  OK  ]
 	</div>
 
       
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
       
         <p class="article-more-link">
           <a  href="/2016/04/29/javamethod-messageformat/#more">more >></a>
@@ -843,6 +799,10 @@ where Id =
 	</div>
 
       
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
       
         <p class="article-more-link">
           <a  href="/2016/04/21/javaproxy/#more">more >></a>

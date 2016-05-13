@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="1．确认服务器处于安全的状态也就是没有人能够任意地连接MySQL数据库。因为在重新设置MySQL的root密码的期间，MySQL数据库完全出于没有密码保护的状态下，其他的用户也可以任意地登录和修改MySQL的信息。可以采用将MySQL对外的端口封闭，并且停止Apache以及所有的用户进程的方法实现服务器的准安全状态。最安全的状态是到服务器的Console上面操作，并且拔掉网线。
 2．修改MySQL">
-<meta property="og:updated_time" content="2016-05-13T12:35:40.317Z">
+<meta property="og:updated_time" content="2016-05-13T12:38:06.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos下忘记mysql密码的解决方案">
 <meta name="twitter:description" content="1．确认服务器处于安全的状态也就是没有人能够任意地连接MySQL数据库。因为在重新设置MySQL的root密码的期间，MySQL数据库完全出于没有密码保护的状态下，其他的用户也可以任意地登录和修改MySQL的信息。可以采用将MySQL对外的端口封闭，并且停止Apache以及所有的用户进程的方法实现服务器的准安全状态。最安全的状态是到服务器的Console上面操作，并且拔掉网线。
@@ -224,7 +224,8 @@
       
         <h2 id="1．确认服务器处于安全的状态"><a href="#1．确认服务器处于安全的状态" class="headerlink" title="1．确认服务器处于安全的状态"></a>1．确认服务器处于安全的状态</h2><p>也就是没有人能够任意地连接MySQL数据库。<br>因为在重新设置MySQL的root密码的期间，MySQL数据库完全出于没有密码保护的状态下，其他的用户也可以任意地登录和修改MySQL的信息。可以采用将MySQL对外的端口封闭，并且停止Apache以及所有的用户进程的方法实现服务器的准安全状态。最安全的状态是到服务器的Console上面操作，并且拔掉网线。</p>
 <h2 id="2．修改MySQL的登录设置："><a href="#2．修改MySQL的登录设置：" class="headerlink" title="2．修改MySQL的登录设置："></a>2．修改MySQL的登录设置：</h2><pre><code>[root@CentOS ~]# vi /etc/my.cnf
-</code></pre><p>在[mysqld]的段中加上一句：</p>
+</code></pre><a id="more"></a>
+<p>在[mysqld]的段中加上一句：</p>
 <pre><code>skip-grant-tables
 </code></pre><p>例如：</p>
 <pre><code>[mysqld]
