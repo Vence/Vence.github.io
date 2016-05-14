@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Centos使用过程的解决方案一 | 王文路的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="查看ip地址[wwl@localhost ~]$ ifconfig -a
+eno16777736: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1500
+        inet 192.168.72.131  netmask 255.255.255.0  broadcast 192.168.72.255
+        inet6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos使用过程的解决方案一">
+<meta property="og:url" content="http://yoursite.com/2016/05/14/centos-idea/index.html">
+<meta property="og:site_name" content="王文路的博客">
+<meta property="og:description" content="查看ip地址[wwl@localhost ~]$ ifconfig -a
+eno16777736: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1500
+        inet 192.168.72.131  netmask 255.255.255.0  broadcast 192.168.72.255
+        inet6">
+<meta property="og:image" content="http://i.imgur.com/Sy4vZj8.png">
+<meta property="og:image" content="http://i.imgur.com/laYLbPT.png">
+<meta property="og:updated_time" content="2016-05-14T03:07:53.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos使用过程的解决方案一">
+<meta name="twitter:description" content="查看ip地址[wwl@localhost ~]$ ifconfig -a
+eno16777736: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1500
+        inet 192.168.72.131  netmask 255.255.255.0  broadcast 192.168.72.255
+        inet6">
+<meta name="twitter:image" content="http://i.imgur.com/Sy4vZj8.png">
+  
+    <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">王文路</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12px;">backbone</a> <a href="/tags/blog/" style="font-size: 14px;">blog</a> <a href="/tags/cluster/" style="font-size: 12px;">cluster</a> <a href="/tags/file/" style="font-size: 14px;">file</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linus/" style="font-size: 12px;">linus</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 14px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 18px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/retrofit/" style="font-size: 10px;">retrofit</a> <a href="/tags/spring/" style="font-size: 18px;">spring</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 16px;">web</a> <a href="/tags/webservice/" style="font-size: 12px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12px;">压力测试</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">生命就像那空中白色的羽毛，或迎风搏击，或随风飘荡，或翱翔蓝天，或坠入深渊...</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">王文路</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://i2.piimg.com/62a5ce5907610d14.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">王文路</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">自弃者扶不起，自强者击不倒</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/Vence" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/my0love" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-centos-idea" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/14/centos-idea/" class="article-date">
+  	<time datetime="2016-05-14T03:05:19.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Centos使用过程的解决方案一
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+		<div class="busuanzi-read-num">
+			<span id="busuanzi_container_site_pv">阅读次数:<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>次</span>
+		</div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="查看ip地址"><a href="#查看ip地址" class="headerlink" title="查看ip地址"></a>查看ip地址</h2><pre><code>[wwl@localhost ~]$ ifconfig -a
+eno16777736: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 192.168.72.131  netmask 255.255.255.0  broadcast 192.168.72.255
+        inet6 fe80::20c:29ff:fe9e:b9f7  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 00:0c:29:9e:b9:f7  txqueuelen 1000  (Ethernet)
+        RX packets 156314  bytes 223675777 (213.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 75284  bytes 4659766 (4.4 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 0  (Local Loopback)
+        RX packets 180  bytes 57334 (55.9 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 180  bytes 57334 (55.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+virbr0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500
+        inet 192.168.122.1  netmask 255.255.255.0  broadcast 192.168.122.255
+        ether 00:00:00:00:00:00  txqueuelen 0  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+virbr0-nic: flags=4098&lt;BROADCAST,MULTICAST&gt;  mtu 1500
+        ether 52:54:00:6c:8f:7b  txqueuelen 500  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre><p>中间的<code>192.168.72.131</code>就是本机的ip地址。<br><a id="more"></a></p>
+<h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>命令格式：</p>
+<pre><code>ping [-dfnqrRv][-c 发送次数][-i 间隔秒数][-I (大写i)网络界面][-l (小写L)前置载入][-p 范本样式] [-s 数据包大小][-t 存活数值][主机名或IP地址]
+</code></pre><p>参数说明：</p>
+<p>【-c count】指定要被发送(或接收)的回送信号请求的数目，由Count变量指出。</p>
+<p>【-w timeout】 这个选项仅和-c 选项一起才能起作用。它使 ping 命令以最长的超时时间去等待应答(发送最后一个信息包后)。默认超时时间为4000ms(4s)</p>
+<p>【-d】使用Socket的SO_DEBUG功能。</p>
+<p>【-D】这个选项引起 ICMP ECHO_REPLY 信息包向标准输出的十六进制转储。</p>
+<p>【-f】 指定flood-ping选项。-f标志“倾倒”或输出信息包，在它们回来时或每秒100次，选择较快一个。每一次发送ECHO_REQUEST，都打印 一个句号，而每接收到一个ECHO_REPLY信号，就打印一个退格。这就提供了一种对多少信息包被丢弃的信息的快速显示。仅仅root用户可以使用这个 选项。</p>
+<p>注：这在网络上将非常困难，必须小心使用。Flood ping命令仅仅root用户可 以使用。-f标志与-i Wait标志不兼容.</p>
+<p>【-n】只输出数值。</p>
+<p>-r】忽略路由表，直接将数据包送到远端主机上。通常是查看本机的网络接口是否有问题。</p>
+<p>【-R】记录路由过程。-R标志包括ECHO_REQUEST信息包中的 RECORD_ROUTE选项，并且显示返回信息包上的路由缓冲。</p>
+<p>【-v】 详细显示指令的执行过程。</p>
+<p>【-i wait】在每个信息包发送之间等待被Wait变量指定的时间(秒数)。缺省值是在每个信息包发送之间等待1秒。这个选项与-f标志不兼容。</p>
+<p>【-Ia.b.c.d】指定被a.b.c.d标明的接口将被用于向外的IPv4多点广播。-I标志是大写的i。</p>
+<p>【-lPreload】在进入正常行为模式(每秒1个)前尽快发送Preload变量指定数量的信息包。-l标志是小写的L。</p>
+<p>【 -L】对多点广播ping命令禁用本地回送。</p>
+<p>【-pPattern】指定用多达16个“填充”字节去填充你发送的信息包。这有利于诊断网络上依赖数据的问题。例如“-p ff”全部用1填充信息包。</p>
+<p>【-q】不显示任何传送封包的信息，只显示最后的结果。</p>
+<p>【-spacketsize】 指定发送的数据字节数，预设值是56，加上8字节的ICMP头，一共是64ICMP数据字节。</p>
+<p>【-Shostname/IP addr】将IP地址用作发出的ping信息包中的源地址。在具有不止一个IP地址的主机上，可以使用-S标志来强制源地址为除了软件包在其上发送的接口 的IP地址外的任何地址。如果IP地址不是以下机器接口地址之一，则返 回错误并且不进行任何发送。</p>
+<p>【-ttll】 设置存活数值TTL的大小。</p>
+<p>【-ointerface】指出interface将被用于向外的IPv6多点广播。接口以“en0”，“tr0”等的形式指定。</p>
+<h2 id="开启apache"><a href="#开启apache" class="headerlink" title="开启apache"></a>开启apache</h2><p>使用以下命令：</p>
+<pre><code>service httpd start 
+</code></pre><p>关闭对应就是</p>
+<pre><code>service httpd stop
+</code></pre><p>重启就是 </p>
+<pre><code>service httpd restart
+</code></pre><p>开启apache后就可以在浏览器中访问了，输入    <code>http://localhost</code> 或者输入 ip地址 <code>http://192.168.72.131</code><br>就会看到如下界面<br><img src="http://i.imgur.com/Sy4vZj8.png" alt=""></p>
+<p>在其他机器中输入ip同样可以访问，如果访问不了，首先ping一下IP地址，如果ping通了，那么很可能是centos的防火墙没关闭，使用如下命令关闭防火墙：</p>
+<pre><code>systemctl start  httpd.service
+</code></pre><p>对应关闭就是</p>
+<pre><code>systemctl stop  httpd.service
+</code></pre><p>这时候应该就可以访问了</p>
+<h2 id="开启mysql"><a href="#开启mysql" class="headerlink" title="开启mysql"></a>开启mysql</h2><p>使用如下命令开启</p>
+<pre><code>service mysqld start
+</code></pre><p>关闭就是：</p>
+<pre><code>service mysqld stop
+</code></pre><h2 id="使用远程访问centos的mysql"><a href="#使用远程访问centos的mysql" class="headerlink" title="使用远程访问centos的mysql"></a>使用远程访问centos的mysql</h2><p>mysql默认的用户Host是localhost，也就是只有本机的用户才能访问mysql。</p>
+<p>可以使用如下方式修改user的使用host：</p>
+<pre><code>[wwl@localhost ~]$ mysql -uroot -proot 
+</code></pre><p>以上的-u后面的是用户名，-p后面的是密码，如果忘记密码了请参考我的另外一篇日志<a href="/2016/05/13/centos-mysql-forgotpwd/">《Centos下忘记mysql密码的解决方案》</a>。</p>
+<p>然后修改用户的host：</p>
+<pre><code>mysql&gt;update user set Host =&apos;%&apos; where Name = &apos;root&apos;
+</code></pre><p>这时候用其他的电脑远程访问，我这里使用的HeidiSql访问的，设置centos系统的Ip地址，mysql用户名和密码，如下图</p>
+<p><img src="http://i.imgur.com/laYLbPT.png" alt=""></p>
+<p>如果提示</p>
+<pre><code>MYSQL ERROR 1862 (HY000): Your password has expired.
+</code></pre><p>说明你的mysql密码过期了，mysql处于安全考虑默认会定期更新一下密码，这时候只要你修改一下密码即可。</p>
+<pre><code>mysql&gt;mysql urrot -proot
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 7
+Server version: 5.7.12
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.
+
+mysql&gt; set password=password(&apos;123&apos;);
+Query OK, 0 rows affected, 1 warning (0.22 sec)
+</code></pre><p>当然出了这种方法，你还可以更改user的密码过期时间为更长时间。</p>
+<p>更新过后，这时候用HeidiSQL就能连接上了</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/14/centos-packagemanager/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Centos常用包管理命令</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 王文路
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span>次</span>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
