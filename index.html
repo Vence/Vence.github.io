@@ -177,6 +177,70 @@
 
       <div class="body-wrap">
   
+    <article id="post-threadlocal-info" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/28/threadlocal-info/" class="article-date">
+  	<time datetime="2016-05-28T06:01:39.000Z" itemprop="datePublished">2016-05-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/28/threadlocal-info/">深入理解ThreadLocal</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="ThreadLocal概述"><a href="#ThreadLocal概述" class="headerlink" title="ThreadLocal概述"></a>ThreadLocal概述</h2><p>学习JDK中的类，首先看下JDK API对此类的描述，描述如下：<br>该类提供了线程局部 (thread-local) 变量。这些变量不同于它们的普通对应物，因为访问某个变量（通过其 get 或 set 方法）的每个线程都有自己的局部变量，它独立于变量的初始化副本。<strong>ThreadLocal其实就是一个工具类，用来操作线程局部变量，ThreadLocal 实例通常是类中的 private static 字段</strong>。它们希望将状态与某一个线程（例如，用户 ID 或事务 ID）相关联。 例如，以下类生成对每个线程唯一的局部标识符。线程 ID 是在第一次调用<code>UniqueThreadIdGenerator.getCurrentThreadId()</code>时分配的，在后续调用中不会更改。</p>
+<p>其实ThreadLocal并非是一个线程的本地实现版本，它并不是一个Thread，而是threadlocalvariable(线程局部变量)。也许把它命名为ThreadLocalVar更加合适。线程局部变量(ThreadLocal)其实的功用非常简单，就是为每一个使用该变量的线程都提供一个变量值的副本，是Java中一种较为特殊的线程绑定机制，是每一个线程都可以独立地改变自己的副本，而不会和其它线程的副本冲突。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/05/28/threadlocal-info/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-centos-idea" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -762,65 +826,6 @@ where Id =
       
         <p class="article-more-link">
           <a  href="/2016/04/21/pullword/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mybatis-parameter-info" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/21/mybatis-parameter-info/" class="article-date">
-  	<time datetime="2016-04-21T02:50:30.000Z" itemprop="datePublished">2016-04-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/21/mybatis-parameter-info/">关于Mybatis动态赋值的三种方式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Mybatis经常会遇到sql语句中携带参数的问题，Mybatis提供了几种方式进行动态赋值，有些方式也是我在网上找寻无果后，查看源码所得的。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li></ul>
-	</div>
-
-      
-      
-        <p class="article-more-link">
-          <a  href="/2016/04/21/mybatis-parameter-info/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
