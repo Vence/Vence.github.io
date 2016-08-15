@@ -28,7 +28,7 @@
 但结果偏偏是：
 用户名称：${dynaForm.map.username }&amp;lt;br&amp;gt;
 年龄：">
-<meta property="og:updated_time" content="2016-08-15T01:43:23.649Z">
+<meta property="og:updated_time" content="2016-08-15T01:45:39.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSP中EL表达式不起作用">
 <meta name="twitter:description" content="StrutsActionForm项目/dynaactionform.jsp中：
@@ -256,11 +256,9 @@
 <p>检查了代码无误后，估计是EL本身的问题。在网上找到了解决办法，在dynaactionform.jsp文件中头部加上：<strong>&lt;%@ page isELIgnored=”false”%&gt;</strong>。正确显示结果。故提出来备忘。之前大量的符合jsp1.2标准的项目中用到了${<em>*</em>}，比如${1+2}，但本意就是想显示${1+2}，而不是3，所以应该有控制是否解析el表达式的选项，我觉得分为三个级别：</p>
 <ol>
 <li>设置整个应用服务器下的所有项目是否解析el表达式（控制所有项目）</li>
-<li><p>设置整个项目使用el表达式，需要在web.xml中加上 （控制一个项目） </p>
-<p><code> </code></p>
-<p> <jsp-config><br> <jsp-property-group><br> <el-ignored>false</el-ignored><br> </jsp-property-group><br> </jsp-config></p>
-</li>
+<li>设置整个项目使用el表达式，需要在web.xml中加上 （控制一个项目） </li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp-property-group&gt;</span><br><span class="line">&lt;el-ignored&gt;false&lt;/el-ignored&gt; </span><br><span class="line">&lt;/jsp-property-group&gt;</span><br><span class="line">&lt;/jsp-config&gt;</span><br></pre></td></tr></table></figure>
 <p>3.设置某个jsp页面使用el表达式，需要在jsp页面加上（控制单个页面）</p>
 <pre><code>&lt;%@ page isELIgnored=&quot;false&quot;%&gt;
 </code></pre>
