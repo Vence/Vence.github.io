@@ -6,32 +6,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>tigase-testsuite测试 | 王文路的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##参照官方文档：http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests
+  <meta name="description" content="参照官方文档：http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests
 -version = “2.0.0”
-#测试步骤：
-##1.添加或修改文件scripts/tests-runner-settings.sh
-#!/bin/bash
-func_rep=&amp;quot;func-rep.html&amp;quot">
+测试步骤：1.添加或修改文件scripts/tests-runner-settings.sh#!/bin/bash
+func_rep=&amp;quot;func-rep.html&amp;quot;
+perf_">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tigase-testsuite测试">
 <meta property="og:url" content="http://yoursite.com/2016/11/17/tigase-testsuite/index.html">
 <meta property="og:site_name" content="王文路的博客">
-<meta property="og:description" content="##参照官方文档：http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests
+<meta property="og:description" content="参照官方文档：http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests
 -version = “2.0.0”
-#测试步骤：
-##1.添加或修改文件scripts/tests-runner-settings.sh
-#!/bin/bash
-func_rep=&amp;quot;func-rep.html&amp;quot">
+测试步骤：1.添加或修改文件scripts/tests-runner-settings.sh#!/bin/bash
+func_rep=&amp;quot;func-rep.html&amp;quot;
+perf_">
 <meta property="og:image" content="http://7xj3in.com1.z0.glb.clouddn.com/tigase-testsuite-single%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png">
-<meta property="og:updated_time" content="2016-11-17T02:00:30.248Z">
+<meta property="og:updated_time" content="2016-11-17T02:04:27.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tigase-testsuite测试">
-<meta name="twitter:description" content="##参照官方文档：http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests
+<meta name="twitter:description" content="参照官方文档：http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests
 -version = “2.0.0”
-#测试步骤：
-##1.添加或修改文件scripts/tests-runner-settings.sh
-#!/bin/bash
-func_rep=&amp;quot;func-rep.html&amp;quot">
+测试步骤：1.添加或修改文件scripts/tests-runner-settings.sh#!/bin/bash
+func_rep=&amp;quot;func-rep.html&amp;quot;
+perf_">
 <meta name="twitter:image" content="http://7xj3in.com1.z0.glb.clouddn.com/tigase-testsuite-single%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
@@ -236,11 +233,9 @@ func_rep=&amp;quot;func-rep.html&amp;quot">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##参照官方文档：<br><a href="http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests" target="_blank" rel="external">http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests</a></p>
+        <h2 id="参照官方文档："><a href="#参照官方文档：" class="headerlink" title="参照官方文档："></a>参照官方文档：</h2><p><a href="http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests" target="_blank" rel="external">http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests</a></p>
 <p><strong><em>-version = “2.0.0”</em></strong></p>
-<p>#测试步骤：</p>
-<p>##1.添加或修改文件scripts/tests-runner-settings.sh</p>
-<pre><code>#!/bin/bash
+<h1 id="测试步骤："><a href="#测试步骤：" class="headerlink" title="测试步骤："></a>测试步骤：</h1><h2 id="1-添加或修改文件scripts-tests-runner-settings-sh"><a href="#1-添加或修改文件scripts-tests-runner-settings-sh" class="headerlink" title="1.添加或修改文件scripts/tests-runner-settings.sh"></a>1.添加或修改文件scripts/tests-runner-settings.sh</h2><pre><code>#!/bin/bash
 func_rep=&quot;func-rep.html&quot;
 perf_rep=&quot;perf-rep.html&quot;
 db_name=&quot;tigasedb&quot;
@@ -304,7 +299,7 @@ fi
 <pre><code>SKIP_SERVER_START=&quot;true&quot;
 SKIP_DB_RELOAD=&quot;true&quot;
 </code></pre><p><br><br><strong>database</strong>:tigase数据库类型<br><br><strong>server_ip</strong>:tigase服务器地址<br></p>
-<p>##2.创建测试文件<br>如：创建 <strong>JabberIqPrivate.test</strong></p>
+<h2 id="2-创建测试文件"><a href="#2-创建测试文件" class="headerlink" title="2.创建测试文件"></a>2.创建测试文件</h2><p>如：创建 <strong>JabberIqPrivate.test</strong></p>
 <pre><code>send: {
 &lt;iq type=&quot;set&quot; id=&quot;1001&quot;&gt;
   &lt;query xmlns=&quot;jabber:iq:private&quot;&gt;
@@ -319,8 +314,7 @@ expect: {
 &lt;iq type=&quot;result&quot; id=&quot;1001&quot;/&gt;
 }
 </code></pre><p>这个就是发送报文，和期待的响应报文。</p>
-<p>##3.修改测试脚本</p>
-<p>###3.1 修改测试类型对应的脚本<br>这里以single测试为例，修改对应的<strong>single-xmpp-test.xmpt</strong>，默认情况如下：</p>
+<h2 id="3-修改测试脚本"><a href="#3-修改测试脚本" class="headerlink" title="3.修改测试脚本"></a>3.修改测试脚本</h2><h3 id="3-1-修改测试类型对应的脚本"><a href="#3-1-修改测试类型对应的脚本" class="headerlink" title="3.1 修改测试类型对应的脚本"></a>3.1 修改测试类型对应的脚本</h3><p>这里以single测试为例，修改对应的<strong>single-xmpp-test.xmpt</strong>，默认情况如下：</p>
 <pre><code>-version = &quot;2.0.0&quot;
 
 -output-format  = html
@@ -359,7 +353,7 @@ Configuration@command-get-config: &gt;&gt; Server configuration &lt;&lt;
 Statistics@iq-stats: &gt;&gt; Server statistics &lt;&lt;
 Common test@xmpp-session;common: &gt;&gt; Common test &lt;&lt;
 </code></pre><p>根据服务器配置。自定义修改<strong>-serverip</strong>、 <strong>$(server-host)</strong>等等</p>
-<p>###3.2 修改公共执行方法脚本<br>修改<strong>scripts/tests-runner-function.sh</strong>：</p>
+<h3 id="3-2-修改公共执行方法脚本"><a href="#3-2-修改公共执行方法脚本" class="headerlink" title="3.2 修改公共执行方法脚本"></a>3.2 修改公共执行方法脚本</h3><p>修改<strong>scripts/tests-runner-function.sh</strong>：</p>
 <pre><code>function ts_start() {
 
     [[ -z ${1} ]] &amp;&amp; local _test_script=&quot;scripts/all-xmpp-tests.xmpt&quot; \
@@ -378,7 +372,7 @@ Common test@xmpp-session;common: &gt;&gt; Common test &lt;&lt;
 </code></pre><p>在调用测试方法的地方，注意JAVA_HOME和_classpath是否正确， 默认_classpath在文件头声明过：</p>
 <pre><code>_classpath=&quot;jars/tigase-testsuite.jar:libs/tigase-utils.jar:libs/tigase-xmltools.jar&quot;
 </code></pre><p>检查相应的jar文件是否存在，并放在声明的文件夹内；或执行修改以上声明。</p>
-<p>##4.开始测试<br>执行以下脚本：</p>
+<h2 id="4-开始测试"><a href="#4-开始测试" class="headerlink" title="4.开始测试"></a>4.开始测试</h2><p>执行以下脚本：</p>
 <pre><code>testsuite $ ./scripts/all-tests-runner.sh --single JabberIqPrivate.test
 
 Tigase server home directory: ../server
@@ -411,7 +405,7 @@ received:
 Total: 100ms
 Test time: 00:00:02
 Shutting down Tigase: 6751
-</code></pre><p>##5.查看结果<br>结果输出目录都是在脚本<strong>tests-runner-function.sh</strong>中配置的。</p>
+</code></pre><h2 id="5-查看结果"><a href="#5-查看结果" class="headerlink" title="5.查看结果"></a>5.查看结果</h2><p>结果输出目录都是在脚本<strong>tests-runner-function.sh</strong>中配置的。</p>
 <pre><code>local _output_dir=&quot;${output_dir}/${_test_type}/${_database}&quot;
 
 case ${_test_type} in
