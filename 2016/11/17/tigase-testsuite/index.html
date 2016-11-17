@@ -23,7 +23,7 @@ func_rep=&amp;quot;func-rep.html&amp;quot">
 #!/bin/bash
 func_rep=&amp;quot;func-rep.html&amp;quot">
 <meta property="og:image" content="http://7xj3in.com1.z0.glb.clouddn.com/tigase-testsuite-single%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C.png">
-<meta property="og:updated_time" content="2016-11-17T01:57:32.087Z">
+<meta property="og:updated_time" content="2016-11-17T02:00:30.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tigase-testsuite测试">
 <meta name="twitter:description" content="##参照官方文档：http://docs.tigase.org/tigase-server/snapshot/Development_Guide/html/#tests
@@ -264,7 +264,8 @@ MX_MEM=1000
 
 SMALL_MS_MEM=10
 SMALL_MX_MEM=50
-</code></pre><p><strong>db_name</strong> :tigase server的数据库名<br><br><strong>db_user</strong>:tigase数据库用户名<br><br><strong>db_pass</strong>:tigase数据库密码<br><br><strong>root_user</strong>:tigase数据库管理员账号<br><br><strong>root_pass</strong>:tigase数据库管理员密码<br><br><strong>TESTS</strong>:待测试数据库，目前支持这四种数据库的测试<br><br><strong>IPS</strong>:待测试数据库的IP地址<br><br><strong>server_dir</strong> :正常情况下，测试之前，都需要调用tigase目录下的脚本清空tigase数据库，并启动tigase，但是这种只支持测试环境与tigase服务器在同一个机器下或可访问FTP下，否则无法访问到tigase目录。如果你不需要清空tigase数据库，这个无需配置，默认都是清空数据库的，具体看<strong>scripts/tests-runner-functions.sh</strong>中的代码：</p>
+</code></pre><a id="more"></a>
+<p><strong>db_name</strong> :tigase server的数据库名<br><br><strong>db_user</strong>:tigase数据库用户名<br><br><strong>db_pass</strong>:tigase数据库密码<br><br><strong>root_user</strong>:tigase数据库管理员账号<br><br><strong>root_pass</strong>:tigase数据库管理员密码<br><br><strong>TESTS</strong>:待测试数据库，目前支持这四种数据库的测试<br><br><strong>IPS</strong>:待测试数据库的IP地址<br><br><strong>server_dir</strong> :正常情况下，测试之前，都需要调用tigase目录下的脚本清空tigase数据库，并启动tigase，但是这种只支持测试环境与tigase服务器在同一个机器下或可访问FTP下，否则无法访问到tigase目录。如果你不需要清空tigase数据库，这个无需配置，默认都是清空数据库的，具体看<strong>scripts/tests-runner-functions.sh</strong>中的代码：</p>
 <pre><code>if [ -z &quot;${SKIP_DB_RELOAD}&quot; ] ; then
       echo &quot;Re-creating database: ${_database}&quot;
         case ${_database} in
