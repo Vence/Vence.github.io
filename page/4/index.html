@@ -206,7 +206,7 @@
         <h2 id="1、什么是LVS？"><a href="#1、什么是LVS？" class="headerlink" title="1、什么是LVS？"></a>1、什么是LVS？</h2><p>　　首先简单介绍一下LVS (Linux Virtual Server)到底是什么东西，其实它是一种集群(Cluster)技术，采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。</p>
 <p>　　为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。一般来说，LVS集</p>
 <p>　　群采用三层结构，其体系结构如图所示：</p>
-<p><img src="http://i1.piimg.com/852ce2f7f65dba54.jpg" alt="LVS集群的体系结构"><br>
+<p><img src="http://i.imgur.com/OXzIsbD.jpg" alt="LVS集群的体系结构"><br>
       
     </div>
     
@@ -567,7 +567,7 @@
 <li>开发流程<br>-</li>
 </ul>
 <h3 id="定好View"><a href="#定好View" class="headerlink" title="定好View"></a>定好View</h3><p>首先，根据页面切分View，切分View的规则是将重复利用的视图或者功能相近的视图归于一个View,对于Backbone，每一个model都要对应一个View。父层View负责布局，并将model发给子层View，让子层view负责渲染model数据。View并不是越多越好，要合理设计，View过多将会导致View资源管理成为负担；另外，View过于精简，可能会造成View的不必要的渲染工作。页面切分很有讲究，所以这一部分工作建议进行统一设计。</p>
-<p>以下图作为例子进行View设计：<br><img src="http://i1.piimg.com/03aee69fe0cbc67c.png" alt=""><br>
+<p>以下图作为例子进行View设计：<br><img src="http://i.imgur.com/4Scum9k.png" alt=""><br>
       
     </div>
     

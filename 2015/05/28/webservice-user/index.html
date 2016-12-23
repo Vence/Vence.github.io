@@ -12,12 +12,10 @@
 <meta property="og:url" content="http://yoursite.com/2015/05/28/webservice-user/index.html">
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="简介WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：http://developer.51cto.com/art/200908/147125.htm，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。">
-<meta property="og:image" content="http://i1.piimg.com/43f03797b1efef5c.png">
-<meta property="og:updated_time" content="2016-04-21T03:25:25.484Z">
+<meta property="og:updated_time" content="2016-12-23T05:56:17.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java创建WebService服务及客户端实现">
 <meta name="twitter:description" content="简介WebService是一种服务的提供方式，通过WebService，不同应用间相互间调用变的很方便，网络上有很多常用的WebService服务，如：http://developer.51cto.com/art/200908/147125.htm，不同的语言平台对WebService都有实现，Java的WebService实现，比较流行的有Axis2、Jaxws，本文介绍的是Axis2。">
-<meta name="twitter:image" content="http://i1.piimg.com/43f03797b1efef5c.png">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -322,7 +320,6 @@ public class CalculateService {
     &lt;/operation&gt;  
 &lt;/service&gt;  
 </code></pre><p> 最后将这两个文件打成jar包，不论用工具还是手动打，打的都是最外层的文件夹。</p>
-<p><img src="http://i1.piimg.com/43f03797b1efef5c.png" alt=""></p>
 <p>我打的名字是server.jar，更改后缀为aar，所以最后是server.aar，Axis2建议使用aar发布WebService， 将server.aar放到<tomcat安装目录>/webapps/axis2/WEB-INF/services下，访问<a href="http://localhost:8080/axis2/services/listServices" target="_blank" rel="external">http://localhost:8080/axis2/services/listServices</a>，多出了一个CalculateService，说明发布成功。</tomcat安装目录></p>
 <pre><code>CalculateService  
 

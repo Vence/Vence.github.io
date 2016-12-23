@@ -22,14 +22,12 @@
 站内账户绑定
 
 绑定实际就是实现信息共享，当前很多社交网站都实现了第三方登录的功能，但是涉及到信息安全，资金安全的电子商务网站， 比如支付宝就只有自家淘宝登录，这些网站需要从注册用户那获得更好的价值数据分析，并且电商用户的账号涉及到许多隐私问题，因此并没有其他第三方登录方式。">
-<meta property="og:image" content="http://i1.piimg.com/d7cd4b7ccc8a313d.png">
-<meta property="og:image" content="http://i4.piimg.com/ca50b38833d49b94.png">
-<meta property="og:image" content="http://i4.piimg.com/61bb87e17d36fa0c.png">
-<meta property="og:image" content="http://i4.piimg.com/fdeae2d3e855e8ed.png">
-<meta property="og:image" content="http://i4.piimg.com/f7b42ecf3b6e5eb7.png">
-<meta property="og:image" content="http://i4.piimg.com/d8a9c4ac8e29e923.png">
-<meta property="og:image" content="http://i4.piimg.com/7aeef35899790ff6.png">
-<meta property="og:updated_time" content="2016-04-21T03:25:05.869Z">
+<meta property="og:image" content="http://i.imgur.com/tSguIpa.png">
+<meta property="og:image" content="http://i.imgur.com/IfDYEp1.png">
+<meta property="og:image" content="http://i.imgur.com/bFARWct.png">
+<meta property="og:image" content="http://i.imgur.com/EIzLbYL.png">
+<meta property="og:image" content="http://i.imgur.com/mvJjWBr.png">
+<meta property="og:updated_time" content="2016-12-23T06:18:34.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简介第三方网站账户绑定">
 <meta name="twitter:description" content="绑定涉及到两种：
@@ -38,7 +36,7 @@
 站内账户绑定
 
 绑定实际就是实现信息共享，当前很多社交网站都实现了第三方登录的功能，但是涉及到信息安全，资金安全的电子商务网站， 比如支付宝就只有自家淘宝登录，这些网站需要从注册用户那获得更好的价值数据分析，并且电商用户的账号涉及到许多隐私问题，因此并没有其他第三方登录方式。">
-<meta name="twitter:image" content="http://i1.piimg.com/d7cd4b7ccc8a313d.png">
+<meta name="twitter:image" content="http://i.imgur.com/tSguIpa.png">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -247,7 +245,6 @@
 <p>而站内账户绑定的主体是<strong>一个网站</strong> ，<strong>多个用户</strong> : 在一个网站内，为了实现不同用户的信息共享，而进行的账户绑定，绑定者可以查看被绑定者的授权的信息。</p>
 <p>前者在国内有大量专利，而后者国内专利较少。由于篇幅问题，本文仅探讨<em>第三方账户绑定和登录</em>的问题，会在下一篇文章中来探讨<em>站内账户绑定</em>的实现。</p>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>虽说现在的互联网产品注册流程极其简洁，但，那么多网站，为了你单独记一份密码占据脑磁盘，这个成本用户坚决不会花。因此，为用户提供第三方账户（如微信、qq、新浪微博等）进行登录就太有必要了。利用第三方社交账号登录网站成功后，就完成了对该社交账号的绑定过程，并且实现信息共享。</p>
-<p><img src="http://i1.piimg.com/d7cd4b7ccc8a313d.png" alt=""></p>
 <p>对于用户资源的授权来讲, OAuth并不是唯一的, 但是目前<strong>OAuth2.0</strong>应该已经是各种平台的事实标准了, 对于OAuth2.0协议, 有一系列RFC阐述了OAuth2.0。</p>
 <p>不过OAuth2。0虽然已经是一个标准， 但是各个平台对它的实现并不完全相同，但是最基本的流程是一样，所以要先了解这个协议。知道了大体流程之后你就可以结合具体的平台， 比如QQ或微博的开发文档来看。</p>
 <p>OAuth2.0分为四种鉴权方式, 已分别应对不同的需求, 比如说<em>web</em>或<em>app</em>. 通常我们在web端使用第一种Authorization Code方式。为了简单说明，我直接拿QQ做例子，简单说一下流程：</p>
@@ -269,8 +266,7 @@
 <p>如qq：(id access_token openid 用户表ID)；</p>
 <p>当然，你也可以简单，把这几种表，合并为一张表也行，用个type区分下</p>
 <p>如：(id access_token openid 用户表ID type)</p>
-<h2 id="国内专利情况"><a href="#国内专利情况" class="headerlink" title="国内专利情况"></a>国内专利情况</h2><p><img src="http://i4.piimg.com/ca50b38833d49b94.png" alt=""></p>
-<p><img src="http://i4.piimg.com/61bb87e17d36fa0c.png" alt=""></p>
+<h2 id="国内专利情况"><a href="#国内专利情况" class="headerlink" title="国内专利情况"></a>国内专利情况</h2><p><img src="http://i.imgur.com/tSguIpa.png" alt=""></p>
 <h2 id="涉及技术专利"><a href="#涉及技术专利" class="headerlink" title="涉及技术专利"></a>涉及技术专利</h2><h3 id="身份标识绑定方法及系统"><a href="#身份标识绑定方法及系统" class="headerlink" title="身份标识绑定方法及系统"></a>身份标识绑定方法及系统</h3><p>申请人：<strong>腾讯科技(深圳)有限公司</strong></p>
 <p>一种身份标识绑定方法，包括以下步骤：</p>
 <ul>
@@ -280,7 +276,7 @@
 <li>建立第一身份标识与第二身份标识之间的<strong>映射关系</strong>。</li>
 </ul>
 <p>上述身份标识绑定方法及系统在通过第一身份标识登录第二网站时将用户的第一身份标识与原有的第二身份标识进行绑定，从而再次登录第二网站时由用户的第一身份标识即可找到关联的第二身份标识，通过统一的第一身份标识即可实现第二网站的登录，在用户通过第一身份标识登录进入第二网站时也能够识别出第一身份标识所对应的用户与第二身份标识对应的用户为<strong>同一个用户</strong>，实现利用单一身份标识在不同网站上的登陆互通，为用户登录提供了方便。</p>
-<p><img src="http://i4.piimg.com/fdeae2d3e855e8ed.png" alt=""></p>
+<p><img src="http://i.imgur.com/IfDYEp1.png" alt=""></p>
 <h3 id="第三方授权登录方法、开放平台及系统"><a href="#第三方授权登录方法、开放平台及系统" class="headerlink" title="第三方授权登录方法、开放平台及系统"></a>第三方授权登录方法、开放平台及系统</h3><p>申请人：<strong>腾讯科技(深圳)有限公司</strong></p>
 <p>本发明涉及一种第三方授权登录方法、开放平台及系统，其方法包括 ：</p>
 <ul>
@@ -289,7 +285,7 @@
 <li>由第三方站点根据第一OpenID和第一OpenKey进行基于用户终端的授权登录。</li>
 </ul>
 <p>本发明可以实现多种形态的登录，用户不需要注册和管理多个网站的登录账号，只需通过一个开放平台的注册账号，经过授权即可访问多个网站，为用户提供方便，而且实现简单。</p>
-<p><img src="http://i4.piimg.com/f7b42ecf3b6e5eb7.png" alt=""></p>
+<p><img src="http://i.imgur.com/bFARWct.png" alt=""></p>
 <h3 id="登录第三方站点的方法和服务器"><a href="#登录第三方站点的方法和服务器" class="headerlink" title="登录第三方站点的方法和服务器"></a>登录第三方站点的方法和服务器</h3><p>申请人：<strong>百度在线网络技术(北京)有限公司</strong></p>
 <p>本发明提出一种登录第三方站点的方法和装置，该方法包括：</p>
 <ul>
@@ -298,7 +294,7 @@
 <li>将所述用户信息加密串发送给所述浏览器，以使浏览器将用户信息加密串发送给第三方站点服务端，以使第三方站点服务端成功解密用户信息加密串后对用户进行自动登录第三方站点的处理。</li>
 </ul>
 <p>该方法可以实现用户在流量分发入口产品上处于登录状态时点击链接进入第三方站点时，无需主动登录就能够在该第三方站点上也处于登录状态，并保证用户信息的安全性。</p>
-<p><img src="http://i4.piimg.com/d8a9c4ac8e29e923.png" alt=""></p>
+<p><img src="http://i.imgur.com/EIzLbYL.png" alt=""></p>
 <h3 id="第三方应用的注册和登录方法及系统"><a href="#第三方应用的注册和登录方法及系统" class="headerlink" title="第三方应用的注册和登录方法及系统"></a>第三方应用的注册和登录方法及系统</h3><p>申请人：<strong>广州唯品会信息科技有限公司</strong></p>
 <p>一种第三方应用的注册和登录方法和系统，其方法包括 ：</p>
 <ul>
@@ -309,7 +305,7 @@
 <li>服务器利用标识和令牌值查找出该第三方应用对应的用户账号，并发送至第三方应用进行登录。</li>
 </ul>
 <p>本申请提高注册效率。</p>
-<p><img src="http://i4.piimg.com/7aeef35899790ff6.png" alt=""></p>
+<p><img src="http://i.imgur.com/mvJjWBr.png" alt=""></p>
 
       
     </div>

@@ -16,15 +16,15 @@
 <meta property="og:description" content="开发流程-
 
 定好View首先，根据页面切分View，切分View的规则是将重复利用的视图或者功能相近的视图归于一个View,对于Backbone，每一个model都要对应一个View。父层View负责布局，并将model发给子层View，让子层view负责渲染model数据。View并不是越多越好，要合理设计，View过多将会导致View资源管理成为负担；另外，View过于精简，可能会造成Vi">
-<meta property="og:image" content="http://i1.piimg.com/03aee69fe0cbc67c.png">
-<meta property="og:image" content="http://i1.piimg.com/3e05448400743d86.png">
-<meta property="og:updated_time" content="2016-04-21T03:23:01.883Z">
+<meta property="og:image" content="http://i.imgur.com/4Scum9k.png">
+<meta property="og:image" content="http://i.imgur.com/CtVw2Qf.png">
+<meta property="og:updated_time" content="2016-12-23T05:52:56.532Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Backbone前端开发流程及规范">
 <meta name="twitter:description" content="开发流程-
 
 定好View首先，根据页面切分View，切分View的规则是将重复利用的视图或者功能相近的视图归于一个View,对于Backbone，每一个model都要对应一个View。父层View负责布局，并将model发给子层View，让子层view负责渲染model数据。View并不是越多越好，要合理设计，View过多将会导致View资源管理成为负担；另外，View过于精简，可能会造成Vi">
-<meta name="twitter:image" content="http://i1.piimg.com/03aee69fe0cbc67c.png">
+<meta name="twitter:image" content="http://i.imgur.com/4Scum9k.png">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -228,7 +228,7 @@
 <li>开发流程<br>-</li>
 </ul>
 <h3 id="定好View"><a href="#定好View" class="headerlink" title="定好View"></a>定好View</h3><p>首先，根据页面切分View，切分View的规则是将重复利用的视图或者功能相近的视图归于一个View,对于Backbone，每一个model都要对应一个View。父层View负责布局，并将model发给子层View，让子层view负责渲染model数据。View并不是越多越好，要合理设计，View过多将会导致View资源管理成为负担；另外，View过于精简，可能会造成View的不必要的渲染工作。页面切分很有讲究，所以这一部分工作建议进行统一设计。</p>
-<p>以下图作为例子进行View设计：<br><img src="http://i1.piimg.com/03aee69fe0cbc67c.png" alt=""><br><a id="more"></a><br>View设计如下：<br><img src="http://i1.piimg.com/3e05448400743d86.png" alt=""></p>
+<p>以下图作为例子进行View设计：<br><img src="http://i.imgur.com/4Scum9k.png" alt=""><br><a id="more"></a><br>View设计如下：<br><img src="http://i.imgur.com/CtVw2Qf.png" alt=""></p>
 <p>这里一共有7个View(实际还有几个潜在view，比如弹窗，上传图片页面等，原理是一样的)：</p>
 <p>MyMainView负责全局布局，并将子View的渲染内容填充到页面中；</p>
 <p>TopView负责渲染页面头，包括网站图标，工具栏，关于我们等；</p>

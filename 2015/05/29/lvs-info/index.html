@@ -12,17 +12,17 @@
 <meta property="og:url" content="http://yoursite.com/2015/05/29/lvs-info/index.html">
 <meta property="og:site_name" content="王文路的博客">
 <meta property="og:description" content="1、什么是LVS？　　首先简单介绍一下LVS (Linux Virtual Server)到底是什么东西，其实它是一种集群(Cluster)技术，采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器">
-<meta property="og:image" content="http://i1.piimg.com/852ce2f7f65dba54.jpg">
-<meta property="og:image" content="http://i1.piimg.com/139671e0d1e9eb57.jpg">
-<meta property="og:image" content="http://i1.piimg.com/7b3e2f54bd659c69.jpg">
-<meta property="og:image" content="http://i1.piimg.com/78ae9814515c6a45.jpg">
-<meta property="og:image" content="http://i1.piimg.com/9105d9532616b843.jpg">
-<meta property="og:image" content="http://i1.piimg.com/78ae9814515c6a45.jpg">
-<meta property="og:updated_time" content="2016-04-21T03:24:01.603Z">
+<meta property="og:image" content="http://i.imgur.com/OXzIsbD.jpg">
+<meta property="og:image" content="http://i.imgur.com/5EmIJsb.jpg">
+<meta property="og:image" content="http://i.imgur.com/thOwTst.jpg">
+<meta property="og:image" content="http://i.imgur.com/WS1Pikq.jpg">
+<meta property="og:image" content="http://i.imgur.com/IptnQCo.jpg">
+<meta property="og:image" content="http://i.imgur.com/QT5f86q.jpg">
+<meta property="og:updated_time" content="2016-12-23T06:06:36.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LVS三种负载均衡方式比较">
 <meta name="twitter:description" content="1、什么是LVS？　　首先简单介绍一下LVS (Linux Virtual Server)到底是什么东西，其实它是一种集群(Cluster)技术，采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器">
-<meta name="twitter:image" content="http://i1.piimg.com/852ce2f7f65dba54.jpg">
+<meta name="twitter:image" content="http://i.imgur.com/OXzIsbD.jpg">
   
     <link rel="alternative" href="/atom.xml" title="王文路的博客" type="application/atom+xml">
   
@@ -225,24 +225,23 @@
         <h2 id="1、什么是LVS？"><a href="#1、什么是LVS？" class="headerlink" title="1、什么是LVS？"></a>1、什么是LVS？</h2><p>　　首先简单介绍一下LVS (Linux Virtual Server)到底是什么东西，其实它是一种集群(Cluster)技术，采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。</p>
 <p>　　为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。一般来说，LVS集</p>
 <p>　　群采用三层结构，其体系结构如图所示：</p>
-<p><img src="http://i1.piimg.com/852ce2f7f65dba54.jpg" alt="LVS集群的体系结构"><br><a id="more"></a></p>
+<p><img src="http://i.imgur.com/OXzIsbD.jpg" alt="LVS集群的体系结构"><br><a id="more"></a></p>
 <p>　</p>
 <h2 id="2、LVS主要组成部分为："><a href="#2、LVS主要组成部分为：" class="headerlink" title="2、LVS主要组成部分为："></a>2、LVS主要组成部分为：</h2><p>　　负载调度器(load balancer/ Director)，它是整个集群对外面的前端机，负责将客户的请求发送到一组服务器上执行，而客户认为服务是来自一个IP地址(我们可称之为虚拟IP地址)上的。</p>
 <p>　　服务器池(server pool/ Realserver)，是一组真正执行客户请求的服务器，执行的服务一般有WEB、MAIL、FTP和DNS等。</p>
 <p>　　共享存储(shared storage)，它为服务器池提供一个共享的存储区，这样很容易使得服务器池拥有相同的内容，提供相同的服务。</p>
 <h2 id="3、LVS负载均衡方式"><a href="#3、LVS负载均衡方式" class="headerlink" title="3、LVS负载均衡方式:"></a>3、LVS负载均衡方式:</h2><h3 id="Virtual-Server-via-Network-Address-Translation-NAT-VS-NAT"><a href="#Virtual-Server-via-Network-Address-Translation-NAT-VS-NAT" class="headerlink" title="Virtual Server via Network Address Translation NAT(VS/NAT)"></a>Virtual Server via Network Address Translation NAT(VS/NAT)</h3><p>　　VS/NAT是一种最简单的方式，所有的RealServer只需要将自己的网关指向Director即可。客户端可以是任意操作系统，但此方式下，一个Director能够带动的RealServer比较有限。在VS/NAT的方式下，Director也可以兼为一台RealServer。VS/NAT的体系结构如图所示。</p>
-<p><img src="http://i1.piimg.com/139671e0d1e9eb57.jpg" alt="　VS/NAT的体系结构"></p>
+<p><img src="http://i.imgur.com/5EmIJsb.jpg" alt="VS/NAT的体系结构"></p>
 <h3 id="Virtual-Server-via-IP-Tunneling-VS-TUN"><a href="#Virtual-Server-via-IP-Tunneling-VS-TUN" class="headerlink" title="Virtual Server via IP Tunneling(VS/TUN)"></a>Virtual Server via IP Tunneling(VS/TUN)</h3><p>　　IP隧道(IP tunneling)是将一个IP报文封装在另一个IP报文的技术，这可以使得目标为一个IP地址的数据报文能被封装和转发到另一个IP地址。IP隧道技术亦称为IP封装技术(IP encapsulation)。IP隧道主要用于移动主机和虚拟私有网络(Virtual Private Network)，在其中隧道都是静态建立的，隧道一端有一个IP地址，另一端也有唯一的IP地址。它的连接调度和管理与VS/NAT中的一样，只是它的报文转发方法不同。调度器根据各个服务器的负载情况，动态地选择一台服务器，将请求报文封装在另一个IP报文中，再将封装后的IP报文转发给选出的服务器;服务器收到报文后，先将报文解封获得原来目标地址为 VIP 的报文，服务器发现VIP地址被配置在本地的IP隧道设备上，所以就处理这个请求，然后根据路由表将响应报文直接返回给客户。</p>
 <p>　　VS/TUN的体系结构:</p>
-<p><img src="http://i1.piimg.com/7b3e2f54bd659c69.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/thOwTst.jpg" alt=""></p>
 <p>　　VS/TUN的工作流程：</p>
-<p><img src="http://i1.piimg.com/78ae9814515c6a45.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/WS1Pikq.jpg" alt=""></p>
 <h3 id="Virtual-Server-via-Direct-Routing-VS-DR"><a href="#Virtual-Server-via-Direct-Routing-VS-DR" class="headerlink" title="Virtual Server via Direct Routing(VS/DR)"></a>Virtual Server via Direct Routing(VS/DR)</h3><p>　　VS/DR方式是通过改写请求报文中的MAC地址部分来实现的。Director和RealServer必需在物理上有一个网卡通过不间断的局域网相连。 RealServer上绑定的VIP配置在各自Non-ARP的网络设备上(如lo或tunl),Director的VIP地址对外可见，而RealServer的VIP对外是不可见的。RealServer的地址即可以是内部地址，也可以是真实地址。</p>
-<p>VS/DR的体系结构：</p>
-<p><img src="http://i1.piimg.com/9105d9532616b843.jpg" alt=""></p>
+<p>VS/DR的体系结构：<br><img src="http://i.imgur.com/IptnQCo.jpg" alt=""></p>
 <p>VS/DR的工作流程:</p>
 <p>　　VS/DR的工作流程如图所示：它的连接调度和管理与VS/NAT和VS/TUN中的一样，它的报文转发方法又有不同，将报文直接路由给目标服务器。在VS/DR中，调度器根据各个服务器的负载情况，动态地选择一台服务器，不修改也不封装IP报文，而是将数据帧的MAC地址改为选出服务器的MAC地址，再将修改后的数据帧在与服务器组的局域网上发送。因为数据帧的MAC地址是选出的服务器，所以服务器肯定可以收到这个数据帧，从中可以获得该IP报文。当服务器发现报文的目标地址VIP是在本地的网络设备上，服务器处理这个报文，然后根据路由表将响应报文直接返回给客户。</p>
-<p><img src="http://i1.piimg.com/78ae9814515c6a45.jpg" alt="VS/DR的工作流程"></p>
+<p><img src="http://i.imgur.com/QT5f86q.jpg" alt="VS/DR的工作流程"></p>
 <p>　　VS/DR的工作流程</p>
 <h2 id="4、三种负载均衡方式比较："><a href="#4、三种负载均衡方式比较：" class="headerlink" title="4、三种负载均衡方式比较："></a>4、三种负载均衡方式比较：</h2><h3 id="Virtual-Server-via-NAT"><a href="#Virtual-Server-via-NAT" class="headerlink" title="Virtual Server via NAT"></a>Virtual Server via NAT</h3><p>　　VS/NAT 的优点是服务器可以运行任何支持TCP/IP的操作系统，它只需要一个IP地址配置在调度器上，服务器组可以用私有的IP地址。缺点是它的伸缩能力有限，当服务器结点数目升到20时，调度器本身有可能成为系统的新瓶颈，因为在VS/NAT中请求和响应报文都需要通过负载调度器。我们在Pentium166 处理器的主机上测得重写报文的平均延时为60us，性能更高的处理器上延时会短一些。假设TCP报文的平均长度为536 Bytes，则调度器的最大吞吐量为8.93 MBytes/s. 我们再假设每台服务器的吞吐量为800KBytes/s，这样一个调度器可以带动10台服务器。(注：这是很早以前测得的数据)</p>
 <p>　　基于 VS/NAT的的集群系统可以适合许多服务器的性能要求。如果负载调度器成为系统新的瓶颈，可以有三种方法解决这个问题：混合方法、VS/TUN和 VS/DR。在DNS混合集群系统中，有若干个VS/NAT负调度器，每个负载调度器带自己的服务器集群，同时这些负载调度器又通过RR-DNS组成简单的域名。</p>
