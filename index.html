@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12.5px;">backbone</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/cluster/" style="font-size: 12.5px;">cluster</a> <a href="/tags/file/" style="font-size: 15px;">file</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linus/" style="font-size: 15px;">linus</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 15px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 17.5px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/retrofit/" style="font-size: 10px;">retrofit</a> <a href="/tags/spring/" style="font-size: 17.5px;">spring</a> <a href="/tags/tigase/" style="font-size: 10px;">tigase</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 17.5px;">web</a> <a href="/tags/webservice/" style="font-size: 12.5px;">webservice</a> <a href="/tags/压力测试/" style="font-size: 12.5px;">压力测试</a> <a href="/tags/闲趣/" style="font-size: 10px;">闲趣</a>
+						<a href="/tags/aop/" style="font-size: 10px;">aop</a> <a href="/tags/backbone/" style="font-size: 12.5px;">backbone</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/cluster/" style="font-size: 12.5px;">cluster</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/file/" style="font-size: 15px;">file</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linus/" style="font-size: 15px;">linus</a> <a href="/tags/mail/" style="font-size: 10px;">mail</a> <a href="/tags/mybatis/" style="font-size: 15px;">mybatis</a> <a href="/tags/myeclipse/" style="font-size: 10px;">myeclipse</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/octopress/" style="font-size: 10px;">octopress</a> <a href="/tags/patent/" style="font-size: 17.5px;">patent</a> <a href="/tags/permission/" style="font-size: 10px;">permission</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/recource/" style="font-size: 10px;">recource</a> <a href="/tags/requirejs/" style="font-size: 10px;">requirejs</a> <a href="/tags/retrofit/" style="font-size: 10px;">retrofit</a> <a href="/tags/spring/" style="font-size: 17.5px;">spring</a> <a href="/tags/tigase/" style="font-size: 10px;">tigase</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/web/" style="font-size: 17.5px;">web</a> <a href="/tags/webservice/" style="font-size: 12.5px;">webservice</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/压力测试/" style="font-size: 12.5px;">压力测试</a> <a href="/tags/闲趣/" style="font-size: 10px;">闲趣</a>
 					</div>
 				</section>
 				
@@ -177,6 +177,84 @@
 
       <div class="body-wrap">
   
+    <article id="post-dubbo-info" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/03/30/dubbo-info/" class="article-date">
+  	<time datetime="2018-03-30T07:12:31.000Z" itemprop="datePublished">2018-03-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/30/dubbo-info/">dubbo使用笔记</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在研究github的这个项目=&gt; <a href="https://github.com/shuzheng/zheng">https://github.com/shuzheng/zheng</a>，<br>将其中关于dubbo的使用做一下笔记，方便下次使用。</p>
+<h2 id="一、dubbo是什么？"><a href="#一、dubbo是什么？" class="headerlink" title="一、dubbo是什么？"></a>一、dubbo是什么？</h2><p>Dubbo是一个分布式服务框架，致力于提供高性能和透明化的<strong>RPC</strong>远程服务调用方案，以及SOA服务治理方案。<br> 戳这里查看具体介绍<a href="https://blog.csdn.net/houshaolin/article/details/76408399">https://blog.csdn.net/houshaolin/article/details/76408399</a></p>
+<p><img src="https://i.imgur.com/IbNQPik.jpg" alt=""></p>
+<p><strong>节点角色说明：</strong></p>
+<p>Provider: 暴露服务的服务提供方；</p>
+<p>Consumer: 调用远程服务的服务消费方；</p>
+<p>Registry: 服务注册与发现的注册中心；</p>
+<p>Monitor: 统计服务的调用次数和调用时间的监控中心；</p>
+<p>Container: 服务运行容器</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dubbo/">dubbo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zookeeper/">zookeeper</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/java/">java</a>
+	</div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2018/03/30/dubbo-info/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+	  
+	
+
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
     <article id="post-hdtvs" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -194,7 +272,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/29/hdtvs/">高清电视在线播放</a>
+      <a class="article-title" href="/2017/11/29/hdtvs/">高清电视在线播放源</a>
     </h1>
   
 
@@ -203,40 +281,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="CCTV"><a href="#CCTV" class="headerlink" title="CCTV"></a>CCTV</h2><p><a href="http://183.251.61.207/PLTV/88888888/224/3221225922/index.m3u8" target="_self"> CCTV-1高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225922/index.m3u8" target="_self"> CCTV-1高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225923/index.m3u8" target="_self"> CCTV-2高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225923/index.m3u8" target="_self"> CCTV-2高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225924/index.m3u8" target="_self"> CCTV-3高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225924/index.m3u8" target="_self"> CCTV-3高清 </a></p>
-<p><a href="http://61.166.153.32:1180/play/playback/90000001000000050000000000000199/live100001.m3u8" target="_self"> CCTV-4高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225925/index.m3u8" target="_self"> CCTV-5高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225925/index.m3u8" target="_self"> CCTV-5高清 </a><br><a href="http://183.251.61.207/PLTV/88888888/224/3221225912/index.m3u8" target="_self"> CCTV-5高清 </a><br><a href="http://183.251.61.207/PLTV/88888888/224/3221225915/index.m3u8" target="_self"> CCTV-5+高清 </a><br><a href="http://183.251.61.207/PLTV/88888888/224/3221225939/index.m3u8" target="_self"> CCTV-5+高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225939/index.m3u8" target="_self"> CCTV-5+高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225926/index.m3u8 " target="_self"> CCTV-6高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225926/index.m3u8" target="_self"> CCTV-6高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225927/index.m3u8" target="_self"> CCTV-7高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225927/index.m3u8" target="_self"> CCTV-7高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225928/index.m3u8" target="_self"> CCTV-8高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225929/index.m3u8" target="_self"> CCTV-9高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225929/index.m3u8" target="_self"> CCTV-9高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225931/index.m3u8" target="_self"> CCTV-10高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225931/index.m3u8" target="_self"> CCTV-10高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225932/index.m3u8" target="_self"> CCTV-12高清 </a><br><a href="http://183.252.176.10/PLTV/88888888/224/3221225932/index.m3u8" target="_self"> CCTV-12高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225933/index.m3u8" target="_self"> CCTV-14高清 </a></p>
-<h2 id="地方卫视"><a href="#地方卫视" class="headerlink" title="地方卫视"></a>地方卫视</h2><p><a href="http://223.110.245.139:80/PLTV/3/224/3221226977/index.m3u8" target="_self"> 凤凰中文高清 </a></p>
-<p><a href="http://223.110.245.139:80/PLTV/3/224/3221226980/index.m3u8" target="_self"> 凤凰资讯高清 </a></p>
-<p><a href="http://223.110.245.139:80/PLTV/3/224/3221226975/index.m3u8" target="_self"> 凤凰香港高清 </a></p>
-<p><a href="http://acm.gg/jade.m3u8" target="_self"> 翡翠台高清 </a></p>
-<p><a href="http://zzcs1.ott.henancatv.com/mlive/172_30_100_77_/cdn_proxy/os_ott_henancatv_com/live/HWH/3.m3u8" target="_self"> 河南卫视高清 </a></p>
-<p><a href="http://183.252.176.10/PLTV/88888888/224/3221225941/index.m3u8" target="_self"> 天津卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225937/index.m3u8" target="_self"> 北京卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225946/index.m3u8" target="_self"> 纪实频道高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225935/index.m3u8" target="_self"> 湖南卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225948/index.m3u8" target="_self"> 湖北卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225934/index.m3u8" target="_self"> 浙江卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225936/index.m3u8" target="_self"> 东方卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225945/index.m3u8" target="_self"> 安徽卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225943/index.m3u8" target="_self"> 山东卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225942/index.m3u8" target="_self"> 广东卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225938/index.m3u8" target="_self"> 深圳卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225949/index.m3u8" target="_self"> 重庆卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225930/index.m3u8" target="_self"> 江苏卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225834/index.m3u8" target="_self"> 江西卫视高清 </a></p>
-<p><a href="http://183.252.176.10/PLTV/88888888/224/3221225947/index.m3u8" target="_self"> 辽宁卫视高清 </a></p>
-<p><a href="http://183.251.61.207/PLTV/88888888/224/3221225940/index.m3u8" target="_self"> 黑龙江卫视高清 </a></p>
-
+        <p>闲来无事，整理了高清直播电视台的播放源，点击【more】查看！<br>
       
     </div>
     
@@ -249,11 +294,18 @@
 
       
       
+        <p class="article-more-link">
+          <a  href="/2017/11/29/hdtvs/#more">more >></a>
+        </p>
+      
       <div class="clearfix"></div>
     </div>
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -262,6 +314,10 @@
 
 
 
+
+
+
+  
 
 
   
@@ -343,6 +399,9 @@ SMALL_MX_MEM=50
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -351,6 +410,10 @@ SMALL_MX_MEM=50
 
 
 
+
+
+
+  
 
 
   
@@ -415,6 +478,9 @@ SMALL_MX_MEM=50
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -423,6 +489,10 @@ SMALL_MX_MEM=50
 
 
 
+
+
+
+  
 
 
   
@@ -479,6 +549,9 @@ SMALL_MX_MEM=50
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -487,6 +560,10 @@ SMALL_MX_MEM=50
 
 
 
+
+
+
+  
 
 
   
@@ -552,6 +629,9 @@ eno16777736: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -560,6 +640,10 @@ eno16777736: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
 
 
 
+
+
+
+  
 
 
   
@@ -627,6 +711,9 @@ httpd-tools.x86_64 : Tools for use with the Apache HTTP Server
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -635,6 +722,10 @@ httpd-tools.x86_64 : Tools for use with the Apache HTTP Server
 
 
 
+
+
+
+  
 
 
   
@@ -692,6 +783,9 @@ httpd-tools.x86_64 : Tools for use with the Apache HTTP Server
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -700,6 +794,10 @@ httpd-tools.x86_64 : Tools for use with the Apache HTTP Server
 
 
 
+
+
+
+  
 
 
   
@@ -759,6 +857,9 @@ httpd-tools.x86_64 : Tools for use with the Apache HTTP Server
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -767,6 +868,10 @@ httpd-tools.x86_64 : Tools for use with the Apache HTTP Server
 
 
 
+
+
+
+  
 
 
   
@@ -824,6 +929,9 @@ where Id =
     
   </div>
   
+	  
+	
+
 </article>
 
 
@@ -834,68 +942,8 @@ where Id =
 
 
 
+
   
-    <article id="post-retrofitinto" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/22/retrofitinto/" class="article-date">
-  	<time datetime="2016-04-22T09:22:12.000Z" itemprop="datePublished">2016-04-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/22/retrofitinto/">Android端使用Retrofit实现与RestAPI后台进行数据交互</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>该项目主要实现Android移动端与RestAPI后台的交互过程</p>
-<p><strong>方案一</strong>：可以使用HTTPClient自己去实现，不过复杂度和情况需要逐一去考虑，我写过一个简单的demo:</p>
-<blockquote>
-<p><a href="https://github.com/Vence/AndroidAPIService">https://github.com/Vence/AndroidAPIService</a></p>
-</blockquote>
-<p><strong>方案二</strong>：这里主要介绍使用类库Retrofit框架去实现RestAPI交互过程。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/retrofit/">retrofit</a></li></ul>
-	</div>
-
-      
-      
-        <p class="article-more-link">
-          <a  href="/2016/04/22/retrofitinto/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
 
 
   
@@ -909,7 +957,7 @@ where Id =
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 王文路
+    		&copy; 2018 王文路
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
